@@ -76,6 +76,7 @@ class CreateGameActivity : AppCompatActivity() {
     private fun redirectToGameScreen() {
         val intent = Intent(this, GameActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun onSupportNavigateUp(): Boolean {
