@@ -6,12 +6,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
+import com.jgeniselli.banco.game.common.domain.InsufficientPlayersException
 import com.jgeniselli.banco.game.common.view.player.selection.MultiplePlayerSelectionAdapter
 import com.jgeniselli.banco.game.play.GameActivity
 import kotlinx.android.synthetic.main.activity_create_game.*
@@ -48,7 +50,11 @@ class CreateGameActivity : AppCompatActivity() {
 
     private fun createGame() {
         val selectedPlayers = adapter.getSelectedPlayers()
-        viewModel.createGame(selectedPlayers)
+        try {
+            viewModel.createGame(selectedPlayers)
+        } catch (e: InsufficientPlayersException) {
+            displayErrorToast(R.string.error_minimum_players_required)
+        }
     }
 
     private fun applyViewState(state: CreateGameViewState) {
@@ -56,14 +62,14 @@ class CreateGameActivity : AppCompatActivity() {
             is CreateGameViewState.LoadingStart -> progress.visibility = View.VISIBLE
             is CreateGameViewState.LoadingStop -> progress.visibility = View.GONE
             is CreateGameViewState.ContentFound -> adapter.players = state.players
-            is Error -> displayErrorToast()
+            is Error -> displayErrorToast(R.string.error_while_fetching_players)
             is CreateGameViewState.RedirectToGame -> redirectToGameScreen()
         }
     }
 
-    private fun displayErrorToast() {
+    private fun displayErrorToast(@StringRes messageId: Int) {
         Toast
-            .makeText(this, R.string.error_while_fetching_players, Toast.LENGTH_LONG)
+            .makeText(this, messageId, Toast.LENGTH_LONG)
             .show()
     }
 

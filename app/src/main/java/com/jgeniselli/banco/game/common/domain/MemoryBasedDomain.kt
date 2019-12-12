@@ -32,6 +32,7 @@ class MemoryGameRepository : GameRepository {
     private var game: MemoryGame? = null
 
     override fun createAndActivateGame(selectedPlayers: List<Player>) {
+        if (selectedPlayers.size < 2) throw InsufficientPlayersException()
         game = MemoryGame(selectedPlayers)
     }
 

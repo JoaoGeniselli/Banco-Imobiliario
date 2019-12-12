@@ -12,5 +12,6 @@
     <string name="error">Erro</string>
     <string name="transaction_history">Histórico de transações</string>
     <string name="transaction">Transação</string>
+    <string name="error_minimum_players_required">É necessário selecionar ao menos dois jogadores</string>
 
 </resources>
