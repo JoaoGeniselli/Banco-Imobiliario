@@ -8,7 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.game.common.view.player.selection.MultiplePlayerSelectionAdapter
 import com.jgeniselli.banco.game.play.GameActivity
@@ -27,6 +29,7 @@ class CreateGameActivity : AppCompatActivity() {
         viewModel.observeViewState(this, Observer { applyViewState(it) })
 
         recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.addItemDecoration(DividerItemDecoration(this, RecyclerView.VERTICAL))
         recycler_view.adapter = adapter
     }
 

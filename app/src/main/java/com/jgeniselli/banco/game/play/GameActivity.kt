@@ -7,7 +7,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.game.common.domain.Player
 import com.jgeniselli.banco.game.common.view.player.summary.PlayerSummaryAdapter
@@ -28,6 +30,7 @@ class GameActivity : AppCompatActivity() {
         lifecycle.addObserver(viewModel)
         viewModel.observeViewState(this, Observer { applyViewState(it) })
         recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.addItemDecoration(DividerItemDecoration(this, RecyclerView.VERTICAL))
         recycler_view.adapter = adapter
     }
 
