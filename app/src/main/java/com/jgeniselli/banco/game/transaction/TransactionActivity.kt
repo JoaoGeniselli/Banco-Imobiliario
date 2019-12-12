@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.game.common.domain.Player
 import com.jgeniselli.banco.game.common.view.player.selection.SinglePlayerSelectionAdapter
-import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.activity_transaction.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -38,7 +38,7 @@ class TransactionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(R.layout.activity_transaction)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         lifecycle.addObserver(viewModel)
         viewModel.observeViewState(this, Observer { applyViewState(it) })

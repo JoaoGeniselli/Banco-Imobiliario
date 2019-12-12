@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
           package="com.jgeniselli.banco">
 
     <application
@@ -11,8 +10,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/BlueTheme">
-        <activity android:name=".game.create.CreateGameActivity">
-        </activity>
+
+        <activity
+                android:label="@string/new_game"
+                android:name=".game.create.CreateGameActivity"/>
+
         <activity android:name=".landing.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -26,13 +28,15 @@
                       android:path="/deeplink"/>
             </intent-filter>
         </activity>
+
         <activity
                 android:name=".game.transaction.TransactionActivity"
-                android:label="Transação"
+                android:label="@string/transaction"
                 android:screenOrientation="portrait"/>
+
         <activity
                 android:name=".game.play.GameActivity"
-                android:label="Banco Imobiliário"
+                android:label="@string/app_name"
                 android:screenOrientation="portrait"/>
     </application>
 

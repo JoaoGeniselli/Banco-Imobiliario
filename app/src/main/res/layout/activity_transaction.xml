@@ -54,5 +54,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp" android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/other_players_recycler" android:clipToPadding="false" android:paddingBottom="24dp"/>
+            android:id="@+id/other_players_recycler" android:clipToPadding="false" android:paddingBottom="24dp"
+            tools:listitem="@layout/line_view_player_selection"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

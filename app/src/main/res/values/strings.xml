@@ -11,5 +11,6 @@
     <string name="error_while_starting_game">Ocorreu um erro ao buscar as informações do jogo atual</string>
     <string name="error">Erro</string>
     <string name="transaction_history">Histórico de transações</string>
+    <string name="transaction">Transação</string>
 
 </resources>
