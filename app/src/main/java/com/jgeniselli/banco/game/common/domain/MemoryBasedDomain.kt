@@ -33,6 +33,7 @@ class MemoryGameRepository : GameRepository {
 
     override fun createAndActivateGame(selectedPlayers: List<Player>) {
         if (selectedPlayers.size < 2) throw InsufficientPlayersException()
+        selectedPlayers.forEach { it.currentValue = 25000.00 }
         game = MemoryGame(selectedPlayers)
     }
 
