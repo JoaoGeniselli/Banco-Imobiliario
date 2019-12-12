@@ -16,8 +16,14 @@
         <activity android:name=".landing.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <data android:scheme="jgeniselli.banco.imobiliario://"
+                      android:host="app"
+                      android:path="/deeplink"/>
             </intent-filter>
         </activity>
         <activity
@@ -27,9 +33,7 @@
         <activity
                 android:name=".game.play.GameActivity"
                 android:label="Banco Imobiliário"
-                android:screenOrientation="portrait">
-
-        </activity>
+                android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
