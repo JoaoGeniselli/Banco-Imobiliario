@@ -27,7 +27,7 @@ class CreateGameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_game)
         lifecycle.addObserver(viewModel)
         viewModel.observeViewState(this, Observer { applyViewState(it) })
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.addItemDecoration(DividerItemDecoration(this, RecyclerView.VERTICAL))
         recycler_view.adapter = adapter
@@ -70,5 +70,10 @@ class CreateGameActivity : AppCompatActivity() {
     private fun redirectToGameScreen() {
         val intent = Intent(this, GameActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

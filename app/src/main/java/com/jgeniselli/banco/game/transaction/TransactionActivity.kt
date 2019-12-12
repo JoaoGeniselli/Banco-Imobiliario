@@ -39,28 +39,26 @@ class TransactionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         lifecycle.addObserver(viewModel)
-        viewModel.observeViewState(this, Observer {
-            when (it) {
-                is TransactionViewState.Loading -> {
-                }
-                is TransactionViewState.Content -> {
-                    displayPlayerName(it.playerName)
-                    displayOtherPlayers(it.players)
-                    input_value.requestFocus()
-                }
-                is TransactionViewState.TransactionComplete -> finish()
-            }
-        })
-        button_debit.setOnClickListener {
-            viewModel.applyDebit(inputtedValue)
-        }
-        button_credit.setOnClickListener {
-            viewModel.applyCredit(inputtedValue)
-        }
+        viewModel.observeViewState(this, Observer { applyViewState(it) })
+
+        button_debit.setOnClickListener { viewModel.applyDebit(inputtedValue) }
+        button_credit.setOnClickListener { viewModel.applyCredit(inputtedValue) }
 
         other_players_recycler.layoutManager = LinearLayoutManager(this)
         other_players_recycler.adapter = otherPlayersAdapter
+    }
+
+    private fun applyViewState(it: TransactionViewState?) {
+        when (it) {
+            is TransactionViewState.Content -> {
+                displayPlayerName(it.playerName)
+                displayOtherPlayers(it.players)
+                input_value.requestFocus()
+            }
+            is TransactionViewState.TransactionComplete -> finish()
+        }
     }
 
     private fun displayPlayerName(name: String?) {
@@ -73,6 +71,11 @@ class TransactionActivity : AppCompatActivity() {
 
     private fun applyTransferTo(otherPlayer: Player) {
         viewModel.applyTransfer(inputtedValue, otherPlayer)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     companion object {

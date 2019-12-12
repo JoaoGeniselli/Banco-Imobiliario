@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/button_credit" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/button_debit"
             app:layout_constraintHorizontal_chainStyle="spread" android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/input_value"/>
@@ -30,9 +30,10 @@
             android:text="@string/debit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/button_debit" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:id="@+id/button_debit" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
             app:layout_constraintStart_toEndOf="@+id/button_credit" app:layout_constraintHorizontal_bias="0.5"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/input_value"/>
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/input_value"
+            android:layout_marginStart="8dp"/>
     <TextView
             android:text="@string/transfer_value_to"
             android:layout_width="wrap_content"
@@ -44,14 +45,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/text_player_name" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="24dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" tools:text="Jogador: Azul"/>
+            android:layout_marginEnd="16dp" tools:text="Jogador: Azul" android:textSize="18sp"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/textView" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="24dp"
-            android:id="@+id/other_players_recycler"/>
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/other_players_recycler" android:clipToPadding="false" android:paddingBottom="24dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
