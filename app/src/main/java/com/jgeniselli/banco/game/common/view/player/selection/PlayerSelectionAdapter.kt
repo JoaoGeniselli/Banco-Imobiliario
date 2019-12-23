@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.game.common.domain.Player
 
-open class PlayerSelectionAdapter : RecyclerView.Adapter<IconAndTitleViewHolder>() {
+open class PlayerSelectionAdapter(
+    private val indexSelectionListener: (Player) -> Unit
+) : RecyclerView.Adapter<IconAndTitleViewHolder>() {
 
     var players: List<Player> = listOf()
         set(value) {
@@ -26,5 +28,11 @@ open class PlayerSelectionAdapter : RecyclerView.Adapter<IconAndTitleViewHolder>
         val player = players[position]
         holder.setTitle(player.name)
         holder.setIconColor(player.colorHex)
+        holder.setOnClickListener {
+            indexSelectionListener(players[position])
+        }
     }
+
+    private fun IconAndTitleViewHolder.setOnClickListener(listener: () -> Unit) =
+        itemView.setOnClickListener { listener() }
 }

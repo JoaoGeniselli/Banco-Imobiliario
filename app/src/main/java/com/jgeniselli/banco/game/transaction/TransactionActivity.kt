@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.game.common.domain.Player
-import com.jgeniselli.banco.game.common.view.player.selection.SinglePlayerSelectionAdapter
+import com.jgeniselli.banco.game.common.view.player.selection.PlayerSelectionAdapter
 import kotlinx.android.synthetic.main.activity_transaction.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -32,7 +32,7 @@ class TransactionActivity : AppCompatActivity() {
         }
 
     private val otherPlayersAdapter =
-        SinglePlayerSelectionAdapter { player ->
+        PlayerSelectionAdapter { player ->
             applyTransferTo(player)
         }
 
