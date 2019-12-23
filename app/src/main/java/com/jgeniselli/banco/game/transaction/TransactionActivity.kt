@@ -20,7 +20,7 @@ class TransactionActivity : AppCompatActivity() {
     }
 
     private val inputtedValue: Double
-        get() = input_value.text.toString().toDouble()
+        get() = input_transaction_value.text.toString().toDouble()
 
     private val playerIdExtra: Int
         get() {
@@ -43,11 +43,25 @@ class TransactionActivity : AppCompatActivity() {
         lifecycle.addObserver(viewModel)
         viewModel.observeViewState(this, Observer { applyViewState(it) })
 
-        button_debit.setOnClickListener { viewModel.applyDebit(inputtedValue) }
-        button_credit.setOnClickListener { viewModel.applyCredit(inputtedValue) }
+        button_debit.setOnClickListener { applyTransactionIfInputIsOk(viewModel::applyDebit) }
+        button_credit.setOnClickListener { applyTransactionIfInputIsOk(viewModel::applyCredit) }
 
         other_players_recycler.layoutManager = LinearLayoutManager(this)
         other_players_recycler.adapter = otherPlayersAdapter
+    }
+
+    private fun applyTransactionIfInputIsOk(operation: (Double) -> Unit) {
+        if (inputContainsNumbers()) {
+            operation(inputtedValue)
+        }
+        else {
+            input_transaction_value.error = getString(R.string.must_fill_input)
+        }
+    }
+
+    private fun inputContainsNumbers(): Boolean {
+        val input = input_transaction_value.text.toString()
+        return input.matches(Regex(".*\\d.*"))
     }
 
     private fun applyViewState(it: TransactionViewState?) {
@@ -55,7 +69,7 @@ class TransactionActivity : AppCompatActivity() {
             is TransactionViewState.Content -> {
                 displayPlayerName(it.playerName)
                 displayOtherPlayers(it.players)
-                input_value.requestFocus()
+                input_transaction_value.requestFocus()
             }
             is TransactionViewState.TransactionComplete -> finish()
         }
