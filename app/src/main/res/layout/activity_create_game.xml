@@ -15,7 +15,7 @@
             android:id="@+id/recycler_view" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" tools:listitem="@layout/line_view_player_selection">
+            app:layout_constraintBottom_toBottomOf="parent" tools:listitem="@layout/line_view_icon_and_title">
     </androidx.recyclerview.widget.RecyclerView>
     <ProgressBar
             style="?android:attr/progressBarStyle"

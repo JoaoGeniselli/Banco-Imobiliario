@@ -15,9 +15,10 @@ object KoinModule {
             single<GameRepository> { MemoryGameRepository() }
             single<PlayerRepository> { MemoryPlayerRepository() }
             single<TransactionRepository> { MemoryTransactionRepository() }
+            single<ColorRepository> { MemoryColorRepository() }
 
             viewModel { MainViewModel(get()) }
-            viewModel { CreateGameViewModel(get(), get()) }
+            viewModel { CreateGameViewModel(get(), get(), get()) }
             viewModel { GameViewModel(get()) }
             viewModel { params -> TransactionViewModel(params[0], get(), get(), get()) }
         }

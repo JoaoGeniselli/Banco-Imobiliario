@@ -2,6 +2,15 @@ package com.jgeniselli.banco.game.common.domain
 
 class MemoryPlayerRepository : PlayerRepository {
 
+    private var autoIncrementPlayerId = 0
+    private val players = mutableMapOf<Int, Player>()
+
+    override fun createPlayer(color: Color): Player {
+        val newPlayer = MemoryPlayer(id = autoIncrementPlayerId.inc(), colorHex = color.colorHex, name = color.name)
+        players[newPlayer.id] = newPlayer
+        return newPlayer
+    }
+
     override fun findById(playerId: Int, onSuccess: (Player?) -> Unit) {
         onSuccess(players[playerId])
     }
@@ -10,15 +19,30 @@ class MemoryPlayerRepository : PlayerRepository {
         onSuccess(players.map { it.value })
     }
 
-    private val players = mapOf(
-        1 to MemoryPlayer(id = 1, colorHex = "#42a5f5", name = "Azul"),
-        2 to MemoryPlayer(id = 2, colorHex = "#ffee58", name = "Amarelo"),
-        3 to MemoryPlayer(id = 3, colorHex = "#66bb6a", name = "Verde"),
-        4 to MemoryPlayer(id = 4, colorHex = "#ef5350", name = "Vermelho"),
-        5 to MemoryPlayer(id = 5, colorHex = "#ab47bc", name = "Roxo"),
-        6 to MemoryPlayer(id = 6, colorHex = "#bdbdbd", name = "Cinza")
-    )
+
 }
+
+class MemoryColorRepository : ColorRepository {
+
+    private val colors = listOf<Color>(
+        MemoryColor(id = 1, colorHex = "#42a5f5", name = "Azul"),
+        MemoryColor(id = 2, colorHex = "#ffee58", name = "Amarelo"),
+        MemoryColor(id = 3, colorHex = "#66bb6a", name = "Verde"),
+        MemoryColor(id = 4, colorHex = "#ef5350", name = "Vermelho"),
+        MemoryColor(id = 5, colorHex = "#ab47bc", name = "Roxo"),
+        MemoryColor(id = 6, colorHex = "#bdbdbd", name = "Cinza")
+    )
+
+    override fun findAll(onSuccess: (List<Color>) -> Unit, onError: () -> Unit) {
+        onSuccess(colors)
+    }
+}
+
+data class MemoryColor(
+    override val id: Int,
+    override val colorHex: String,
+    override val name: String
+) : Color
 
 class MemoryTransactionRepository : TransactionRepository {
 

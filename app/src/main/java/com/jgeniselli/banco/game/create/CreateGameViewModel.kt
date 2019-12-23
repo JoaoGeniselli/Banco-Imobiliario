@@ -1,11 +1,13 @@
 package com.jgeniselli.banco.game.create
 
 import androidx.lifecycle.*
+import com.jgeniselli.banco.game.common.domain.Color
+import com.jgeniselli.banco.game.common.domain.ColorRepository
 import com.jgeniselli.banco.game.common.domain.GameRepository
-import com.jgeniselli.banco.game.common.domain.Player
 import com.jgeniselli.banco.game.common.domain.PlayerRepository
 
 internal class CreateGameViewModel(
+    private val colorRepository: ColorRepository,
     private val playerRepository: PlayerRepository,
     private val gameRepository: GameRepository
 ) : ViewModel(), LifecycleObserver {
@@ -19,7 +21,7 @@ internal class CreateGameViewModel(
     }
 
     private fun fetchAvailablePlayers() {
-        playerRepository.findAll(
+        colorRepository.findAll(
             onSuccess = {
                 viewStateEvent.postValue(CreateGameViewState.LoadingStop)
                 viewStateEvent.postValue(CreateGameViewState.ContentFound(it))
@@ -31,8 +33,11 @@ internal class CreateGameViewModel(
         )
     }
 
-    fun createGame(selectedPlayers: List<Player>) {
-        gameRepository.createAndActivateGame(selectedPlayers)
+    fun createGame(selectedColors: List<Color>) {
+        val players = selectedColors.map {
+                color -> playerRepository.createPlayer(color)
+        }
+        gameRepository.createAndActivateGame(players)
         viewStateEvent.value = CreateGameViewState.RedirectToGame
     }
 

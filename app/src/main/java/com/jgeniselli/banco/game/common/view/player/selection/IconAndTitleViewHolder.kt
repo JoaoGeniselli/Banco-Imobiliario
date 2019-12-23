@@ -4,9 +4,13 @@ import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
-import kotlinx.android.synthetic.main.line_view_player_selection.view.*
+import kotlinx.android.synthetic.main.line_view_icon_and_title.view.*
 
-class PlayerSelectionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class IconAndTitleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+    companion object {
+        const val viewId = R.layout.line_view_icon_and_title
+    }
 
     var isHighlighted: Boolean = false
         set(value) {

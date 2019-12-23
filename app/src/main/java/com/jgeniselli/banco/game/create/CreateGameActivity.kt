@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.game.common.domain.InsufficientPlayersException
-import com.jgeniselli.banco.game.common.view.player.selection.MultiplePlayerSelectionAdapter
+import com.jgeniselli.banco.game.common.view.color.ColorAdapter
 import com.jgeniselli.banco.game.play.GameActivity
 import kotlinx.android.synthetic.main.activity_create_game.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -22,7 +22,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class CreateGameActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<CreateGameViewModel>()
-    private val adapter = MultiplePlayerSelectionAdapter()
+    private val adapter = ColorAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class CreateGameActivity : AppCompatActivity() {
     }
 
     private fun createGame() {
-        val selectedPlayers = adapter.getSelectedPlayers()
+        val selectedPlayers = adapter.selectedColors
         try {
             viewModel.createGame(selectedPlayers)
         } catch (e: InsufficientPlayersException) {
@@ -61,7 +61,7 @@ class CreateGameActivity : AppCompatActivity() {
         when(state) {
             is CreateGameViewState.LoadingStart -> progress.visibility = View.VISIBLE
             is CreateGameViewState.LoadingStop -> progress.visibility = View.GONE
-            is CreateGameViewState.ContentFound -> adapter.players = state.players
+            is CreateGameViewState.ContentFound -> adapter.colors = state.colors
             is Error -> displayErrorToast(R.string.error_while_fetching_players)
             is CreateGameViewState.RedirectToGame -> redirectToGameScreen()
         }
