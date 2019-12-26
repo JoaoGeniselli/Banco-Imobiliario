@@ -33,7 +33,7 @@ class TransactionActivity : AppCompatActivity() {
 
     private val otherPlayersAdapter =
         PlayerSelectionAdapter { player ->
-            applyTransferTo(player)
+            applyTransactionIfInputIsOk { applyTransferTo(player) }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +53,7 @@ class TransactionActivity : AppCompatActivity() {
     private fun applyTransactionIfInputIsOk(operation: (Double) -> Unit) {
         if (inputContainsNumbers()) {
             operation(inputtedValue)
-        }
-        else {
+        } else {
             input_transaction_value.error = getString(R.string.must_fill_input)
         }
     }

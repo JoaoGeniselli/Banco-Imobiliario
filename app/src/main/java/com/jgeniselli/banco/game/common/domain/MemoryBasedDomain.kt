@@ -18,8 +18,6 @@ class MemoryPlayerRepository : PlayerRepository {
     override fun findAll(onSuccess: (List<Player>) -> Unit, onError: () -> Unit) {
         onSuccess(players.map { it.value })
     }
-
-
 }
 
 class MemoryColorRepository : ColorRepository {
@@ -66,7 +64,8 @@ class MemoryGameRepository : GameRepository {
 
 private class MemoryGame(
     override val players: List<Player>,
-    override val transactions: List<Transaction> = listOf()
+    override val transactions: List<Transaction> = listOf(),
+    override val id: Int = 0
 ) : Game
 
 class MemoryPlayer(
