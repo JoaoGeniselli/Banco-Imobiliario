@@ -1,12 +1,17 @@
 package com.jgeniselli.banco.game.common.domain
 
+import java.util.*
+
 class MemoryPlayerRepository : PlayerRepository {
 
     private var autoIncrementPlayerId = 0
     private val players = mutableMapOf<Int, Player>()
 
     override fun createPlayer(color: Color): Player {
-        val newPlayer = MemoryPlayer(id = autoIncrementPlayerId.inc(), colorHex = color.colorHex, name = color.name)
+        val newPlayer = Player(
+            id = autoIncrementPlayerId.inc(),
+            color = color
+        )
         players[newPlayer.id] = newPlayer
         return newPlayer
     }
@@ -23,24 +28,18 @@ class MemoryPlayerRepository : PlayerRepository {
 class MemoryColorRepository : ColorRepository {
 
     private val colors = listOf<Color>(
-        MemoryColor(id = 1, colorHex = "#42a5f5", name = "Azul"),
-        MemoryColor(id = 2, colorHex = "#ffee58", name = "Amarelo"),
-        MemoryColor(id = 3, colorHex = "#66bb6a", name = "Verde"),
-        MemoryColor(id = 4, colorHex = "#ef5350", name = "Vermelho"),
-        MemoryColor(id = 5, colorHex = "#ab47bc", name = "Roxo"),
-        MemoryColor(id = 6, colorHex = "#bdbdbd", name = "Cinza")
+        Color(id = 1, colorHex = "#42a5f5", name = "Azul"),
+        Color(id = 2, colorHex = "#ffee58", name = "Amarelo"),
+        Color(id = 3, colorHex = "#66bb6a", name = "Verde"),
+        Color(id = 4, colorHex = "#ef5350", name = "Vermelho"),
+        Color(id = 5, colorHex = "#ab47bc", name = "Roxo"),
+        Color(id = 6, colorHex = "#bdbdbd", name = "Cinza")
     )
 
     override fun findAll(onSuccess: (List<Color>) -> Unit, onError: () -> Unit) {
         onSuccess(colors)
     }
 }
-
-data class MemoryColor(
-    override val id: Int,
-    override val colorHex: String,
-    override val name: String
-) : Color
 
 class MemoryTransactionRepository : TransactionRepository {
 
@@ -51,26 +50,17 @@ class MemoryTransactionRepository : TransactionRepository {
 
 class MemoryGameRepository : GameRepository {
 
-    private var game: MemoryGame? = null
+    private var game: Game? = null
 
     override fun createAndActivateGame(selectedPlayers: List<Player>) {
         if (selectedPlayers.size < 2) throw InsufficientPlayersException()
         selectedPlayers.forEach { it.currentValue = 25000.00 }
-        game = MemoryGame(selectedPlayers)
+        game = Game(
+            id = 1,
+            createTime = Date(),
+            players = selectedPlayers
+        )
     }
 
     override fun getActiveGame(): Game? = game
 }
-
-private class MemoryGame(
-    override val players: List<Player>,
-    override val transactions: List<Transaction> = listOf(),
-    override val id: Int = 0
-) : Game
-
-class MemoryPlayer(
-    override val id: Int,
-    override val colorHex: String = "#F00",
-    override var currentValue: Double = 25000.00,
-    override val name: String = "Player"
-) : Player

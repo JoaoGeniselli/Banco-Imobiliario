@@ -1,9 +1,7 @@
 package com.jgeniselli.banco.game.common.domain
 
-interface Player {
-    val id: Int
-//    val color: Color
-    val colorHex: String
-    val name: String
-    var currentValue: Double
-}
+class Player(
+    val id: Int,
+    val color: Color,
+    var currentValue: Double = 25000.0
+)

@@ -1,6 +1,7 @@
 package com.jgeniselli.banco.game.common.domain
 
-interface Transaction {
-    val player: Player
+class Transaction(
+    val id: Int,
+    val player: Player,
     val value: Double
-}
+)

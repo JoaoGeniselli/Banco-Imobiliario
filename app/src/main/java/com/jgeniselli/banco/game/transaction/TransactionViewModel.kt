@@ -37,7 +37,7 @@ class TransactionViewModel(
         val otherPlayers = gameRepository.getActiveGame()
             ?.players
             ?.filter { it != selectedPlayer } ?: listOf()
-        viewStateEvent.value = TransactionViewState.Content(selectedPlayer.name, otherPlayers)
+        viewStateEvent.value = TransactionViewState.Content(selectedPlayer.color.name, otherPlayers)
     }
 
     fun observeViewState(owner: LifecycleOwner, observer: Observer<TransactionViewState>) {
