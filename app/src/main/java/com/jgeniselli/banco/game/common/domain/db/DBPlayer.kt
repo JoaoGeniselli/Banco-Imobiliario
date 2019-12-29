@@ -15,5 +15,5 @@ data class DBPlayer(
     val creditCard: DBCreditCard?,
     @ColumnInfo(name = "game_id")
     val gameId: Long,
-    val cash: Double
+    var cash: Double
 )

@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 )
 data class DBGame(
     @PrimaryKey(autoGenerate = true)
-    val id: Long
+    val id: Long = 0
 )

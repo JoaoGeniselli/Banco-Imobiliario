@@ -28,7 +28,7 @@ class PlayerSummaryAdapter(
     override fun onBindViewHolder(holder: PlayerSummaryViewHolder, position: Int) {
         val player = players[position]
         holder.setPlayerCash(player.currentValue)
-        holder.setIconColor(player.color.colorHex)
+        holder.setIconColor(player.creditCard.colorHex)
         holder.setClickListener {
             onPlayerClickListener(player)
         }

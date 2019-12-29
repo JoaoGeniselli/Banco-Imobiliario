@@ -1,7 +1,7 @@
 package com.jgeniselli.banco.game.create
 
 import androidx.lifecycle.*
-import com.jgeniselli.banco.game.common.domain.Color
+import com.jgeniselli.banco.game.common.domain.CreditCard
 import com.jgeniselli.banco.game.common.domain.ColorRepository
 import com.jgeniselli.banco.game.common.domain.GameRepository
 import com.jgeniselli.banco.game.common.domain.PlayerRepository
@@ -33,8 +33,8 @@ internal class CreateGameViewModel(
         )
     }
 
-    fun createGame(selectedColors: List<Color>) {
-        val players = selectedColors.map {
+    fun createGame(selectedCreditCards: List<CreditCard>) {
+        val players = selectedCreditCards.map {
                 color -> playerRepository.createPlayer(color)
         }
         gameRepository.createAndActivateGame(players)

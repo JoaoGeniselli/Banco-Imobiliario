@@ -2,6 +2,6 @@ package com.jgeniselli.banco.game.common.domain
 
 class Player(
     val id: Long,
-    val color: Color,
+    val creditCard: CreditCard,
     var currentValue: Double = 25000.0
 )

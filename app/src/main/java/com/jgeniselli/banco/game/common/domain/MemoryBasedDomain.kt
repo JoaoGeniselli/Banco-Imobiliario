@@ -5,10 +5,10 @@ class MemoryPlayerRepository : PlayerRepository {
     private var autoIncrementPlayerId = 0L
     private val players = mutableMapOf<Long, Player>()
 
-    override fun createPlayer(color: Color): Player {
+    override fun createPlayer(creditCard: CreditCard): Player {
         val newPlayer = Player(
             id = autoIncrementPlayerId.inc(),
-            color = color
+            creditCard = creditCard
         )
         players[newPlayer.id] = newPlayer
         return newPlayer
@@ -25,16 +25,16 @@ class MemoryPlayerRepository : PlayerRepository {
 
 class MemoryColorRepository : ColorRepository {
 
-    private val colors = listOf<Color>(
-        Color(id = 1, colorHex = "#42a5f5", name = "Azul"),
-        Color(id = 2, colorHex = "#ffee58", name = "Amarelo"),
-        Color(id = 3, colorHex = "#66bb6a", name = "Verde"),
-        Color(id = 4, colorHex = "#ef5350", name = "Vermelho"),
-        Color(id = 5, colorHex = "#ab47bc", name = "Roxo"),
-        Color(id = 6, colorHex = "#bdbdbd", name = "Cinza")
+    private val colors = listOf<CreditCard>(
+        CreditCard(id = 1, colorHex = "#42a5f5", name = "Azul"),
+        CreditCard(id = 2, colorHex = "#ffee58", name = "Amarelo"),
+        CreditCard(id = 3, colorHex = "#66bb6a", name = "Verde"),
+        CreditCard(id = 4, colorHex = "#ef5350", name = "Vermelho"),
+        CreditCard(id = 5, colorHex = "#ab47bc", name = "Roxo"),
+        CreditCard(id = 6, colorHex = "#bdbdbd", name = "Cinza")
     )
 
-    override fun findAll(onSuccess: (List<Color>) -> Unit, onError: () -> Unit) {
+    override fun findAll(onSuccess: (List<CreditCard>) -> Unit, onError: () -> Unit) {
         onSuccess(colors)
     }
 }

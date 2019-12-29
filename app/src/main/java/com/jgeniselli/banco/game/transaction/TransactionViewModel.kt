@@ -6,7 +6,7 @@ import com.jgeniselli.banco.game.common.domain.Player
 import com.jgeniselli.banco.game.common.domain.PlayerRepository
 
 class TransactionViewModel(
-    private val playerId: Int,
+    private val playerId: Long,
     private val playerRepository: PlayerRepository,
     private val gameRepository: GameRepository
 ) : ViewModel(), LifecycleObserver {
@@ -35,7 +35,7 @@ class TransactionViewModel(
         val otherPlayers = gameRepository.getActiveGame()
             ?.players
             ?.filter { it != selectedPlayer } ?: listOf()
-        viewStateEvent.value = TransactionViewState.Content(selectedPlayer.color.name, otherPlayers)
+        viewStateEvent.value = TransactionViewState.Content(selectedPlayer.creditCard.name, otherPlayers)
     }
 
     fun observeViewState(owner: LifecycleOwner, observer: Observer<TransactionViewState>) {

@@ -49,7 +49,7 @@ class CreateGameActivity : AppCompatActivity() {
     }
 
     private fun createGame() {
-        val selectedPlayers = adapter.selectedColors
+        val selectedPlayers = adapter.selectedCreditCards
         try {
             viewModel.createGame(selectedPlayers)
         } catch (e: InsufficientPlayersException) {
@@ -61,7 +61,7 @@ class CreateGameActivity : AppCompatActivity() {
         when(state) {
             is CreateGameViewState.LoadingStart -> progress.visibility = View.VISIBLE
             is CreateGameViewState.LoadingStop -> progress.visibility = View.GONE
-            is CreateGameViewState.ContentFound -> adapter.colors = state.colors
+            is CreateGameViewState.ContentFound -> adapter.creditCards = state.creditCards
             is Error -> displayErrorToast(R.string.error_while_fetching_players)
             is CreateGameViewState.RedirectToGame -> redirectToGameScreen()
         }

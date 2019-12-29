@@ -26,8 +26,8 @@ open class PlayerSelectionAdapter(
 
     override fun onBindViewHolder(holder: IconAndTitleViewHolder, position: Int) {
         val player = players[position]
-        holder.setTitle(player.color.name)
-        holder.setIconColor(player.color.colorHex)
+        holder.setTitle(player.creditCard.name)
+        holder.setIconColor(player.creditCard.colorHex)
         holder.setOnClickListener {
             indexSelectionListener(players[position])
         }

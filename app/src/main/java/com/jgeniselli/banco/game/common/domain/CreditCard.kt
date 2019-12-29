@@ -1,6 +1,6 @@
 package com.jgeniselli.banco.game.common.domain
 
-data class Color(
+data class CreditCard(
     val id: Long,
     val colorHex: String,
     val name: String
@@ -8,6 +8,6 @@ data class Color(
 
     companion object {
 
-        fun black() = Color(0, "#000000", "Preto")
+        fun black() = CreditCard(0, "#000000", "Preto")
     }
 }

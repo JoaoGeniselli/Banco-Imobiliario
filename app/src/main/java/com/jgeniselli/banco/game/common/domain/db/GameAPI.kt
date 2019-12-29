@@ -1,6 +1,6 @@
 package com.jgeniselli.banco.game.common.domain.db
 
-import com.jgeniselli.banco.game.common.domain.Color
+import com.jgeniselli.banco.game.common.domain.CreditCard
 import com.jgeniselli.banco.game.common.domain.Game
 import com.jgeniselli.banco.game.common.domain.Player
 
@@ -10,21 +10,20 @@ class GameAPI(
     private val playerDao: DBPlayerDao
 ) {
 
-    fun findAvailableColors(): List<Color> {
+    fun findAvailableCreditCards(): List<CreditCard> {
         val dbCards = creditCardDao.findAll()
-        return dbCards.map { Color(it.id, it.colorHex, it.name) }
+        return dbCards.map { CreditCard(it.id, it.colorHex, it.name) }
     }
 
     fun findAllPlayers(): List<Player> {
         val players = playerDao.findAll()
-
         return players.map { transformPlayer(it) }
     }
 
     private fun transformPlayer(player: DBPlayer): Player {
         val mappedCard = player.creditCard?.let { card ->
-            Color(card.id, card.colorHex, card.name)
-        } ?: Color.black()
+            CreditCard(card.id, card.colorHex, card.name)
+        } ?: CreditCard.black()
         return Player(player.id, mappedCard, player.cash)
     }
 

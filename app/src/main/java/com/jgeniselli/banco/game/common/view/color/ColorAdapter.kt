@@ -4,19 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
-import com.jgeniselli.banco.game.common.domain.Color
+import com.jgeniselli.banco.game.common.domain.CreditCard
 import com.jgeniselli.banco.game.common.view.player.selection.IconAndTitleViewHolder
 
 open class ColorAdapter : RecyclerView.Adapter<IconAndTitleViewHolder>() {
 
     private val selectedIndexes = mutableListOf<Int>()
 
-    val selectedColors: List<Color>
-        get() = colors.filterIndexed { index, _ ->
+    val selectedCreditCards: List<CreditCard>
+        get() = creditCards.filterIndexed { index, _ ->
             selectedIndexes.contains(index)
         }
 
-    var colors: List<Color> = listOf()
+    var creditCards: List<CreditCard> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -29,10 +29,10 @@ open class ColorAdapter : RecyclerView.Adapter<IconAndTitleViewHolder>() {
         return IconAndTitleViewHolder(view)
     }
 
-    override fun getItemCount(): Int = colors.size
+    override fun getItemCount(): Int = creditCards.size
 
     override fun onBindViewHolder(holder: IconAndTitleViewHolder, position: Int) {
-        val player = colors[position]
+        val player = creditCards[position]
         holder.setTitle(player.name)
         holder.setIconColor(player.colorHex)
         holder.setOnSelectionChanged { updatedIndex ->
