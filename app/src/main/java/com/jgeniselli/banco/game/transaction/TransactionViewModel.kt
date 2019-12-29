@@ -4,12 +4,26 @@ import androidx.lifecycle.*
 import com.jgeniselli.banco.game.common.domain.GameRepository
 import com.jgeniselli.banco.game.common.domain.Player
 import com.jgeniselli.banco.game.common.domain.PlayerRepository
+import com.jgeniselli.banco.game.common.view.player.selection.TitleAndColor
 
 class TransactionViewModel(
     private val playerId: Long,
     private val playerRepository: PlayerRepository,
-    private val gameRepository: GameRepository
+    private val gameRepository: GameRepository,
+    private val transactionService: Someone,
+    private val someone: Someone2
 ) : ViewModel(), LifecycleObserver {
+
+    interface Someone {
+        fun debit(playerId: Long, value: Double)
+        fun credit(playerId: Long, value: Double)
+    }
+
+    interface Someone2 {
+        fun getPlayer(playerId: Long): Player
+        fun getGamePlayersBut(playerId: Long): List<Player>
+
+    }
 
     private lateinit var selectedPlayer: Player
     private lateinit var otherPlayers: List<Player>
@@ -17,25 +31,12 @@ class TransactionViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun start() {
-        retrieveSelectedPlayer(
-            thenExecute = this::retrieveOtherPlayers
+        selectedPlayer = someone.getPlayer(playerId)
+        otherPlayers = someone.getGamePlayersBut(playerId)
+        viewStateEvent.value = TransactionViewState.Content(
+            selectedPlayer.creditCard.name,
+            otherPlayers.map { TitleAndColor(it.creditCard.name, it.creditCard.colorHex) }
         )
-    }
-
-    private fun retrieveSelectedPlayer(thenExecute: () -> Unit) {
-        playerRepository.findById(playerId) { foundPlayer ->
-            foundPlayer?.let {
-                this.selectedPlayer = it
-            } ?: throw IllegalStateException("Player is unknown")
-            thenExecute()
-        }
-    }
-
-    private fun retrieveOtherPlayers() {
-        val otherPlayers = gameRepository.getActiveGame()
-            ?.players
-            ?.filter { it != selectedPlayer } ?: listOf()
-        viewStateEvent.value = TransactionViewState.Content(selectedPlayer.creditCard.name, otherPlayers)
     }
 
     fun observeViewState(owner: LifecycleOwner, observer: Observer<TransactionViewState>) {
@@ -43,20 +44,19 @@ class TransactionViewModel(
     }
 
     fun applyDebit(value: Double) {
-        addCashToPlayer(value * -1.0, selectedPlayer)
-    }
-
-    private fun addCashToPlayer(value: Double, player: Player) {
-        player.currentValue += value
+        transactionService.debit(playerId, value)
         viewStateEvent.postValue(TransactionViewState.TransactionComplete)
     }
 
     fun applyCredit(value: Double) {
-        addCashToPlayer(value, selectedPlayer)
+        transactionService.credit(playerId, value)
+        viewStateEvent.postValue(TransactionViewState.TransactionComplete)
     }
 
-    fun applyTransfer(value: Double, otherPlayer: Player) {
-        addCashToPlayer(value * -1.0, selectedPlayer)
-        addCashToPlayer(value, otherPlayer)
+    fun applyTransfer(value: Double, selectedIndex: Int) {
+        val destinationId = otherPlayers[selectedIndex].id
+        transactionService.debit(playerId, value)
+        transactionService.credit(destinationId, value)
+        viewStateEvent.postValue(TransactionViewState.TransactionComplete)
     }
 }

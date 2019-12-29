@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jgeniselli.banco.R
-import com.jgeniselli.banco.game.common.domain.Player
 import com.jgeniselli.banco.game.common.view.player.selection.PlayerSelectionAdapter
+import com.jgeniselli.banco.game.common.view.player.selection.TitleAndColor
 import kotlinx.android.synthetic.main.activity_transaction.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -32,8 +32,8 @@ class TransactionActivity : AppCompatActivity() {
         }
 
     private val otherPlayersAdapter =
-        PlayerSelectionAdapter { player ->
-            applyTransactionIfInputIsOk { applyTransferTo(player) }
+        PlayerSelectionAdapter { selectedPosition ->
+            applyTransactionIfInputIsOk { applyTransferTo(selectedPosition) }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +67,7 @@ class TransactionActivity : AppCompatActivity() {
         when (it) {
             is TransactionViewState.Content -> {
                 displayPlayerName(it.playerName)
-                displayOtherPlayers(it.players)
+                displayOtherPlayers(it.otherPlayerRows)
                 input_transaction_value.requestFocus()
             }
             is TransactionViewState.TransactionComplete -> finish()
@@ -78,12 +78,12 @@ class TransactionActivity : AppCompatActivity() {
         text_player_name.text = getString(R.string.player_name_mask, name)
     }
 
-    private fun displayOtherPlayers(players: List<Player>) {
-        otherPlayersAdapter.players = players
+    private fun displayOtherPlayers(players: List<TitleAndColor>) {
+        otherPlayersAdapter.rows = players
     }
 
-    private fun applyTransferTo(otherPlayer: Player) {
-        viewModel.applyTransfer(inputtedValue, otherPlayer)
+    private fun applyTransferTo(playerPosition: Int) {
+        viewModel.applyTransfer(inputtedValue, playerPosition)
     }
 
     override fun onSupportNavigateUp(): Boolean {
