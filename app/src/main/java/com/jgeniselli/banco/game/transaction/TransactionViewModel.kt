@@ -4,13 +4,11 @@ import androidx.lifecycle.*
 import com.jgeniselli.banco.game.common.domain.GameRepository
 import com.jgeniselli.banco.game.common.domain.Player
 import com.jgeniselli.banco.game.common.domain.PlayerRepository
-import com.jgeniselli.banco.game.common.domain.TransactionRepository
 
 class TransactionViewModel(
     private val playerId: Int,
     private val playerRepository: PlayerRepository,
-    private val gameRepository: GameRepository,
-    private val transactionRepository: TransactionRepository
+    private val gameRepository: GameRepository
 ) : ViewModel(), LifecycleObserver {
 
     private lateinit var selectedPlayer: Player
@@ -50,7 +48,6 @@ class TransactionViewModel(
 
     private fun addCashToPlayer(value: Double, player: Player) {
         player.currentValue += value
-        transactionRepository.saveTransaction(player, value)
         viewStateEvent.postValue(TransactionViewState.TransactionComplete)
     }
 

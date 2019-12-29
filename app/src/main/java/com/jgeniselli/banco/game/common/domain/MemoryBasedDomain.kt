@@ -1,11 +1,9 @@
 package com.jgeniselli.banco.game.common.domain
 
-import java.util.*
-
 class MemoryPlayerRepository : PlayerRepository {
 
-    private var autoIncrementPlayerId = 0
-    private val players = mutableMapOf<Int, Player>()
+    private var autoIncrementPlayerId = 0L
+    private val players = mutableMapOf<Long, Player>()
 
     override fun createPlayer(color: Color): Player {
         val newPlayer = Player(
@@ -16,7 +14,7 @@ class MemoryPlayerRepository : PlayerRepository {
         return newPlayer
     }
 
-    override fun findById(playerId: Int, onSuccess: (Player?) -> Unit) {
+    override fun findById(playerId: Long, onSuccess: (Player?) -> Unit) {
         onSuccess(players[playerId])
     }
 
@@ -41,13 +39,6 @@ class MemoryColorRepository : ColorRepository {
     }
 }
 
-class MemoryTransactionRepository : TransactionRepository {
-
-    override fun saveTransaction(player: Player, value: Double) {
-
-    }
-}
-
 class MemoryGameRepository : GameRepository {
 
     private var game: Game? = null
@@ -57,7 +48,6 @@ class MemoryGameRepository : GameRepository {
         selectedPlayers.forEach { it.currentValue = 25000.00 }
         game = Game(
             id = 1,
-            createTime = Date(),
             players = selectedPlayers
         )
     }
