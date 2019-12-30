@@ -1,13 +1,14 @@
 package com.jgeniselli.banco.domain
 
-class CreditUseCase : UseCase<CreditUseCase.Request, Unit>() {
+internal class CreditUseCase(
+    private val playerRepository: PlayerRepository
+) : UseCase<BalanceUpdateRequest, Unit>() {
 
-    override fun execute(input: Request, onComplete: (Unit, Throwable?) -> Unit) {
+    override fun execute(input: BalanceUpdateRequest, onComplete: (Unit, Throwable?) -> Unit) {
         with(input) {
             player.currentValue += value
+            playerRepository.save(player)
         }
         onComplete(Unit, null)
     }
-
-    data class Request(val player: Player, val value: Double)
 }
