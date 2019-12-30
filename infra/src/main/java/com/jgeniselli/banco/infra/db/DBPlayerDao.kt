@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.common.domain.db
+package com.jgeniselli.banco.infra.db
 
 import androidx.room.*
 

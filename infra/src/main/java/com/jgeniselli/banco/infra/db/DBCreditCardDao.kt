@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.common.domain.db
+package com.jgeniselli.banco.infra.db
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -10,7 +10,7 @@ interface DBCreditCardDao {
     @Query("select * from CreditCard")
     fun findAll() : List<DBCreditCard>
 
-    @Query("select * from CreditCard where id = :id")
+    @Query("select * from CreditCard where credit_card_id = :id")
     fun findById(id: Long) : DBCreditCard?
 
     @Insert
