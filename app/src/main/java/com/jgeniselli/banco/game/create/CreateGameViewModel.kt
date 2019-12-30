@@ -5,6 +5,7 @@ import com.jgeniselli.banco.game.common.domain.CreditCard
 import com.jgeniselli.banco.game.common.domain.ColorRepository
 import com.jgeniselli.banco.game.common.domain.GameRepository
 import com.jgeniselli.banco.game.common.domain.PlayerRepository
+import com.jgeniselli.banco.game.common.view.player.selection.TitleAndColor
 
 internal class CreateGameViewModel(
     private val colorRepository: ColorRepository,
@@ -22,9 +23,10 @@ internal class CreateGameViewModel(
 
     private fun fetchAvailablePlayers() {
         colorRepository.findAll(
-            onSuccess = {
+            onSuccess = { cards ->
+                val rows = cards.map { TitleAndColor(it.name, it.colorHex) }
                 viewStateEvent.postValue(CreateGameViewState.LoadingStop)
-                viewStateEvent.postValue(CreateGameViewState.ContentFound(it))
+                viewStateEvent.postValue(CreateGameViewState.ContentFound(rows))
             },
             onError = {
                 viewStateEvent.postValue(CreateGameViewState.LoadingStop)
@@ -34,8 +36,8 @@ internal class CreateGameViewModel(
     }
 
     fun createGame(selectedCreditCards: List<CreditCard>) {
-        val players = selectedCreditCards.map {
-                color -> playerRepository.createPlayer(color)
+        val players = selectedCreditCards.map { color ->
+            playerRepository.createPlayer(color)
         }
         gameRepository.createAndActivateGame(players)
         viewStateEvent.value = CreateGameViewState.RedirectToGame

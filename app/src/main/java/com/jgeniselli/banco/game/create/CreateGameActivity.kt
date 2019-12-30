@@ -49,9 +49,9 @@ class CreateGameActivity : AppCompatActivity() {
     }
 
     private fun createGame() {
-        val selectedPlayers = adapter.selectedCreditCards
+        val selectedPlayers = adapter.selectedRows
         try {
-            viewModel.createGame(selectedPlayers)
+//            viewModel.createGame(selectedPlayers)
         } catch (e: InsufficientPlayersException) {
             displayErrorToast(R.string.error_minimum_players_required)
         }
@@ -61,7 +61,7 @@ class CreateGameActivity : AppCompatActivity() {
         when(state) {
             is CreateGameViewState.LoadingStart -> progress.visibility = View.VISIBLE
             is CreateGameViewState.LoadingStop -> progress.visibility = View.GONE
-            is CreateGameViewState.ContentFound -> adapter.creditCards = state.creditCards
+            is CreateGameViewState.ContentFound -> adapter.rows = state.rows
             is Error -> displayErrorToast(R.string.error_while_fetching_players)
             is CreateGameViewState.RedirectToGame -> redirectToGameScreen()
         }
