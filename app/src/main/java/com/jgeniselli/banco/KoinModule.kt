@@ -14,7 +14,7 @@ object KoinModule {
         module {
             single<GameRepository> { MemoryGameRepository() }
             single<PlayerRepository> { MemoryPlayerRepository() }
-            single<ColorRepository> { MemoryColorRepository() }
+            single<CreditCardRepository> { MemoryColorRepository() }
 
             viewModel { MainViewModel(get()) }
             viewModel { CreateGameViewModel(get(), get(), get()) }

@@ -1,5 +1,5 @@
 package com.jgeniselli.banco.game.common.domain
 
-interface ColorRepository {
+interface CreditCardRepository {
     fun findAll(onSuccess: (List<CreditCard>) -> Unit, onError: () -> Unit)
 }

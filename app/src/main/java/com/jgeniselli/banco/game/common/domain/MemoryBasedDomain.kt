@@ -23,7 +23,7 @@ class MemoryPlayerRepository : PlayerRepository {
     }
 }
 
-class MemoryColorRepository : ColorRepository {
+class MemoryColorRepository : CreditCardRepository {
 
     private val colors = listOf<CreditCard>(
         CreditCard(id = 1, colorHex = "#42a5f5", name = "Azul"),

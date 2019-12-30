@@ -51,7 +51,7 @@ class CreateGameActivity : AppCompatActivity() {
     private fun createGame() {
         val selectedPlayers = adapter.selectedRows
         try {
-//            viewModel.createGame(selectedPlayers)
+            viewModel.createGame(selectedPlayers)
         } catch (e: InsufficientPlayersException) {
             displayErrorToast(R.string.error_minimum_players_required)
         }
