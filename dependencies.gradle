@@ -1,59 +1,65 @@
 ext {
     // SDK Versions
-    compileSdkVersion = 28
-    minSdkVersion = 24
-    targetSdkVersion = 28
+    sdk = [
+            compileVersion: 28,
+            minVersion    : 24,
+            targetVersion : 28
+    ]
 
     versions = [
-            gradle          : "3.4.2",
-            kotlin          : "1.3.61",
-            room            : "2.2.3",
-            koin            : "2.0.1",
-            constraintLayout: "1.1.3",
-            kotlinCoroutines: "1.3.3",
-            robolectric     : "3.5.1",
-            androidXTestCore: "1.2.0",
-            mockito         : "1.10.19",
-            mockk           : "1.9.3.kotlin12",
-            junit           : "4.12",
-            testRunner      : "1.2.0",
-            testRules       : "1.2.0",
-            espressoIntents : "3.2.0",
-            espressoCore    : "3.2.0",
-            appCompat       : "1.1.0",
-            kotlinCore      : "1.1.0"
+            gradle             : "3.4.2",
+            kotlin             : "1.3.61",
+            room               : "2.2.3",
+            koin               : "2.0.1",
+            constraintLayout   : "1.1.3",
+            kotlinCoroutines   : "1.3.3",
+            robolectric        : "3.5.1",
+            androidXTestCore   : "1.2.0",
+            mockito            : "1.10.19",
+            mockk              : "1.9.3.kotlin12",
+            junit              : "4.12",
+            testRunner         : "1.2.0",
+            testRules          : "1.2.0",
+            espressoIntents    : "3.2.0",
+            espressoCore       : "3.2.0",
+            appCompat          : "1.1.0",
+            kotlinCore         : "1.1.0",
+            lifecycleExtensions: "1.1.1",
+            recyclerView       : "1.1.0"
     ]
 
     libs = [
             // Android
-            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
-            kotlinCore      : "androidx.core:core-ktx:${versions.kotlinCore}",
-            appCompat       : "androidx.appcompat:appcompat:${versions.appCompat}",
+            kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
+            kotlinCore         : "androidx.core:core-ktx:${versions.kotlinCore}",
+            appCompat          : "androidx.appcompat:appcompat:${versions.appCompat}",
+            lifecycleExtensions: "android.arch.lifecycle:extensions:${versions.lifecycleExtensions}",
 
             // Storage
-            room            : "androidx.room:room-runtime:${versions.room}",
-            roomCompiler    : "androidx.room:room-compiler:${versions.room}",
+            room               : "androidx.room:room-runtime:${versions.room}",
+            roomCompiler       : "androidx.room:room-compiler:${versions.room}",
 
             // UI
-            constraintLayout: "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+            constraintLayout   : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+            recyclerView       : "androidx.recyclerview:recyclerview:${versions.recyclerView}",
 
             // Dependency Injection
-            koinAndroid     : "org.koin:koin-android:${versions.koin}",
-            koinScope       : "org.koin:koin-android-scope:${versions.koin}",
-            koinViewModel   : "org.koin:koin-android-viewmodel:${versions.koin}",
+            koinAndroid        : "org.koin:koin-android:${versions.koin}",
+            koinScope          : "org.koin:koin-android-scope:${versions.koin}",
+            koinViewModel      : "org.koin:koin-android-viewmodel:${versions.koin}",
 
             // Threads
-            kotlinCoroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlinCoroutines}",
+            kotlinCoroutines   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlinCoroutines}",
 
             // Testing
-            testRunner      : "androidx.test:runner:${versions.testRunner}",
-            testRules       : "androidx.test:rules:${versions.testRules}",
-            junit           : "junit:junit:${versions.junit}",
-            mockito         : "org.mockito:mockito-core:${versions.mockito}",
-            robolectric     : "org.robolectric:robolectric:${versions.robolectric}",
-            androidXTestCore: "androidx.test:core:${versions.androidXTestCore}",
-            mokk            : "io.mockk:mockk:${versions.mockk}",
-            espressoCore    : "androidx.test.espresso:espresso-core:${versions.espressoCore}",
-            espressoIntents : "androidx.test.espresso:espresso-intents:${versions.espressoIntents}"
+            testRunner         : "androidx.test:runner:${versions.testRunner}",
+            testRules          : "androidx.test:rules:${versions.testRules}",
+            junit              : "junit:junit:${versions.junit}",
+            mockito            : "org.mockito:mockito-core:${versions.mockito}",
+            robolectric        : "org.robolectric:robolectric:${versions.robolectric}",
+            androidXTestCore   : "androidx.test:core:${versions.androidXTestCore}",
+            mockk              : "io.mockk:mockk:${versions.mockk}",
+            espressoCore       : "androidx.test.espresso:espresso-core:${versions.espressoCore}",
+            espressoIntents    : "androidx.test.espresso:espresso-intents:${versions.espressoIntents}"
     ]
 }
