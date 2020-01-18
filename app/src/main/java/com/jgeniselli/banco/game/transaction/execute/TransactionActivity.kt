@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.transaction
+package com.jgeniselli.banco.game.transaction.execute
 
 import android.content.Context
 import android.content.Intent

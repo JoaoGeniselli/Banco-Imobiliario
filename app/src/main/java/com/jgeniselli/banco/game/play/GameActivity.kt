@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.game.common.view.player.summary.PlayerSummaryAdapter
-import com.jgeniselli.banco.game.transaction.TransactionActivity
+import com.jgeniselli.banco.game.transaction.execute.TransactionActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

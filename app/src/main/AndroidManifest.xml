@@ -3,36 +3,36 @@
           package="com.jgeniselli.banco">
 
     <application
-            android:allowBackup="true"
             android:name=".GameApplication"
+            android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/BlueTheme">
-
+        <activity android:name=".game.transaction.history.TransactionHistoryActivity">
+        </activity>
         <activity
-                android:name=".game.transaction.TransactionActivity"
+                android:name=".game.transaction.execute.TransactionActivity"
                 android:label="@string/transaction"
                 android:screenOrientation="portrait"/>
-
         <activity
                 android:name=".game.play.GameActivity"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
-                <data android:scheme="jgeniselli.banco.imobiliario://"
-                      android:host="app"
-                      android:path="/deeplink"/>
-            </intent-filter>
 
+                <data
+                        android:host="app"
+                        android:path="/deeplink"
+                        android:scheme="jgeniselli.banco.imobiliario://"/>
+            </intent-filter>
         </activity>
     </application>
 
