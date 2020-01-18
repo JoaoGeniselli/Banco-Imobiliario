@@ -49,6 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    compile project(path: ':domain')
-    compile project(path: ':infra')
+
+    implementation project(path: ':domain')
+    implementation project(path: ':infra')
 }
