@@ -31,14 +31,7 @@ class GameAPI(
     }
 
     suspend fun startNewGame() {
-        val colors = listOf(
-            "#ffffff",
-            "#ffff00",
-            "#ff0000",
-            "#ff00FF",
-            "#00ffff",
-            "#00ff00"
-        )
+        val colors = PlayerColor.allAvailable()
         storage.clearPlayers()
         storage.createPlayersForColors(colors, INITIAL_CASH)
     }
