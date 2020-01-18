@@ -12,10 +12,15 @@
             android:theme="@style/BlueTheme">
 
         <activity
-                android:label="@string/new_game"
-                android:name=".game.create.CreateGameActivity"/>
+                android:name=".game.transaction.TransactionActivity"
+                android:label="@string/transaction"
+                android:screenOrientation="portrait"/>
 
-        <activity android:name=".landing.MainActivity">
+        <activity
+                android:name=".game.play.GameActivity"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -27,17 +32,8 @@
                       android:host="app"
                       android:path="/deeplink"/>
             </intent-filter>
+
         </activity>
-
-        <activity
-                android:name=".game.transaction.TransactionActivity"
-                android:label="@string/transaction"
-                android:screenOrientation="portrait"/>
-
-        <activity
-                android:name=".game.play.GameActivity"
-                android:label="@string/app_name"
-                android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

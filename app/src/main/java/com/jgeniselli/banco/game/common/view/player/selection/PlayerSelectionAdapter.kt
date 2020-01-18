@@ -3,13 +3,12 @@ package com.jgeniselli.banco.game.common.view.player.selection
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jgeniselli.banco.game.common.domain.Player
 
 open class PlayerSelectionAdapter(
-    private val indexSelectionListener: (Player) -> Unit
+    private val indexSelectionListener: (Int) -> Unit
 ) : RecyclerView.Adapter<IconAndTitleViewHolder>() {
 
-    var players: List<Player> = listOf()
+    var rows: List<TitleAndColor> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -22,17 +21,19 @@ open class PlayerSelectionAdapter(
         return IconAndTitleViewHolder(view)
     }
 
-    override fun getItemCount(): Int = players.size
+    override fun getItemCount(): Int = rows.size
 
     override fun onBindViewHolder(holder: IconAndTitleViewHolder, position: Int) {
-        val player = players[position]
-        holder.setTitle(player.color.name)
-        holder.setIconColor(player.color.colorHex)
+        val row = rows[position]
+        holder.setTitle(row.title)
+        holder.setIconColor(row.colorHex)
         holder.setOnClickListener {
-            indexSelectionListener(players[position])
+            indexSelectionListener(position)
         }
     }
 
     private fun IconAndTitleViewHolder.setOnClickListener(listener: () -> Unit) =
         itemView.setOnClickListener { listener() }
 }
+
+data class TitleAndColor(val title: String, val colorHex: String)
