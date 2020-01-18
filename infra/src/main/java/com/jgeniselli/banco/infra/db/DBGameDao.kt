@@ -6,10 +6,10 @@ import androidx.room.*
 interface DBGameDao {
 
     @Query("select * from Player")
-    fun findAll() : List<DBPlayer>
+    fun findAllPlayers() : List<DBPlayer>
 
     @Query("select * from Player where id = :id")
-    fun findById(id: Long) : DBPlayer?
+    fun findPlayerById(id: Long) : DBPlayer?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(players: List<DBPlayer>)

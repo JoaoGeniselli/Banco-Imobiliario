@@ -40,7 +40,7 @@ class GameViewModel(
 
     fun onResetRequested() {
         GlobalScope.launch {
-            api.startNewGame()
+            api.resetGame()
             refreshPlayers()
         }
     }

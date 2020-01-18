@@ -15,11 +15,11 @@ class DBPlayerStorage(
     private fun ColorAndCashTuple.toDto() = StoredTransactionDto(cash, color)
 
     override suspend fun findAllPlayers(): List<StoredPlayerDto> {
-        return gameDao.findAll().map { it.toDto() }
+        return gameDao.findAllPlayers().map { it.toDto() }
     }
 
     override suspend fun findById(playerId: Long): StoredPlayerDto? {
-        return gameDao.findById(playerId)?.toDto()
+        return gameDao.findPlayerById(playerId)?.toDto()
     }
 
     override suspend fun updateCashToAllPlayers(cash: Double) {
@@ -48,6 +48,10 @@ class DBPlayerStorage(
             val updatedCash = it.currentCash + value
             gameDao.updateCash(playerId, updatedCash)
         }
+    }
+
+    override suspend fun isGameGoingOn(): Boolean {
+        return gameDao.findAllPlayers().isNotEmpty()
     }
 
     private fun insertTransaction(playerId: Long, value: Double) {

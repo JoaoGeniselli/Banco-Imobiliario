@@ -39,7 +39,14 @@ class GameAPI(
         credit(destinationPlayerId, value)
     }
 
-    suspend fun startNewGame() {
+    suspend fun startGameIfNeeded() {
+        val thereIsNoGameToPlay = !storage.isGameGoingOn()
+        if (thereIsNoGameToPlay) {
+            resetGame()
+        }
+    }
+
+    suspend fun resetGame() {
         val colors = PlayerColor.allAvailable()
         storage.clearPlayersAndTransactions()
         storage.createPlayersForColors(colors, INITIAL_CASH)
