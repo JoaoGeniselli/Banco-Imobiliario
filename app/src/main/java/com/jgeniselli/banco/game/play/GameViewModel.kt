@@ -27,4 +27,8 @@ class GameViewModel(
 
     fun observeViewState(owner: LifecycleOwner, observer: Observer<GameViewState>) =
         viewStateEvent.observe(owner, observer)
+
+    fun onResetRequested() {
+
+    }
 }

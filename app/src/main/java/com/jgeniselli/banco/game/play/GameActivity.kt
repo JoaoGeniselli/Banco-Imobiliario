@@ -42,15 +42,10 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun displayErrorAlert() {
-        val okListener = DialogInterface.OnClickListener { _, _ ->
-            finish()
-        }
-        AlertDialog.Builder(this)
-            .setTitle(R.string.error)
-            .setMessage(R.string.error_while_starting_game)
-            .setNeutralButton(android.R.string.ok, okListener)
-            .create()
-            .show()
+        val okListener = DialogInterface.OnClickListener { _, _ -> finish() }
+        val builder = AlertDialog.Builder(this)
+        DialogDirector.Error(okListener).construct(builder)
+        builder.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -59,15 +54,29 @@ class GameActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (R.id.history == item?.itemId) {
-            redirectToTransactionHistory()
-            return true
+        when (item?.itemId) {
+            R.id.history -> {
+                redirectToTransactionHistory()
+                return true
+            }
+            R.id.reset_game -> {
+                confirmGameReset()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun redirectToTransactionHistory() {
         // TODO IMPLEMENT
+    }
+
+    private fun confirmGameReset() {
+        val okListener = DialogInterface.OnClickListener { _, _ -> viewModel.onResetRequested() }
+        val cancelListener = DialogInterface.OnClickListener { _, _ -> }
+        val builder = AlertDialog.Builder(this)
+        DialogDirector.ConfirmReset(okListener, cancelListener).construct(builder)
+        builder.show()
     }
 
     private fun redirectToTransaction(selectedPlayer: Player) {
