@@ -9,10 +9,8 @@ import java.text.NumberFormat
 
 class PlayerSummaryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun setPlayerCash(cash: Double) {
-        val formatter = NumberFormat.getCurrencyInstance()
-        val formattedCash = formatter.format(cash)
-        itemView.text_player_cash.text = formattedCash
+    fun setPlayerCash(cash: String?) {
+        itemView.text_player_cash.text = cash
     }
 
     fun setIconColor(colorHex: String?) {

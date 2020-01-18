@@ -1,25 +1,29 @@
 package com.jgeniselli.banco.infra.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface DBGameDao {
 
-    @Query("select * from Game")
-    fun findAll(): List<DBGame>
+    @Query("select * from Player")
+    fun findAll() : List<DBPlayer>
 
-    @Query("select * from Game")
-    fun findAllWithPlayers() : List<DBGameAndAllPlayers>
+    @Query("select * from Player where id = :id")
+    fun findById(id: Long) : DBPlayer?
 
-    @Query("select * from Game where id = :id")
-    fun findById(id: Long): DBGame?
-
-    @Insert
-    fun insert(game: DBGame)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(players: List<DBPlayer>)
 
     @Delete
-    fun delete(game: DBGame)
+    fun delete(player: DBPlayer)
+
+    @Query("update Player set cash = :cash where id = :playerId")
+    fun updateCash(playerId: Long, cash: Double)
+
+    @Query("update Player set cash = :cash")
+    fun updateCashToAllPlayers(cash: Double)
+
+    @Query("delete from Player")
+    fun deleteAllPlayers()
+
 }

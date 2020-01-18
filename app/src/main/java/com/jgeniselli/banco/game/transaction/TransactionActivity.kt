@@ -22,10 +22,10 @@ class TransactionActivity : AppCompatActivity() {
     private val inputtedValue: Double
         get() = input_transaction_value.text.toString().toDouble()
 
-    private val playerIdExtra: Int
+    private val playerIdExtra: Long
         get() {
             if (intent?.extras?.containsKey(EXTRA_KEY_PLAYER_ID) == true) {
-                return intent.getIntExtra(EXTRA_KEY_PLAYER_ID, 0)
+                return intent.getLongExtra(EXTRA_KEY_PLAYER_ID, 0L)
             } else {
                 throw IllegalStateException("Transaction activity must receive a player id")
             }
@@ -41,7 +41,7 @@ class TransactionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transaction)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         lifecycle.addObserver(viewModel)
-        viewModel.observeViewState(this, Observer { applyViewState(it) })
+        viewModel.viewState.observe(this, Observer { applyViewState(it) })
 
         button_debit.setOnClickListener { applyTransactionIfInputIsOk(viewModel::applyDebit) }
         button_credit.setOnClickListener { applyTransactionIfInputIsOk(viewModel::applyCredit) }
@@ -94,7 +94,7 @@ class TransactionActivity : AppCompatActivity() {
     companion object {
         private const val EXTRA_KEY_PLAYER_ID = "playerId"
 
-        fun start(context: Context, selectedPlayerId: Int) {
+        fun start(context: Context, selectedPlayerId: Long) {
             val intent = Intent(context, TransactionActivity::class.java)
             intent.putExtra(EXTRA_KEY_PLAYER_ID, selectedPlayerId)
             context.startActivity(intent)

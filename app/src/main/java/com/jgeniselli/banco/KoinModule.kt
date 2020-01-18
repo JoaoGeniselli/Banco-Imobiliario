@@ -1,25 +1,55 @@
 package com.jgeniselli.banco
 
-import com.jgeniselli.banco.game.common.domain.*
-import com.jgeniselli.banco.game.create.CreateGameViewModel
+import androidx.room.Room
+import com.jgeniselli.banco.core.GameAPI
+import com.jgeniselli.banco.core.PlayerStorage
+import com.jgeniselli.banco.game.common.BRAZIL
 import com.jgeniselli.banco.game.play.GameViewModel
 import com.jgeniselli.banco.game.transaction.TransactionViewModel
-import com.jgeniselli.banco.landing.MainViewModel
+import com.jgeniselli.banco.infra.ThreadWrapperPlayerStorage
+import com.jgeniselli.banco.infra.db.DBPlayerStorage
+import com.jgeniselli.banco.infra.db.Database
+import com.jgeniselli.banco.infra.memory.MemoryPlayerStorage
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import java.text.DecimalFormat
 
 object KoinModule {
 
     val mainModule by lazy {
         module {
-            single<GameRepository> { MemoryGameRepository() }
-            single<PlayerRepository> { MemoryPlayerRepository() }
-            single<CreditCardRepository> { MemoryColorRepository() }
+            // USE CASE API
+            single { GameAPI(get()) }
 
-            viewModel { MainViewModel(get()) }
-            viewModel { CreateGameViewModel(get(), get(), get()) }
-            viewModel { GameViewModel(get()) }
-            viewModel { params -> TransactionViewModel(params[0], get(), get()) }
+            // MEMORY STORAGE
+//            single<PlayerStorage> {
+//                val wrappedStorage = ThreadWrapperPlayerStorage(MemoryPlayerStorage())
+//                wrappedStorage
+//            }
+
+            // DATABASE STORAGE
+            single {
+                Room.databaseBuilder(
+                    androidApplication(),
+                    Database::class.java,
+                    "game_db"
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
+            }
+            single { get<Database>().gameDao() }
+            single<PlayerStorage> {
+                val wrappedStorage = ThreadWrapperPlayerStorage(DBPlayerStorage(get()))
+                wrappedStorage
+            }
+
+            // VIEW MODELS
+            viewModel { GameViewModel(get(), get()) }
+            viewModel { params -> TransactionViewModel(params[0], get()) }
+
+            // FORMATTER
+            single { DecimalFormat.getCurrencyInstance(BRAZIL) }
         }
     }
 }

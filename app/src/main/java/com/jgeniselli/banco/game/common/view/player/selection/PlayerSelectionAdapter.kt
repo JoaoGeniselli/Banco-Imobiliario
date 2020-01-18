@@ -3,7 +3,6 @@ package com.jgeniselli.banco.game.common.view.player.selection
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jgeniselli.banco.game.common.domain.Player
 
 open class PlayerSelectionAdapter(
     private val indexSelectionListener: (Int) -> Unit

@@ -3,17 +3,11 @@ package com.jgeniselli.banco.infra.db
 import androidx.room.*
 
 @Entity(
-    tableName = "Player",
-    foreignKeys = [
-        ForeignKey(entity = DBGame::class, parentColumns = ["id"], childColumns = ["game_id"])
-    ]
+    tableName = "Player"
 )
 data class DBPlayer(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
-    @Embedded
-    val creditCard: DBCreditCard?,
-    @ColumnInfo(name = "game_id")
-    val gameId: Long,
+    val id: Long = 0,
+    val color: String,
     var cash: Double
 )

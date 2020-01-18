@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.domain;
+package com.jgeniselli.banco.core;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;

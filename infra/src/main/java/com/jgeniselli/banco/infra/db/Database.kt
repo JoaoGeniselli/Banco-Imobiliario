@@ -5,10 +5,11 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [
-        DBCreditCard::class,
-        DBGame::class,
         DBPlayer::class
     ],
-    version = 1
+    version = 2
 )
-abstract class Database : RoomDatabase()
+abstract class Database : RoomDatabase() {
+
+    abstract fun gameDao(): DBGameDao
+}

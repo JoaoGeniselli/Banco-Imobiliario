@@ -1,2 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.jgeniselli.banco.domain"/>
+          package="com.jgeniselli.banco.core"/>

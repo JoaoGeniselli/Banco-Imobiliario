@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
-import com.jgeniselli.banco.game.common.domain.Player
 import com.jgeniselli.banco.game.common.view.player.summary.PlayerSummaryAdapter
 import com.jgeniselli.banco.game.transaction.TransactionActivity
 import kotlinx.android.synthetic.main.activity_game.*
@@ -21,56 +20,50 @@ class GameActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<GameViewModel>()
     private val adapter = PlayerSummaryAdapter(
-        onPlayerClickListener = { selectedPlayer -> redirectToTransaction(selectedPlayer) }
+        onPositionClickListener = { position -> viewModel.onPlayerSelected(position) }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        setupViewModel()
+        setupRecyclerView()
+    }
+
+    private fun setupViewModel() {
         lifecycle.addObserver(viewModel)
-        viewModel.observeViewState(this, Observer { applyViewState(it) })
-        recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.addItemDecoration(DividerItemDecoration(this, RecyclerView.VERTICAL))
+        viewModel.viewState.observe(this, Observer { applyViewState(it) })
+    }
+
+    private fun setupRecyclerView() {
+        recycler_view.layoutManager = LinearLayoutManager(this@GameActivity)
+        recycler_view.addItemDecoration(
+            DividerItemDecoration(this@GameActivity, RecyclerView.VERTICAL)
+        )
         recycler_view.adapter = adapter
     }
 
     private fun applyViewState(state: GameViewState) {
         when (state) {
             is GameViewState.PlayersFound -> adapter.players = state.players
-            is GameViewState.Error -> displayErrorAlert()
+            is GameViewState.Error -> displayErrorAlert(state.error)
+            is GameViewState.RedirectToTransaction -> redirectToTransaction(state.playerId)
         }
     }
 
-    private fun displayErrorAlert() {
+    private fun displayErrorAlert(error: String?) {
         val okListener = DialogInterface.OnClickListener { _, _ ->
             finish()
         }
         AlertDialog.Builder(this)
             .setTitle(R.string.error)
-            .setMessage(R.string.error_while_starting_game)
+            .setMessage(error)
             .setNeutralButton(android.R.string.ok, okListener)
             .create()
             .show()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.game_play, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (R.id.history == item?.itemId) {
-            redirectToTransactionHistory()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun redirectToTransactionHistory() {
-        // TODO IMPLEMENT
-    }
-
-    private fun redirectToTransaction(selectedPlayer: Player) {
-        TransactionActivity.start(this, selectedPlayer.id)
+    private fun redirectToTransaction(playerId: Long) {
+        TransactionActivity.start(this, playerId)
     }
 }
