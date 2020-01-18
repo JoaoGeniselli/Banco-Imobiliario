@@ -12,7 +12,6 @@
             android:id="@+id/history"
             android:title="@string/transaction_history"
             android:icon="@drawable/ic_history_24dp"
-            android:enabled="false"
             app:showAsAction="ifRoom"
     />
 

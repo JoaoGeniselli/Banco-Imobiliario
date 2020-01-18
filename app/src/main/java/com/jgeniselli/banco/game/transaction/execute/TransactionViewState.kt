@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.transaction
+package com.jgeniselli.banco.game.transaction.execute
 
 import com.jgeniselli.banco.game.common.view.player.selection.TitleAndColor
 

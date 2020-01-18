@@ -5,11 +5,11 @@ import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.PlayerStorage
 import com.jgeniselli.banco.game.common.BRAZIL
 import com.jgeniselli.banco.game.play.GameViewModel
-import com.jgeniselli.banco.game.transaction.TransactionViewModel
+import com.jgeniselli.banco.game.transaction.execute.TransactionViewModel
+import com.jgeniselli.banco.game.transaction.history.TransactionHistoryViewModel
 import com.jgeniselli.banco.infra.ThreadWrapperPlayerStorage
 import com.jgeniselli.banco.infra.db.DBPlayerStorage
 import com.jgeniselli.banco.infra.db.Database
-import com.jgeniselli.banco.infra.memory.MemoryPlayerStorage
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -47,6 +47,7 @@ object KoinModule {
             // VIEW MODELS
             viewModel { GameViewModel(get(), get()) }
             viewModel { params -> TransactionViewModel(params[0], get()) }
+            viewModel { TransactionHistoryViewModel(get(), get()) }
 
             // FORMATTER
             single { DecimalFormat.getCurrencyInstance(BRAZIL) }
