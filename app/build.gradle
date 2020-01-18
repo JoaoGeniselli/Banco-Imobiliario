@@ -6,11 +6,11 @@ apply from: '../dependencies.gradle'
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion sdk.compileVersion
     defaultConfig {
         applicationId "com.jgeniselli.banco"
-        minSdkVersion 24
-        targetSdkVersion 28
+        minSdkVersion sdk.minVersion
+        targetSdkVersion sdk.targetVersion
         versionCode 1
         versionName "1.0"
     }
