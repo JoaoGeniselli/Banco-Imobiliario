@@ -26,4 +26,10 @@ interface DBGameDao {
     @Query("delete from Player")
     fun deleteAllPlayers()
 
+    @Query("select P.color, T.cash from `Transaction` T inner join Player P where T.player_id = P.id")
+    fun findTransactionsWithPlayerColor() : List<ColorAndCashTuple>
+
+    @Insert
+    fun insertTransaction(transaction: DBTransaction)
+
 }

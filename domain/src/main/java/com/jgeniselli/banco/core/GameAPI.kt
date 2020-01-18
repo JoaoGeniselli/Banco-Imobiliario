@@ -12,16 +12,25 @@ class GameAPI(
     }
 
     suspend fun debit(playerId: Long, value: Double) {
+        ensurePositiveValue(value)
         addCashToPlayer(playerId, value * -1)
     }
 
+    private fun ensurePositiveValue(value: Double) {
+        if (value < 0.0) throw IllegalTransactionValueException.mustBePositive()
+    }
+
     private suspend fun addCashToPlayer(playerId: Long, value: Double) {
-        val player = storage.findById(playerId) ?: throw UnknownPlayerException(playerId)
-        val updatedCash = player.currentCash + value
-        storage.updateCash(playerId, updatedCash)
+        ensurePlayerExists(playerId)
+        storage.addTransaction(playerId, value)
+    }
+
+    private suspend fun ensurePlayerExists(playerId: Long) {
+        storage.findById(playerId) ?: throw UnknownPlayerException(playerId)
     }
 
     suspend fun credit(playerId: Long, value: Double) {
+        ensurePositiveValue(value)
         addCashToPlayer(playerId, value)
     }
 
