@@ -41,7 +41,11 @@ class GameAPI(
 
     suspend fun startNewGame() {
         val colors = PlayerColor.allAvailable()
-        storage.clearPlayers()
+        storage.clearPlayersAndTransactions()
         storage.createPlayersForColors(colors, INITIAL_CASH)
+    }
+
+    suspend fun getTransactionHistory(): List<StoredTransactionDto> {
+        return storage.findTransactionHistory()
     }
 }

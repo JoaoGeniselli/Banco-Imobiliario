@@ -4,7 +4,7 @@ interface PlayerStorage {
     suspend fun findAllPlayers(): List<StoredPlayerDto>
     suspend fun findById(playerId: Long): StoredPlayerDto?
     suspend fun updateCashToAllPlayers(cash: Double)
-    suspend fun clearPlayers()
+    suspend fun clearPlayersAndTransactions()
     suspend fun createPlayersForColors(colors: List<String>, initialCash: Double)
     suspend fun addTransaction(playerId: Long, value: Double)
     suspend fun findTransactionHistory(): List<StoredTransactionDto>

@@ -1,7 +1,6 @@
 package com.jgeniselli.banco.infra
 
 import com.jgeniselli.banco.core.PlayerStorage
-import com.jgeniselli.banco.core.StoredTransactionDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,8 +29,8 @@ class ThreadWrapperPlayerStorage(
         childStorage.updateCashToAllPlayers(cash)
     }
 
-    override suspend fun clearPlayers() = runInIOThread {
-        childStorage.clearPlayers()
+    override suspend fun clearPlayersAndTransactions() = runInIOThread {
+        childStorage.clearPlayersAndTransactions()
     }
 
     override suspend fun createPlayersForColors(colors: List<String>, initialCash: Double) = runInIOThread {

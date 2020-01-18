@@ -24,7 +24,8 @@ class MemoryPlayerStorage : PlayerStorage {
         players.values.forEach { it.cash = cash }
     }
 
-    override suspend fun clearPlayers() {
+    override suspend fun clearPlayersAndTransactions() {
+        transactions.clear()
         players.clear()
     }
 
@@ -46,7 +47,7 @@ class MemoryPlayerStorage : PlayerStorage {
         return transactions.map { transaction ->
             val player = players[transaction.playerId]
             StoredTransactionDto(transaction.value, player?.color ?: "")
-        }
+        }.reversed()
     }
 
     data class PlayerRegister(val id: Long, val color: String, var cash: Double) {

@@ -26,7 +26,8 @@ class DBPlayerStorage(
         gameDao.updateCashToAllPlayers(cash)
     }
 
-    override suspend fun clearPlayers() {
+    override suspend fun clearPlayersAndTransactions() {
+        gameDao.deleteAllTransactions()
         gameDao.deleteAllPlayers()
     }
 

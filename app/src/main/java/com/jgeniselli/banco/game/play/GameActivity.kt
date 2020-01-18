@@ -1,6 +1,7 @@
 package com.jgeniselli.banco.game.play
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.game.common.view.player.summary.PlayerSummaryAdapter
 import com.jgeniselli.banco.game.transaction.execute.TransactionActivity
+import com.jgeniselli.banco.game.transaction.history.TransactionHistoryActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -78,7 +80,8 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun redirectToTransactionHistory() {
-        // TODO IMPLEMENT
+        val intent = Intent(this, TransactionHistoryActivity::class.java)
+        startActivity(intent)
     }
 
     private fun confirmGameReset() {
