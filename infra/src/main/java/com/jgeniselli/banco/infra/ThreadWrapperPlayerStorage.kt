@@ -37,6 +37,10 @@ class ThreadWrapperPlayerStorage(
         childStorage.createPlayersForColors(colors, initialCash)
     }
 
+    override suspend fun isGameGoingOn() = runInIOThread {
+        childStorage.isGameGoingOn()
+    }
+
     private suspend fun <T> runInIOThread(block: suspend CoroutineScope.() -> T): T {
         return withContext(Dispatchers.IO, block)
     }

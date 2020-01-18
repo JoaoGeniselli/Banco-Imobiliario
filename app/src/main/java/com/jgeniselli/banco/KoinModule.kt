@@ -10,6 +10,7 @@ import com.jgeniselli.banco.game.transaction.history.TransactionHistoryViewModel
 import com.jgeniselli.banco.infra.ThreadWrapperPlayerStorage
 import com.jgeniselli.banco.infra.db.DBPlayerStorage
 import com.jgeniselli.banco.infra.db.Database
+import com.jgeniselli.banco.infra.memory.MemoryPlayerStorage
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module

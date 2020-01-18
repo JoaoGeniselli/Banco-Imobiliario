@@ -50,6 +50,10 @@ class MemoryPlayerStorage : PlayerStorage {
         }.reversed()
     }
 
+    override suspend fun isGameGoingOn(): Boolean {
+        return players.isNotEmpty()
+    }
+
     data class PlayerRegister(val id: Long, val color: String, var cash: Double) {
 
         fun toDto(): StoredPlayerDto {

@@ -8,5 +8,6 @@ interface PlayerStorage {
     suspend fun createPlayersForColors(colors: List<String>, initialCash: Double)
     suspend fun addTransaction(playerId: Long, value: Double)
     suspend fun findTransactionHistory(): List<StoredTransactionDto>
+    suspend fun isGameGoingOn(): Boolean
 }
 
