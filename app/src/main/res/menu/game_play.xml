@@ -2,10 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/history"
-            android:title="@string/transaction_history"
-            android:icon="@drawable/ic_history_24dp"
+            android:id="@+id/reset_game"
+            android:title="@string/reset_game"
+            android:icon="@drawable/ic_replay_24dp"
             app:showAsAction="ifRoom"
     />
+
+    <!--<item-->
+            <!--android:id="@+id/history"-->
+            <!--android:title="@string/transaction_history"-->
+            <!--android:icon="@drawable/ic_history_24dp"-->
+            <!--app:showAsAction="ifRoom"-->
+    <!--/>-->
 
 </menu>
