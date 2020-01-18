@@ -1,14 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion sdk.compileVersion
 
 
     defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 28
+        minSdkVersion sdk.minVersion
+        targetSdkVersion sdk.targetVersion
         versionCode 1
         versionName "1.0"
 
@@ -28,8 +29,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "androidx.core:core-ktx:1.1.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation libs.kotlinCore
+    implementation libs.kotlin
 }
 repositories {
     mavenCentral()
