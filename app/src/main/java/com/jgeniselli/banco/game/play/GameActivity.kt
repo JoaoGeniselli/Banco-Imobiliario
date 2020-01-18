@@ -52,15 +52,41 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun displayErrorAlert(error: String?) {
-        val okListener = DialogInterface.OnClickListener { _, _ ->
-            finish()
+        val okListener = DialogInterface.OnClickListener { _, _ -> finish() }
+        val builder = AlertDialog.Builder(this)
+        DialogDirector.Error(okListener).construct(builder)
+        builder.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.game_play, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.history -> {
+                redirectToTransactionHistory()
+                return true
+            }
+            R.id.reset_game -> {
+                confirmGameReset()
+                return true
+            }
         }
-        AlertDialog.Builder(this)
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setNeutralButton(android.R.string.ok, okListener)
-            .create()
-            .show()
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun redirectToTransactionHistory() {
+        // TODO IMPLEMENT
+    }
+
+    private fun confirmGameReset() {
+        val okListener = DialogInterface.OnClickListener { _, _ -> viewModel.onResetRequested() }
+        val cancelListener = DialogInterface.OnClickListener { _, _ -> }
+        val builder = AlertDialog.Builder(this)
+        DialogDirector.ConfirmReset(okListener, cancelListener).construct(builder)
+        builder.show()
     }
 
     private fun redirectToTransaction(playerId: Long) {
