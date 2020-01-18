@@ -1,34 +1,47 @@
 package com.jgeniselli.banco.game.play
 
 import androidx.lifecycle.*
-import com.jgeniselli.banco.game.common.domain.Game
-import com.jgeniselli.banco.game.common.domain.GameRepository
+import com.jgeniselli.banco.core.GameAPI
+import com.jgeniselli.banco.core.StoredPlayerDto
+import kotlinx.coroutines.*
+import java.text.NumberFormat
 
 class GameViewModel(
-    private val gameRepository: GameRepository
+    private val api: GameAPI,
+    private val currencyFormatter: NumberFormat
 ) : ViewModel(), LifecycleObserver {
 
-    private lateinit var currentGame: Game
     private val viewStateEvent = MutableLiveData<GameViewState>()
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    private fun start() {
-        gameRepository.getActiveGame()?.let {
-            currentGame = it
-        } ?: run {
-            viewStateEvent.postValue(GameViewState.Error)
-        }
-    }
+    val viewState: LiveData<GameViewState>
+        get() = viewStateEvent
+
+    private lateinit var players: List<StoredPlayerDto>
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun refresh() {
-        viewStateEvent.postValue(GameViewState.PlayersFound(currentGame.players))
+        GlobalScope.launch {
+            refreshPlayers()
+        }
     }
 
-    fun observeViewState(owner: LifecycleOwner, observer: Observer<GameViewState>) =
-        viewStateEvent.observe(owner, observer)
+    private suspend fun refreshPlayers() {
+        players = api.getPlayers()
+        val playerRows = players.map { it.toRow() }
+        viewStateEvent.postValue(GameViewState.PlayersFound(playerRows))
+    }
+
+    private fun StoredPlayerDto.toRow() = PlayerRow(colorHex, currencyFormatter.format(currentCash))
+
+    fun onPlayerSelected(position: Int) {
+        val playerId = players[position].id
+        viewStateEvent.postValue(GameViewState.RedirectToTransaction(playerId))
+    }
 
     fun onResetRequested() {
-
+        GlobalScope.launch {
+            api.startNewGame()
+            refreshPlayers()
+        }
     }
 }

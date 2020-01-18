@@ -1,65 +1,63 @@
 package com.jgeniselli.banco.game.transaction
 
 import androidx.lifecycle.*
-import com.jgeniselli.banco.game.common.domain.GameRepository
-import com.jgeniselli.banco.game.common.domain.Player
-import com.jgeniselli.banco.game.common.domain.PlayerRepository
-import com.jgeniselli.banco.game.common.domain.TransactionRepository
+import com.jgeniselli.banco.core.GameAPI
+import com.jgeniselli.banco.core.StoredPlayerDto
+import com.jgeniselli.banco.game.common.view.player.selection.TitleAndColor
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class TransactionViewModel(
-    private val playerId: Int,
-    private val playerRepository: PlayerRepository,
-    private val gameRepository: GameRepository,
-    private val transactionRepository: TransactionRepository
+    private val selectedPlayerId: Long,
+    private val gameAPI: GameAPI
 ) : ViewModel(), LifecycleObserver {
 
-    private lateinit var selectedPlayer: Player
-    private lateinit var otherPlayers: List<Player>
+    private lateinit var otherPlayers: List<StoredPlayerDto>
     private val viewStateEvent = MutableLiveData<TransactionViewState>()
+
+    val viewState: LiveData<TransactionViewState>
+        get() = viewStateEvent
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun start() {
-        retrieveSelectedPlayer(
-            thenExecute = this::retrieveOtherPlayers
-        )
-    }
+        GlobalScope.launch {
+            otherPlayers = gameAPI.getPlayers().filter { it.id != selectedPlayerId }
 
-    private fun retrieveSelectedPlayer(thenExecute: () -> Unit) {
-        playerRepository.findById(playerId) { foundPlayer ->
-            foundPlayer?.let {
-                this.selectedPlayer = it
-            } ?: throw IllegalStateException("Player is unknown")
-            thenExecute()
+            val otherPlayerRows = otherPlayers
+                .map { TitleAndColor("Jogador", it.colorHex) }
+
+            viewStateEvent.postValue(
+                TransactionViewState.Content(
+                    "Jogador Selecionado",
+                    otherPlayerRows
+                )
+            )
         }
     }
 
-    private fun retrieveOtherPlayers() {
-        val otherPlayers = gameRepository.getActiveGame()
-            ?.players
-            ?.filter { it != selectedPlayer } ?: listOf()
-        viewStateEvent.value = TransactionViewState.Content(selectedPlayer.color.name, otherPlayers)
-    }
-
-    fun observeViewState(owner: LifecycleOwner, observer: Observer<TransactionViewState>) {
-        viewStateEvent.observe(owner, observer)
-    }
-
     fun applyDebit(value: Double) {
-        addCashToPlayer(value * -1.0, selectedPlayer)
-    }
-
-    private fun addCashToPlayer(value: Double, player: Player) {
-        player.currentValue += value
-        transactionRepository.saveTransaction(player, value)
-        viewStateEvent.postValue(TransactionViewState.TransactionComplete)
+        GlobalScope.launch {
+            gameAPI.debit(selectedPlayerId, value)
+            finishTransaction()
+        }
     }
 
     fun applyCredit(value: Double) {
-        addCashToPlayer(value, selectedPlayer)
+        GlobalScope.launch {
+            gameAPI.credit(selectedPlayerId, value)
+            finishTransaction()
+        }
     }
 
-    fun applyTransfer(value: Double, otherPlayer: Player) {
-        addCashToPlayer(value * -1.0, selectedPlayer)
-        addCashToPlayer(value, otherPlayer)
+    fun applyTransfer(value: Double, selectedIndex: Int) {
+        GlobalScope.launch {
+            val destinationPlayerId = otherPlayers[selectedIndex].id
+            gameAPI.transfer(selectedPlayerId, destinationPlayerId, value)
+            finishTransaction()
+        }
+    }
+
+    private fun finishTransaction() {
+        viewStateEvent.postValue(TransactionViewState.TransactionComplete)
     }
 }

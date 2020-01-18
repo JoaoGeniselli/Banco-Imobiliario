@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
-import com.jgeniselli.banco.game.common.domain.Player
+import com.jgeniselli.banco.game.play.PlayerRow
 
 class PlayerSummaryAdapter(
-    val onPlayerClickListener: (Player) -> Unit
+    val onPositionClickListener: (Int) -> Unit
 ) : RecyclerView.Adapter<PlayerSummaryViewHolder>() {
 
-    var players: List<Player> = listOf()
+    var players: List<PlayerRow> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -27,10 +27,10 @@ class PlayerSummaryAdapter(
 
     override fun onBindViewHolder(holder: PlayerSummaryViewHolder, position: Int) {
         val player = players[position]
-        holder.setPlayerCash(player.currentValue)
-        holder.setIconColor(player.color.colorHex)
+        holder.setPlayerCash(player.formattedCash)
+        holder.setIconColor(player.colorHex)
         holder.setClickListener {
-            onPlayerClickListener(player)
+            onPositionClickListener(holder.layoutPosition)
         }
     }
 }
