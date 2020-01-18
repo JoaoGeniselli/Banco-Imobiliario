@@ -15,7 +15,7 @@
     <string name="error_minimum_players_required">É necessário selecionar ao menos dois jogadores</string>
     <string name="must_fill_input">É necessário preencher o valor da transação</string>
     <string name="reset_game">Reiniciar Partida</string>
-    <string name="message_reset_game_confirmation">Os dados atuais de saldo serão perdidos.\\nTem certeza que deseja
+    <string name="message_reset_game_confirmation">Os dados atuais de saldo serão perdidos.\nTem certeza que deseja
         reiniciar a partida?
     </string>
 
