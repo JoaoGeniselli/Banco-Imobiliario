@@ -7,10 +7,8 @@ import com.jgeniselli.banco.game.common.BRAZIL
 import com.jgeniselli.banco.game.play.GameViewModel
 import com.jgeniselli.banco.game.transaction.execute.TransactionViewModel
 import com.jgeniselli.banco.game.transaction.history.TransactionHistoryViewModel
-import com.jgeniselli.banco.infra.ThreadWrapperPlayerStorage
 import com.jgeniselli.banco.infra.db.DBPlayerStorage
 import com.jgeniselli.banco.infra.db.Database
-import com.jgeniselli.banco.infra.memory.MemoryPlayerStorage
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -24,10 +22,7 @@ object KoinModule {
             single { GameAPI(get()) }
 
             // MEMORY STORAGE
-//            single<PlayerStorage> {
-//                val wrappedStorage = ThreadWrapperPlayerStorage(MemoryPlayerStorage())
-//                wrappedStorage
-//            }
+//            single<PlayerStorage> { MemoryPlayerStorage() }
 
             // DATABASE STORAGE
             single {
@@ -40,10 +35,7 @@ object KoinModule {
                     .build()
             }
             single { get<Database>().gameDao() }
-            single<PlayerStorage> {
-                val wrappedStorage = ThreadWrapperPlayerStorage(DBPlayerStorage(get()))
-                wrappedStorage
-            }
+            single<PlayerStorage> { DBPlayerStorage(get()) }
 
             // VIEW MODELS
             viewModel { GameViewModel(get(), get()) }

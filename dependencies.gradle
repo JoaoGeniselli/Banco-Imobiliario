@@ -50,6 +50,7 @@ ext {
 
             // Threads
             kotlinCoroutines   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlinCoroutines}",
+            coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlinCoroutines}",
 
             // Testing
             testRunner         : "androidx.test:runner:${versions.testRunner}",

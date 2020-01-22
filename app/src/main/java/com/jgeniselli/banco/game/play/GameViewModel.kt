@@ -3,7 +3,6 @@ package com.jgeniselli.banco.game.play
 import androidx.lifecycle.*
 import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.StoredPlayerDto
-import kotlinx.coroutines.*
 import java.text.NumberFormat
 
 class GameViewModel(
@@ -20,15 +19,15 @@ class GameViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private fun refresh() {
-        GlobalScope.launch {
-            refreshPlayers()
-        }
+        refreshPlayers()
     }
 
-    private suspend fun refreshPlayers() {
-        players = api.getPlayers()
-        val playerRows = players.map { it.toRow() }
-        viewStateEvent.postValue(GameViewState.PlayersFound(playerRows))
+    private fun refreshPlayers() {
+        api.getPlayers { storedPlayers ->
+            players = storedPlayers
+            val playerRows = players.map { it.toRow() }
+            viewStateEvent.postValue(GameViewState.PlayersFound(playerRows))
+        }
     }
 
     private fun StoredPlayerDto.toRow() = PlayerRow(colorHex, currencyFormatter.format(currentCash))
@@ -39,8 +38,7 @@ class GameViewModel(
     }
 
     fun onResetRequested() {
-        GlobalScope.launch {
-            api.resetGame()
+        api.resetGame {
             refreshPlayers()
         }
     }

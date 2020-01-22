@@ -38,7 +38,6 @@ dependencies {
     implementation libs.koinScope
     implementation libs.koinViewModel
     implementation libs.constraintLayout
-    implementation libs.kotlinCoroutines
 
     testImplementation libs.robolectric
     testImplementation libs.androidXTestCore

@@ -4,8 +4,6 @@ import androidx.lifecycle.*
 import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.StoredPlayerDto
 import com.jgeniselli.banco.game.common.view.player.selection.TitleAndColor
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class TransactionViewModel(
     private val selectedPlayerId: Long,
@@ -20,8 +18,8 @@ class TransactionViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun start() {
-        GlobalScope.launch {
-            otherPlayers = gameAPI.getPlayers().filter { it.id != selectedPlayerId }
+        gameAPI.getPlayers { players ->
+            otherPlayers = players.filter { it.id != selectedPlayerId }
 
             val otherPlayerRows = otherPlayers
                 .map { TitleAndColor("Jogador", it.colorHex) }
@@ -36,23 +34,20 @@ class TransactionViewModel(
     }
 
     fun applyDebit(value: Double) {
-        GlobalScope.launch {
-            gameAPI.debit(selectedPlayerId, value)
+        gameAPI.debit(selectedPlayerId, value) {
             finishTransaction()
         }
     }
 
     fun applyCredit(value: Double) {
-        GlobalScope.launch {
-            gameAPI.credit(selectedPlayerId, value)
+        gameAPI.credit(selectedPlayerId, value) {
             finishTransaction()
         }
     }
 
     fun applyTransfer(value: Double, selectedIndex: Int) {
-        GlobalScope.launch {
-            val destinationPlayerId = otherPlayers[selectedIndex].id
-            gameAPI.transfer(selectedPlayerId, destinationPlayerId, value)
+        val destinationPlayerId = otherPlayers[selectedIndex].id
+        gameAPI.transfer(selectedPlayerId, destinationPlayerId, value) {
             finishTransaction()
         }
     }
