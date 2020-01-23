@@ -7,52 +7,62 @@ class GameAPI(
         private const val INITIAL_CASH = 25000.0
     }
 
-    suspend fun getPlayers(): List<StoredPlayerDto> {
-        return storage.findAllPlayers()
+    fun getPlayers(callback: Callback<List<StoredPlayerDto>>) {
+        storage.findAllPlayers(callback)
     }
 
-    suspend fun debit(playerId: Long, value: Double) {
+    fun debit(playerId: Long, value: Double, callback: ResultlessCallback) {
         ensurePositiveValue(value)
-        addCashToPlayer(playerId, value * -1)
+        addCashToPlayer(playerId, value * -1, callback)
     }
 
     private fun ensurePositiveValue(value: Double) {
         if (value < 0.0) throw IllegalTransactionValueException.mustBePositive()
     }
 
-    private suspend fun addCashToPlayer(playerId: Long, value: Double) {
-        ensurePlayerExists(playerId)
-        storage.addTransaction(playerId, value)
+    private fun addCashToPlayer(
+        playerId: Long,
+        value: Double,
+        callback: ResultlessCallback
+    ) {
+        storage.addTransaction(playerId, value, callback)
     }
 
-    private suspend fun ensurePlayerExists(playerId: Long) {
-        storage.findById(playerId) ?: throw UnknownPlayerException(playerId)
-    }
-
-    suspend fun credit(playerId: Long, value: Double) {
+    fun credit(playerId: Long, value: Double, callback: ResultlessCallback) {
         ensurePositiveValue(value)
-        addCashToPlayer(playerId, value)
+        addCashToPlayer(playerId, value, callback)
     }
 
-    suspend fun transfer(sourcePlayerId: Long, destinationPlayerId: Long, value: Double) {
-        debit(sourcePlayerId, value)
-        credit(destinationPlayerId, value)
-    }
-
-    suspend fun startGameIfNeeded() {
-        val thereIsNoGameToPlay = !storage.isGameGoingOn()
-        if (thereIsNoGameToPlay) {
-            resetGame()
+    fun transfer(
+        sourcePlayerId: Long,
+        destinationPlayerId: Long,
+        value: Double,
+        callback: ResultlessCallback
+    ) {
+        debit(sourcePlayerId, value) {
+            credit(destinationPlayerId, value, callback)
         }
     }
 
-    suspend fun resetGame() {
-        val colors = PlayerColor.allAvailable()
-        storage.clearPlayersAndTransactions()
-        storage.createPlayersForColors(colors, INITIAL_CASH)
+    fun startGameIfNeeded(callback: ResultlessCallback = {}) {
+        storage.isGameGoingOn { hasGame ->
+            val thereIsNoGameToPlay = !hasGame
+            if (thereIsNoGameToPlay) {
+                resetGame(callback)
+            } else {
+                callback()
+            }
+        }
     }
 
-    suspend fun getTransactionHistory(): List<StoredTransactionDto> {
-        return storage.findTransactionHistory()
+    fun resetGame(callback: ResultlessCallback) {
+        val colors = PlayerColor.allAvailable()
+        storage.clearPlayersAndTransactions {
+            storage.createPlayersForColors(colors, INITIAL_CASH, callback)
+        }
+    }
+
+    fun getTransactionHistory(callback: Callback<List<StoredTransactionDto>>) {
+        return storage.findTransactionHistory(callback)
     }
 }

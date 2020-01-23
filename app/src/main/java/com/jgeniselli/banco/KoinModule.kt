@@ -1,16 +1,11 @@
 package com.jgeniselli.banco
 
-import androidx.room.Room
 import com.jgeniselli.banco.core.GameAPI
-import com.jgeniselli.banco.core.PlayerStorage
 import com.jgeniselli.banco.game.common.BRAZIL
 import com.jgeniselli.banco.game.play.GameViewModel
 import com.jgeniselli.banco.game.transaction.execute.TransactionViewModel
 import com.jgeniselli.banco.game.transaction.history.TransactionHistoryViewModel
-import com.jgeniselli.banco.infra.ThreadWrapperPlayerStorage
-import com.jgeniselli.banco.infra.db.DBPlayerStorage
-import com.jgeniselli.banco.infra.db.Database
-import com.jgeniselli.banco.infra.memory.MemoryPlayerStorage
+import com.jgeniselli.banco.infra.Infrastructure
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -23,27 +18,14 @@ object KoinModule {
             // USE CASE API
             single { GameAPI(get()) }
 
-            // MEMORY STORAGE
-//            single<PlayerStorage> {
-//                val wrappedStorage = ThreadWrapperPlayerStorage(MemoryPlayerStorage())
-//                wrappedStorage
-//            }
-
-            // DATABASE STORAGE
+            // INFRASTRUCTURE
             single {
-                Room.databaseBuilder(
-                    androidApplication(),
-                    Database::class.java,
-                    "game_db"
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
+                Infrastructure.create {
+                    coroutinesConcurrency()
+                    databaseStorage(androidApplication())
+                }
             }
-            single { get<Database>().gameDao() }
-            single<PlayerStorage> {
-                val wrappedStorage = ThreadWrapperPlayerStorage(DBPlayerStorage(get()))
-                wrappedStorage
-            }
+            single { get<Infrastructure>().storage }
 
             // VIEW MODELS
             viewModel { GameViewModel(get(), get()) }

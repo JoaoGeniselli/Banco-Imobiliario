@@ -35,6 +35,7 @@ dependencies {
     implementation libs.room
     implementation libs.appCompat
     implementation libs.kotlinCoroutines
+    implementation libs.coroutinesAndroid
     implementation libs.kotlinCore
     implementation libs.kotlin
 

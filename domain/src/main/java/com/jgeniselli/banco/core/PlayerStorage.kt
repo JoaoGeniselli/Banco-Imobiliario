@@ -1,13 +1,13 @@
 package com.jgeniselli.banco.core
 
 interface PlayerStorage {
-    suspend fun findAllPlayers(): List<StoredPlayerDto>
-    suspend fun findById(playerId: Long): StoredPlayerDto?
-    suspend fun updateCashToAllPlayers(cash: Double)
-    suspend fun clearPlayersAndTransactions()
-    suspend fun createPlayersForColors(colors: List<String>, initialCash: Double)
-    suspend fun addTransaction(playerId: Long, value: Double)
-    suspend fun findTransactionHistory(): List<StoredTransactionDto>
-    suspend fun isGameGoingOn(): Boolean
+    fun findAllPlayers(callback: Callback<List<StoredPlayerDto>>)
+    fun findById(playerId: Long, callback: Callback<StoredPlayerDto?>)
+    fun updateCashToAllPlayers(cash: Double, callback: ResultlessCallback)
+    fun clearPlayersAndTransactions(callback: ResultlessCallback)
+    fun createPlayersForColors(colors: List<String>, initialCash: Double, callback: ResultlessCallback)
+    fun addTransaction(playerId: Long, value: Double, callback: ResultlessCallback)
+    fun findTransactionHistory(callback: (List<StoredTransactionDto>) -> Unit)
+    fun isGameGoingOn(callback: Callback<Boolean>)
 }
 

@@ -31,6 +31,9 @@ dependencies {
 
     implementation libs.kotlinCore
     implementation libs.kotlin
+
+    testImplementation libs.junit
+    testImplementation libs.mockk
 }
 repositories {
     mavenCentral()

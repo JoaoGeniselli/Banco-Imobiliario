@@ -3,8 +3,6 @@ package com.jgeniselli.banco.game.transaction.history
 import androidx.lifecycle.*
 import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.StoredTransactionDto
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.text.NumberFormat
 
 class TransactionHistoryViewModel(
@@ -24,8 +22,7 @@ class TransactionHistoryViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        GlobalScope.launch {
-            val history = gameAPI.getTransactionHistory()
+        gameAPI.getTransactionHistory { history ->
             val rows = history.map { it.toRow() }
             historyEvent.postValue(rows)
         }
