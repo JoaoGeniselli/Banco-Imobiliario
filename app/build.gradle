@@ -27,13 +27,10 @@ dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':infra')
 
-    kapt libs.roomCompiler
-
     implementation libs.kotlin
     implementation libs.appCompat
     implementation libs.lifecycleExtensions
     implementation libs.recyclerView
-    implementation libs.room
     implementation libs.koinAndroid
     implementation libs.koinScope
     implementation libs.koinViewModel

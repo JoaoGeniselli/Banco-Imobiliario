@@ -8,7 +8,7 @@ object AsyncRunners {
     lateinit var main: AsyncRunner
     lateinit var computation: AsyncRunner
 
-    fun inject(
+    internal fun inject(
         ioThreadRunner: AsyncRunner,
         mainThreadRunner: AsyncRunner,
         computationThreadRunner: AsyncRunner
