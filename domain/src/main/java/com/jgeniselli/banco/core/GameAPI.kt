@@ -49,6 +49,8 @@ class GameAPI(
             val thereIsNoGameToPlay = !hasGame
             if (thereIsNoGameToPlay) {
                 resetGame(callback)
+            } else {
+                callback()
             }
         }
     }
