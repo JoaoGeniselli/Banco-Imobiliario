@@ -1,11 +1,13 @@
 package com.jgeniselli.banco.core
 
+import com.jgeniselli.banco.core.boundary.PlayerStorage
+import com.jgeniselli.banco.core.dto.StoredPlayerDto
+import com.jgeniselli.banco.core.dto.StoredTransactionDto
+
 class GameAPI(
+    private val gameSetup: GameSetup,
     private val storage: PlayerStorage
 ) {
-    companion object {
-        private const val INITIAL_CASH = 25000.0
-    }
 
     fun getPlayers(callback: Callback<List<StoredPlayerDto>>) {
         storage.findAllPlayers(callback)
@@ -56,9 +58,9 @@ class GameAPI(
     }
 
     fun resetGame(callback: ResultlessCallback) {
-        val colors = PlayerColor.allAvailable()
+        val colors = gameSetup.availableColorsInHex
         storage.clearPlayersAndTransactions {
-            storage.createPlayersForColors(colors, INITIAL_CASH, callback)
+            storage.createPlayersForColors(colors, gameSetup.initialCash, callback)
         }
     }
 

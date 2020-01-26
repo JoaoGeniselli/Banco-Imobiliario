@@ -1,5 +1,8 @@
 package com.jgeniselli.banco.core
 
+import com.jgeniselli.banco.core.boundary.PlayerStorage
+import com.jgeniselli.banco.core.dto.StoredPlayerDto
+import com.jgeniselli.banco.core.dto.StoredTransactionDto
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -9,13 +12,18 @@ import org.junit.Test
 
 class GameAPITest {
 
+    private lateinit var gameSetup: GameSetup
     private lateinit var storage: PlayerStorage
     private lateinit var api: GameAPI
 
     @Before
     fun before() {
         storage = mockk(relaxed = true)
-        api = GameAPI(storage)
+        gameSetup = mockk()
+
+        every { gameSetup.initialCash } returns 25000.00
+        every { gameSetup.availableColorsInHex } returns listOf("#FFFFFF", "#000000")
+        api = GameAPI(gameSetup, storage)
     }
 
     @Test
@@ -96,7 +104,7 @@ class GameAPITest {
 
         verify { storage.addTransaction(1, -1500.0, any()) }
         verify { storage.addTransaction(2, +1500.0, any()) }
-        verify(exactly = 1) { callback.invoke() }
+        verify { callback.invoke() }
     }
 
     @Test
@@ -111,9 +119,9 @@ class GameAPITest {
         api.startGameIfNeeded(callback)
 
         verify { storage.isGameGoingOn(any()) }
+        verify { callback.invoke() }
         verify(exactly = 0) { storage.clearPlayersAndTransactions(any()) }
         verify(exactly = 0) { storage.createPlayersForColors(any(), any(), any()) }
-        verify(exactly = 1) { callback.invoke() }
     }
 
     @Test
@@ -140,9 +148,8 @@ class GameAPITest {
         api.startGameIfNeeded(callback)
 
         verify { storage.isGameGoingOn(any()) }
-        verify(exactly = 1) { storage.clearPlayersAndTransactions(any()) }
-        verify(exactly = 1) { storage.createPlayersForColors(any(), 25000.0, any()) }
-        verify(exactly = 1) { callback.invoke() }
+        verify { storage.clearPlayersAndTransactions(any()) }
+        verify { storage.createPlayersForColors(listOf("#FFFFFF", "#000000"), 25000.0, any()) }
     }
 
     @Test
@@ -162,9 +169,9 @@ class GameAPITest {
         val callback = mockk<ResultlessCallback>(relaxed = true)
         api.resetGame(callback)
 
-        verify(exactly = 1) { storage.clearPlayersAndTransactions(any()) }
-        verify(exactly = 1) { storage.createPlayersForColors(any(), 25000.0, any()) }
-        verify(exactly = 1) { callback.invoke() }
+        verify { storage.clearPlayersAndTransactions(any()) }
+        verify { storage.createPlayersForColors(listOf("#FFFFFF", "#000000"), 25000.0, any()) }
+        verify { callback.invoke() }
     }
 
     @Test

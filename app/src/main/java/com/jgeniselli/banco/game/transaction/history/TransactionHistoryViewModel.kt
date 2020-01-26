@@ -2,7 +2,7 @@ package com.jgeniselli.banco.game.transaction.history
 
 import androidx.lifecycle.*
 import com.jgeniselli.banco.core.GameAPI
-import com.jgeniselli.banco.core.StoredTransactionDto
+import com.jgeniselli.banco.core.dto.StoredTransactionDto
 import java.text.NumberFormat
 
 class TransactionHistoryViewModel(

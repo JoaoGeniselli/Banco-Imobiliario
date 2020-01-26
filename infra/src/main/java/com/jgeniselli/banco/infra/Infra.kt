@@ -2,7 +2,7 @@ package com.jgeniselli.banco.infra
 
 import android.content.Context
 import androidx.room.Room
-import com.jgeniselli.banco.core.PlayerStorage
+import com.jgeniselli.banco.core.boundary.PlayerStorage
 import com.jgeniselli.banco.infra.concurrency.AsyncRunners
 import com.jgeniselli.banco.infra.concurrency.CoroutinesAsyncRunners
 import com.jgeniselli.banco.infra.db.DBPlayerStorage

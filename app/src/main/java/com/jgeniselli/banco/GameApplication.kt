@@ -12,7 +12,7 @@ class GameApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@GameApplication)
-            modules(KoinModule.mainModule)
+            modules(DependencyInjection.mainModule)
         }
         startGame()
     }

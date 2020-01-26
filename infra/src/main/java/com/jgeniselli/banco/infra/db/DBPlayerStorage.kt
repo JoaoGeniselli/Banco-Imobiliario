@@ -1,6 +1,9 @@
 package com.jgeniselli.banco.infra.db
 
 import com.jgeniselli.banco.core.*
+import com.jgeniselli.banco.core.boundary.PlayerStorage
+import com.jgeniselli.banco.core.dto.StoredPlayerDto
+import com.jgeniselli.banco.core.dto.StoredTransactionDto
 import com.jgeniselli.banco.infra.concurrency.runInIO
 import com.jgeniselli.banco.infra.concurrency.runInMain
 
