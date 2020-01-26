@@ -1,5 +1,8 @@
 package com.jgeniselli.banco.core
 
+import com.jgeniselli.banco.core.boundary.PlayerStorage
+import com.jgeniselli.banco.core.dto.StoredPlayerDto
+import com.jgeniselli.banco.core.dto.StoredTransactionDto
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

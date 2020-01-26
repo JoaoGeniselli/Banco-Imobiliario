@@ -2,7 +2,7 @@ package com.jgeniselli.banco.game.transaction.execute
 
 import androidx.lifecycle.*
 import com.jgeniselli.banco.core.GameAPI
-import com.jgeniselli.banco.core.StoredPlayerDto
+import com.jgeniselli.banco.core.dto.StoredPlayerDto
 import com.jgeniselli.banco.game.common.view.player.selection.TitleAndColor
 
 class TransactionViewModel(

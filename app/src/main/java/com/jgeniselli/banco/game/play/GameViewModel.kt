@@ -2,7 +2,7 @@ package com.jgeniselli.banco.game.play
 
 import androidx.lifecycle.*
 import com.jgeniselli.banco.core.GameAPI
-import com.jgeniselli.banco.core.StoredPlayerDto
+import com.jgeniselli.banco.core.dto.StoredPlayerDto
 import java.text.NumberFormat
 
 class GameViewModel(
