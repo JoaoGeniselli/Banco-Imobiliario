@@ -1,5 +1,6 @@
 package com.jgeniselli.banco
 
+import android.content.Context
 import com.jgeniselli.banco.core.ColorHex
 import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.GameSetup
@@ -19,8 +20,7 @@ object KoinModule {
         module {
             // USE CASE API
             single { GameAPI(get(), get()) }
-
-            factory { GameSetup(initialPlayerCash(), getAvailableColors()) }
+            factory { GameSetup(initialPlayerCash(), getAvailableColors(get())) }
 
             // INFRASTRUCTURE
             single {
@@ -41,20 +41,11 @@ object KoinModule {
         }
     }
 
-    private fun initialPlayerCash() = 25.000
+    private fun initialPlayerCash() = 25000.00
 
-    private fun getAvailableColors(): List<ColorHex> {
-        return PlayerColor.allAvailable().map { ColorHex.create(it) }
+    private fun getAvailableColors(context: Context): List<ColorHex> {
+        val colors = context.resources.getStringArray(R.array.available_player_colors)
+        return colors.map { ColorHex.create(it) }
     }
 
-    object PlayerColor {
-        private const val RED = "#f44336"
-        private const val BLUE = "#2196f3"
-        private const val GREEN = "#4caf50"
-        private const val PURPLE = "#9c27b0"
-        private const val YELLOW = "#ffeb3b"
-        private const val GRAY = "#9e9e9e"
-
-        fun allAvailable() = listOf(RED, BLUE, GREEN, PURPLE, YELLOW, GRAY)
-    }
 }
