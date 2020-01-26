@@ -1,6 +1,8 @@
 package com.jgeniselli.banco
 
+import com.jgeniselli.banco.core.ColorHex
 import com.jgeniselli.banco.core.GameAPI
+import com.jgeniselli.banco.core.GameSetup
 import com.jgeniselli.banco.game.common.BRAZIL
 import com.jgeniselli.banco.game.play.GameViewModel
 import com.jgeniselli.banco.game.transaction.execute.TransactionViewModel
@@ -16,7 +18,9 @@ object KoinModule {
     val mainModule by lazy {
         module {
             // USE CASE API
-            single { GameAPI(get()) }
+            single { GameAPI(get(), get()) }
+
+            factory { GameSetup(initialPlayerCash(), getAvailableColors()) }
 
             // INFRASTRUCTURE
             single {
@@ -35,5 +39,22 @@ object KoinModule {
             // FORMATTER
             single { DecimalFormat.getCurrencyInstance(BRAZIL) }
         }
+    }
+
+    private fun initialPlayerCash() = 25.000
+
+    private fun getAvailableColors(): List<ColorHex> {
+        return PlayerColor.allAvailable().map { ColorHex.create(it) }
+    }
+
+    object PlayerColor {
+        private const val RED = "#f44336"
+        private const val BLUE = "#2196f3"
+        private const val GREEN = "#4caf50"
+        private const val PURPLE = "#9c27b0"
+        private const val YELLOW = "#ffeb3b"
+        private const val GRAY = "#9e9e9e"
+
+        fun allAvailable() = listOf(RED, BLUE, GREEN, PURPLE, YELLOW, GRAY)
     }
 }
