@@ -14,7 +14,7 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import java.text.DecimalFormat
 
-object KoinModule {
+object DependencyInjection {
 
     val mainModule by lazy {
         module {
