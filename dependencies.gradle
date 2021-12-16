@@ -1,9 +1,9 @@
 ext {
     // SDK Versions
     sdk = [
-            compileVersion: 28,
+            compileVersion: 31,
             minVersion    : 24,
-            targetVersion : 28
+            targetVersion : 31
     ]
 
     versions = [

@@ -18,5 +18,9 @@
     <string name="message_reset_game_confirmation">Os dados atuais de saldo serão perdidos. Tem certeza que deseja
         reiniciar a partida?
     </string>
+    <string name="title_activity_compose_game">ComposeGameActivity</string>
+    <string name="error_duplicated_players">Nomes de jogadores duplicados!</string>
+    <string name="error_unsufficient_players_amount">É necessário ter pelo menos dois jogadores para iniciar uma partida</string>
+    <string name="error_start_game_generic">Ocorreu um erro ao iniciar a partida</string>
 
 </resources>
