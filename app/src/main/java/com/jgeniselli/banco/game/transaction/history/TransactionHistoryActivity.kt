@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jgeniselli.banco.R
 import kotlinx.android.synthetic.main.activity_transaction_history.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TransactionHistoryActivity : AppCompatActivity() {
 

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.jgeniselli.banco.core.usecase.game.IsGameOngoing
 import kotlinx.coroutines.launch
 
-class StartupViewModel(
+class StartUpViewModel(
     private val isGameOngoing: IsGameOngoing
 ) : ViewModel() {
 

@@ -13,7 +13,7 @@ import com.jgeniselli.banco.game.play.ui.theme.BancoImobiliarioTheme
 data class PlayerModel(
     val id: Int,
     val name: String,
-    val balance: String
+    var balance: String
 )
 
 @Composable

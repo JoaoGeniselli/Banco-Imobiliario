@@ -20,12 +20,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.game.play.ui.theme.BancoImobiliarioTheme
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun CreateGameLoader(
-    viewModel: CreateGameViewModel
+    viewModel: CreateGameViewModel = getViewModel(),
+    onStartGame: () -> Unit
 ) {
     val players = viewModel.players.observeAsState(listOf())
+    val redirectToGameplay = viewModel.redirectToGame.observeAsState()
     val isStartEnabled = viewModel.buttonIsEnabled.observeAsState(false)
     CreateGame(
         players = players.value,
@@ -33,6 +36,10 @@ fun CreateGameLoader(
         onClickStartGame = viewModel::onClickStartGame,
         isStartButtonEnabled = isStartEnabled.value
     )
+
+    if (redirectToGameplay.value != null) {
+        onStartGame()
+    }
 }
 
 @Composable
