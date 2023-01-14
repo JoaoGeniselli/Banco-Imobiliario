@@ -11,6 +11,7 @@ import com.jgeniselli.banco.game.transaction.execute.TransactionViewModel
 import com.jgeniselli.banco.game.transaction.history.TransactionHistoryViewModel
 import com.jgeniselli.banco.home.HomeViewModel
 import com.jgeniselli.banco.infra.Infrastructure
+import com.jgeniselli.banco.newgame.NewGameViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -39,6 +40,7 @@ object DependencyInjection {
             viewModel { TransactionHistoryViewModel(get(), get()) }
 
             viewModel { HomeViewModel(HasOngoingGame()) }
+            viewModel { NewGameViewModel() }
 
             // FORMATTER
             single { DecimalFormat.getCurrencyInstance(BRAZIL) }

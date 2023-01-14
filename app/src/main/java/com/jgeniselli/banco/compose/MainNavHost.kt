@@ -18,5 +18,9 @@ fun MainNavHost(
                 onNewGame = { navController.navigate("new_game") }
             )
         }
+
+        composable("new_game") {
+            NewGameLoader(onStart = {})
+        }
     }
 }
