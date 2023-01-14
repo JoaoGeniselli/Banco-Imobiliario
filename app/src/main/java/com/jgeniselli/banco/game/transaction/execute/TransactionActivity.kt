@@ -71,6 +71,7 @@ class TransactionActivity : AppCompatActivity() {
                 input_transaction_value.requestFocus()
             }
             is TransactionViewState.TransactionComplete -> finish()
+            else -> Unit
         }
     }
 

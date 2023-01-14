@@ -26,7 +26,7 @@ object DependencyInjection {
             single {
                 Infrastructure.create {
                     coroutinesConcurrency()
-                    databaseStorage(androidApplication())
+                    memoryStorage()
                 }
             }
             single { get<Infrastructure>().storage }

@@ -30,9 +30,11 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':domain')
 
-    kapt libs.roomCompiler
+    def room_version = "2.4.1"
 
-    implementation libs.room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
     implementation libs.appCompat
     implementation libs.kotlinCoroutines
     implementation libs.coroutinesAndroid
