@@ -11,13 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/BlueTheme">
         <activity
-            android:name=".ComposeActivity"
-            android:exported="false"
+            android:name=".compose.ComposeActivity"
+            android:exported="true"
             android:label="@string/title_activity_compose"
             android:theme="@style/BlueTheme">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".game.transaction.history.TransactionHistoryActivity"
@@ -34,11 +40,11 @@
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

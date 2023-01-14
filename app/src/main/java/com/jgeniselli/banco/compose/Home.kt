@@ -6,14 +6,36 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jgeniselli.banco.home.HomeViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun Home(modifier: Modifier = Modifier) {
+fun HomeLoader(
+    viewModel: HomeViewModel = koinViewModel(),
+    onContinueGame: () -> Unit,
+    onNewGame: () -> Unit
+) {
+    val isContinueGameEnabled = viewModel.isGameAvailable.collectAsState(initial = false)
+    Home(
+        onNewGame = onNewGame,
+        onContinueGame = onContinueGame,
+        isContinueGameEnabled = isContinueGameEnabled.value
+    )
+}
+
+@Composable
+fun Home(
+    modifier: Modifier = Modifier,
+    onNewGame: () -> Unit,
+    onContinueGame: () -> Unit,
+    isContinueGameEnabled: Boolean
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.padding(16.dp)) {
         Spacer(modifier = Modifier.fillMaxHeight(.25f))
 
@@ -23,13 +45,15 @@ fun Home(modifier: Modifier = Modifier) {
 
         Button(
             modifier = Modifier.fillMaxWidth(),
-            onClick = { /*TODO*/ }
+            onClick = onNewGame
         ) { Text(text = "New Game") }
 
         Button(
-            modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
-            enabled = false,
-            onClick = { /*TODO*/ }
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .fillMaxWidth(),
+            enabled = isContinueGameEnabled,
+            onClick = onContinueGame
         ) { Text(text = "Continue Game") }
     }
 }
@@ -39,7 +63,10 @@ fun Home(modifier: Modifier = Modifier) {
 private fun PreviewHome() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
         Home(
-            modifier = Modifier
+            modifier = Modifier,
+            onContinueGame = {},
+            onNewGame = {},
+            isContinueGameEnabled = true
         )
     }
 }

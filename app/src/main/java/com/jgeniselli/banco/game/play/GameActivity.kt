@@ -16,7 +16,7 @@ import com.jgeniselli.banco.game.common.view.player.summary.PlayerSummaryAdapter
 import com.jgeniselli.banco.game.transaction.execute.TransactionActivity
 import com.jgeniselli.banco.game.transaction.history.TransactionHistoryActivity
 import kotlinx.android.synthetic.main.activity_game.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameActivity : AppCompatActivity() {
 
