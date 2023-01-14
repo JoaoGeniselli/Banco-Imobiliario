@@ -10,12 +10,18 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalTextInputService
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.TextInputSession
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import java.util.concurrent.ThreadLocalRandom.current
 
 @Composable
 fun AddPlayerDialogLoader(
@@ -32,13 +38,17 @@ fun AddPlayerDialogLoader(
 @Composable
 fun AddPlayerDialog(modifier: Modifier = Modifier, onDone: (name: String) -> Unit) {
     var name by remember { mutableStateOf("") }
+    val focusRequester = remember { FocusRequester() }
+
+    fun String.isValidName() = length >= 3
 
     Column(modifier.fillMaxWidth()) {
         Text(text = "Insert the Player's name", style = MaterialTheme.typography.h6)
         OutlinedTextField(
             modifier = Modifier
                 .padding(top = 16.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .focusRequester(focusRequester),
             value = name,
             onValueChange = { name = it },
             keyboardOptions = KeyboardOptions(
@@ -46,7 +56,7 @@ fun AddPlayerDialog(modifier: Modifier = Modifier, onDone: (name: String) -> Uni
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { if (name.isNotEmpty()) onDone(name) }
+                onDone = { if (name.isValidName()) onDone(name) }
             ),
             label = { Text(text = "Name") }
         )
@@ -55,11 +65,13 @@ fun AddPlayerDialog(modifier: Modifier = Modifier, onDone: (name: String) -> Uni
             modifier = Modifier
                 .align(Alignment.End)
                 .padding(top = 16.dp),
-            enabled = name.length >= 3,
+            enabled = name.isValidName(),
             onClick = { onDone(name) }
         ) {
             Text(text = "OK")
         }
+
+        LaunchedEffect(Unit) { focusRequester.requestFocus() }
     }
 }
 
