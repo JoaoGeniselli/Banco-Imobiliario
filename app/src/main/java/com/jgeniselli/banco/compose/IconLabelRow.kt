@@ -3,6 +3,7 @@ package com.jgeniselli.banco.compose
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -20,7 +21,7 @@ import com.jgeniselli.banco.R
 fun IconLabelRow(modifier: Modifier = Modifier, icon: Painter, label: String) {
     Row(modifier.fillMaxWidth()) {
         CircleIcon(
-            modifier = Modifier.padding(vertical = 8.dp),
+            modifier = Modifier.size(56.dp).padding(8.dp),
             color = Color.LightGray,
             painter = icon
         )
