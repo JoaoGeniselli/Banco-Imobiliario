@@ -11,7 +11,12 @@ import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
 
 @Composable
-fun TransactionRecipientInput(modifier: Modifier = Modifier, players: List<PlayerSummary>) {
+fun TransferRecipientInputLoader() {
+
+}
+
+@Composable
+fun TransferRecipientInput(modifier: Modifier = Modifier, players: List<PlayerSummary>) {
     GenericInput(
         modifier = modifier,
         title = "Transaction Recipient",
@@ -25,9 +30,9 @@ fun TransactionRecipientInput(modifier: Modifier = Modifier, players: List<Playe
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewTransactionRecipientInput() {
+private fun PreviewTransferRecipientInput() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        TransactionRecipientInput(
+        TransferRecipientInput(
             modifier = Modifier,
             players = listOf(
                 PlayerSummary("Player 1", R.drawable.ic_baseline_pets_24),

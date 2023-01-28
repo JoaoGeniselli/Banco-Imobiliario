@@ -4,23 +4,68 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+
+// Routes
+private const val HOME = "home"
+private const val NEW_GAME = "new_game"
+private const val GAMEPLAY = "gameplay"
+private const val PLAYER_OPTIONS = "player_options"
+private const val CREDIT = "credit"
+private const val DEBIT = "debit"
+private const val TRANSFER = "transfer"
+private const val TRANSFER_INPUT_VALUE = "transfer_input_value"
+private const val TRANSFER_INPUT_RECIPIENT = "transfer_input_recipient"
+private const val TRANSFER_CONCLUSION = "transfer_conclusion"
 
 @Composable
 fun MainNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = "home"
+    startDestination: String = HOME
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
-        composable("home") {
+
+        composable(HOME) {
             HomeLoader(
-                onContinueGame = { navController.navigate("ongoing_game") },
-                onNewGame = { navController.navigate("new_game") }
+                onContinueGame = { navController.navigate(GAMEPLAY) },
+                onNewGame = { navController.navigate(NEW_GAME) }
             )
         }
 
-        composable("new_game") {
-            NewGameLoader(onStart = {})
+        composable(NEW_GAME) {
+            NewGameLoader(
+                onStart = { navController.navigate(GAMEPLAY) }
+            )
         }
+
+        composable(GAMEPLAY) {
+            GamePlayLoader(
+                onTransfer = { selected -> /* Send do Transfer */ }
+            )
+        }
+
+        composable(PLAYER_OPTIONS) {
+            PlayerOptionsLoader(
+                onSelectOption = { option ->
+                    val route = when (option) {
+                        PlayerOptionType.TRANSFER -> TRANSFER
+                        PlayerOptionType.DEBIT -> DEBIT
+                        PlayerOptionType.CREDIT -> CREDIT
+                    }
+                    navController.navigate(route)
+                }
+            )
+        }
+
+        navigation(startDestination = TRANSFER_INPUT_VALUE, route = TRANSFER) {
+            composable(TRANSFER_INPUT_VALUE) {}
+
+            composable(TRANSFER_INPUT_RECIPIENT) {}
+
+            composable(TRANSFER_CONCLUSION) {}
+        }
+
+
     }
 }

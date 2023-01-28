@@ -1,13 +1,11 @@
 package com.jgeniselli.banco.compose
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,7 +16,14 @@ import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
 
 @Composable
-fun TransactionConclusion(
+fun TransferConclusionLoader(
+    onOk: () -> Unit
+) {
+
+}
+
+@Composable
+fun TransferConclusion(
     modifier: Modifier = Modifier,
     source: String,
     recipient: String,
@@ -71,9 +76,9 @@ fun TransactionConclusion(
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewTransactionConclusion() {
+private fun PreviewTransferConclusion() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        TransactionConclusion(
+        TransferConclusion(
             modifier = Modifier,
             source = "Player 1",
             recipient = "Player 2",

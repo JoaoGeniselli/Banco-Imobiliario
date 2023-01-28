@@ -8,7 +8,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun TransactionValueInput(modifier: Modifier = Modifier, balance: String) {
+fun TransferValueInputLoader(
+
+) {
+
+}
+
+@Composable
+fun TransferValueInput(modifier: Modifier = Modifier, balance: String) {
     GenericInput(
         modifier = modifier,
         title = "Transaction Value",
@@ -28,9 +35,9 @@ fun TransactionValueInput(modifier: Modifier = Modifier, balance: String) {
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewTransactionValueInput() {
+private fun PreviewTransferValueInput() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        TransactionValueInput(
+        TransferValueInput(
             modifier = Modifier,
             balance = "$ 650,00"
         )
