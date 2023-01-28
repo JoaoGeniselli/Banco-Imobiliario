@@ -34,18 +34,9 @@ fun Home(
     modifier: Modifier = Modifier,
     onNewGame: () -> Unit,
     onContinueGame: () -> Unit,
-    isContinueGameEnabled: Boolean,
-    resolver: CurrencyValueResolver = get()
+    isContinueGameEnabled: Boolean
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.padding(16.dp)) {
-        var value by remember { mutableStateOf(0.0) }
-        NumberInput(
-            onUpdate = { value = it },
-            onDone = { /*TODO*/ },
-            value = value,
-            label = "Value"
-        )
-
 
         Spacer(modifier = Modifier.fillMaxHeight(.25f))
 
