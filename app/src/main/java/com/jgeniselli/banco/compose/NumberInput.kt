@@ -4,38 +4,50 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jgeniselli.banco.compose.ui.theme.BancoImobiliarioTheme
 
 @Composable
 fun NumberInput(
     modifier: Modifier = Modifier,
-    onUpdate: (String) -> Unit,
+    onUpdate: (Double) -> Unit,
     onDone: () -> Unit,
-    value: String,
+    value: Double = 0.0,
     label: String,
     isError: Boolean = false,
     errorMessage: String? = null,
 ) {
+    val resolver = remember { CurrencyValueResolver() }
+    val formattedValue = resolver.format(value)
+
     Column(modifier.fillMaxWidth()) {
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp),
-            value = value,
-            onValueChange = onUpdate,
+            value = TextFieldValue(
+                text = formattedValue,
+                selection = TextRange(formattedValue.length)
+            ),
+            onValueChange = { newValue ->
+                onUpdate(resolver.resolve(formattedValue, newValue.text))
+            },
             label = { Text(text = label) },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Done
+                imeAction = ImeAction.Done,
             ),
-            keyboardActions = KeyboardActions(onDone = { onDone() }),
+            keyboardActions = KeyboardActions(onDone = {
+                onDone()
+                defaultKeyboardAction(ImeAction.Done)
+            }),
             isError = isError
         )
         if (isError) {
@@ -56,7 +68,7 @@ private fun PreviewCurrencyValueInput() {
         NumberInput(
             modifier = Modifier.padding(16.dp),
             onUpdate = {},
-            value = "$ 250,00",
+            value = 250.0,
             label = "Test",
             onDone = {},
         )
@@ -71,7 +83,7 @@ private fun PreviewCurrencyValueInputError() {
             modifier = Modifier.padding(16.dp),
             onUpdate = {},
             onDone = {},
-            value = "$ 250,00",
+            value = 250.0,
             label = "Test",
             isError = true,
             errorMessage = "Error message",

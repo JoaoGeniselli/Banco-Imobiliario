@@ -2,7 +2,7 @@ package com.jgeniselli.banco.compose
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,10 +16,11 @@ fun TransactionValueInput(modifier: Modifier = Modifier, balance: String) {
         actionEnabled = true,
         onAction = { /*TODO*/ }
     ) {
+        var value by remember { mutableStateOf(0.0) }
         NumberInput(
-            onUpdate = {},
+            onUpdate = { value = it },
             onDone = { /*TODO*/ },
-            value = "R$ 250,00",
+            value = value,
             label = "Value"
         )
     }

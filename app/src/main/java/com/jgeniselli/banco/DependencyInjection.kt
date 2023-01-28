@@ -1,6 +1,7 @@
 package com.jgeniselli.banco
 
 import android.content.Context
+import com.jgeniselli.banco.compose.CurrencyValueResolver
 import com.jgeniselli.banco.core.ColorHex
 import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.GameSetup
@@ -12,7 +13,6 @@ import com.jgeniselli.banco.game.transaction.history.TransactionHistoryViewModel
 import com.jgeniselli.banco.home.HomeViewModel
 import com.jgeniselli.banco.infra.Infrastructure
 import com.jgeniselli.banco.newgame.NewGameViewModel
-import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import java.text.DecimalFormat
@@ -43,7 +43,8 @@ object DependencyInjection {
             viewModel { NewGameViewModel() }
 
             // FORMATTER
-            single { DecimalFormat.getCurrencyInstance(BRAZIL) }
+            factory { DecimalFormat.getCurrencyInstance(BRAZIL) }
+            factory { CurrencyValueResolver(get()) }
         }
     }
 

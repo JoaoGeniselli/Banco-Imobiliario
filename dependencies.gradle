@@ -16,7 +16,7 @@ ext {
             robolectric        : "3.5.1",
             androidXTestCore   : "1.2.0",
             mockito            : "1.10.19",
-            mockk              : "1.9.3.kotlin12",
+            mockk              : "1.13.4",
             junit              : "4.12",
             testRunner         : "1.2.0",
             testRules          : "1.2.0",
