@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.ui.component
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.fillMaxSize

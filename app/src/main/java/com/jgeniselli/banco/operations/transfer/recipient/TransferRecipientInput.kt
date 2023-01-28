@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.operations.transfer.recipient
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,6 +9,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
+import com.jgeniselli.banco.ui.component.GenericInput
+import com.jgeniselli.banco.ui.component.PlayerList
+import com.jgeniselli.banco.ui.component.PlayerSummary
 
 @Composable
 fun TransferRecipientInputLoader() {

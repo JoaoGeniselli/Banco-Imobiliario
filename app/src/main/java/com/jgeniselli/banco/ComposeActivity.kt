@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

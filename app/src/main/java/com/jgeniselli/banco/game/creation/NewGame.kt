@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.game.creation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -13,6 +13,8 @@ import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.newgame.NewGameUiState
 import com.jgeniselli.banco.newgame.NewGameViewModel
+import com.jgeniselli.banco.ui.component.PlayerList
+import com.jgeniselli.banco.ui.component.PlayerSummary
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

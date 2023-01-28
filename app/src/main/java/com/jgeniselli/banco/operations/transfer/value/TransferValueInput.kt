@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.operations.transfer.value
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
@@ -6,6 +6,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.jgeniselli.banco.ui.component.GenericInput
+import com.jgeniselli.banco.ui.component.NumberInput
 
 @Composable
 fun TransferValueInputLoader(

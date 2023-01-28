@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.operations.transfer.conclusion
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
+import com.jgeniselli.banco.ui.component.CircleIcon
 
 @Composable
 fun TransferConclusionLoader(

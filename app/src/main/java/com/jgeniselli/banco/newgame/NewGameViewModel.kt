@@ -2,7 +2,7 @@ package com.jgeniselli.banco.newgame
 
 import androidx.lifecycle.ViewModel
 import com.jgeniselli.banco.R
-import com.jgeniselli.banco.compose.PlayerSummary
+import com.jgeniselli.banco.ui.component.PlayerSummary
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 

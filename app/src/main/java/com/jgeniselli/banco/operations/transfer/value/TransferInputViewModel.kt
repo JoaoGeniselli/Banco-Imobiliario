@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.operations.transfer.value
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.game.play
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface

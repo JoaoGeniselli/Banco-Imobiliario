@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.game.play
 
 import androidx.annotation.DrawableRes
 

@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -6,6 +6,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.jgeniselli.banco.game.creation.NewGameLoader
+import com.jgeniselli.banco.game.play.GamePlayLoader
+import com.jgeniselli.banco.game.play.PlayerOptionType
+import com.jgeniselli.banco.game.play.PlayerOptionsLoader
+import com.jgeniselli.banco.home.HomeLoader
 
 // Routes
 private const val HOME = "home"

@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.ui.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button

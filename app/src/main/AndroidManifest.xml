@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/BlueTheme">
         <activity
-            android:name=".compose.ComposeActivity"
+            android:name=".ComposeActivity"
             android:exported="true"
             android:label="@string/title_activity_compose"
             android:theme="@style/BlueTheme">

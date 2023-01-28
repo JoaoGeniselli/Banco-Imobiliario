@@ -1,9 +1,8 @@
-package com.jgeniselli.banco.compose
+package com.jgeniselli.banco.game.play
 
 import androidx.lifecycle.ViewModel
 import com.jgeniselli.banco.R
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.jgeniselli.banco.compose.GameRepository
 import kotlinx.coroutines.flow.map
 import java.text.NumberFormat
 

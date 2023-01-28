@@ -1,6 +1,6 @@
 package com.jgeniselli.banco.newgame
 
-import com.jgeniselli.banco.compose.PlayerSummary
+import com.jgeniselli.banco.ui.component.PlayerSummary
 
 data class NewGameUiState(
     val players: List<PlayerSummary> = listOf(),

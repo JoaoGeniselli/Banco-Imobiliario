@@ -1,7 +1,7 @@
 package com.jgeniselli.banco
 
 import android.content.Context
-import com.jgeniselli.banco.compose.CurrencyValueResolver
+import com.jgeniselli.banco.ui.component.CurrencyValueResolver
 import com.jgeniselli.banco.core.ColorHex
 import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.GameSetup
