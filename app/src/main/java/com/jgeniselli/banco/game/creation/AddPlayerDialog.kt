@@ -18,24 +18,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 
+const val NAME_MINIMUM_LENGTH = 2
+
 @Composable
 fun AddPlayerDialogLoader(
     onDone: (name: String) -> Unit,
+    forbiddenNames: List<String> = listOf(),
     onCancel: () -> Unit
 ) {
     Dialog(onDismissRequest = onCancel) {
         Surface(shape = MaterialTheme.shapes.large) {
-            AddPlayerDialog(modifier = Modifier.padding(16.dp), onDone = onDone)
+            AddPlayerDialog(
+                modifier = Modifier.padding(16.dp),
+                forbiddenNames = forbiddenNames,
+                onDone = onDone
+            )
         }
     }
 }
 
 @Composable
-fun AddPlayerDialog(modifier: Modifier = Modifier, onDone: (name: String) -> Unit) {
+fun AddPlayerDialog(
+    modifier: Modifier = Modifier,
+    forbiddenNames: List<String>,
+    onDone: (name: String) -> Unit
+) {
     var name by remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
-
-    fun String.isValidName() = length >= 3
 
     Column(modifier.fillMaxWidth()) {
         Text(text = "Insert the Player's name", style = MaterialTheme.typography.h6)
@@ -51,7 +60,7 @@ fun AddPlayerDialog(modifier: Modifier = Modifier, onDone: (name: String) -> Uni
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { if (name.isValidName()) onDone(name) }
+                onDone = { if (isValidName(name, forbiddenNames)) onDone(name) }
             ),
             label = { Text(text = "Name") }
         )
@@ -60,7 +69,7 @@ fun AddPlayerDialog(modifier: Modifier = Modifier, onDone: (name: String) -> Uni
             modifier = Modifier
                 .align(Alignment.End)
                 .padding(top = 16.dp),
-            enabled = name.isValidName(),
+            enabled = isValidName(name, forbiddenNames),
             onClick = { onDone(name) }
         ) {
             Text(text = "OK")
@@ -70,13 +79,16 @@ fun AddPlayerDialog(modifier: Modifier = Modifier, onDone: (name: String) -> Uni
     }
 }
 
+private fun isValidName(name: String, forbidden: List<String>) =
+    name.length >= NAME_MINIMUM_LENGTH && forbidden.contains(name).not()
+
 @Preview(showBackground = true)
 @Composable
 private fun PreviewAddPlayerDialog() {
     Surface(color = Color.White) {
         AddPlayerDialog(
             modifier = Modifier.padding(16.dp),
-            onDone = {}
-        )
+            forbiddenNames = listOf()
+        ) {}
     }
 }

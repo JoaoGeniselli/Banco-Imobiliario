@@ -22,10 +22,10 @@ fun NewGameLoader(
     viewModel: NewGameViewModel = koinViewModel(),
     onStart: () -> Unit
 ) {
-    val uiState = viewModel.uiState.collectAsState(NewGameUiState())
+    val uiState by viewModel.uiState.collectAsState(NewGameUiState())
     var showAddPlayerDialog by remember { mutableStateOf(false) }
     NewGame(
-        uiState = uiState.value,
+        uiState = uiState,
         onAddPlayerClick = { showAddPlayerDialog = true },
         onStartClick = onStart
     )
@@ -35,6 +35,7 @@ fun NewGameLoader(
                 viewModel.onAddNewPlayer(it)
                 showAddPlayerDialog = false
             },
+            forbiddenNames = uiState.players.map { it.name },
             onCancel = { showAddPlayerDialog = false }
         )
     }
