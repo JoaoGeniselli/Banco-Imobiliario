@@ -60,12 +60,12 @@ fun MainNavHost(
             )
         }
 
-        navigation(startDestination = TRANSFER_INPUT_VALUE, route = TRANSFER) {
-            composable(TRANSFER_INPUT_VALUE) {}
+        navigation(startDestination = CREDIT_INPUT_VALUE, route = CREDIT) {
+            composable(CREDIT_INPUT_VALUE) {
+                // INPUT (SELECTED PLAYER)
+            }
 
-            composable(TRANSFER_INPUT_RECIPIENT) {}
-
-            composable(TRANSFER_CONCLUSION) {}
+            composable(CREDIT_CONCLUSION) {}
         }
 
         navigation(startDestination = TRANSFER_INPUT_VALUE, route = TRANSFER) {

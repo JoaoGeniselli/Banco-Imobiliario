@@ -3,11 +3,12 @@ package com.jgeniselli.banco.game.play
 import androidx.lifecycle.ViewModel
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.compose.GameRepository
+import com.jgeniselli.banco.compose.MemoryGameRepository
 import kotlinx.coroutines.flow.map
 import java.text.NumberFormat
 
 class GamePlayViewModel(
-    gameRepository: GameRepository = GameRepository(),
+    gameRepository: GameRepository = MemoryGameRepository(),
     private val balanceFormatter: NumberFormat = NumberFormat.getCurrencyInstance()
 ) : ViewModel() {
 
