@@ -9,20 +9,23 @@ import androidx.navigation.compose.rememberNavController
 import com.jgeniselli.banco.game.creation.NewGameLoader
 import com.jgeniselli.banco.game.play.GamePlayLoader
 import com.jgeniselli.banco.game.play.PlayerOptionType
-import com.jgeniselli.banco.game.play.PlayerOptionsLoader
+import com.jgeniselli.banco.game.play.PlayerOptionsBottomSheet
 import com.jgeniselli.banco.home.HomeLoader
 
 // Routes
-private const val HOME = "home"
-private const val NEW_GAME = "new_game"
-private const val GAMEPLAY = "gameplay"
-private const val PLAYER_OPTIONS = "player_options"
-private const val CREDIT = "credit"
-private const val DEBIT = "debit"
-private const val TRANSFER = "transfer"
-private const val TRANSFER_INPUT_VALUE = "transfer_input_value"
-private const val TRANSFER_INPUT_RECIPIENT = "transfer_input_recipient"
-private const val TRANSFER_CONCLUSION = "transfer_conclusion"
+private const val HOME = "HOME"
+private const val NEW_GAME = "NEW_GAME"
+private const val GAMEPLAY = "GAMEPLAY"
+private const val CREDIT = "CREDIT"
+private const val CREDIT_INPUT_VALUE = "CREDIT_INPUT_VALUE"
+private const val CREDIT_CONCLUSION = "CREDIT_CONCLUSION"
+private const val DEBIT = "DEBIT"
+private const val DEBIT_INPUT_VALUE = "DEBIT_INPUT_VALUE"
+private const val DEBIT_CONCLUSION = "DEBIT_CONCLUSION"
+private const val TRANSFER = "TRANSFER"
+private const val TRANSFER_INPUT_VALUE = "TRANSFER_INPUT_VALUE"
+private const val TRANSFER_INPUT_RECIPIENT = "TRANSFER_INPUT_RECIPIENT"
+private const val TRANSFER_CONCLUSION = "TRANSFER_CONCLUSION"
 
 @Composable
 fun MainNavHost(
@@ -46,21 +49,23 @@ fun MainNavHost(
 
         composable(GAMEPLAY) {
             GamePlayLoader(
-                onTransfer = { selected -> /* Send do Transfer */ }
-            )
-        }
-
-        composable(PLAYER_OPTIONS) {
-            PlayerOptionsLoader(
-                onSelectOption = { option ->
-                    val route = when (option) {
+                onSelectOperation = { player, operation ->
+                    val route = when (operation) {
                         PlayerOptionType.TRANSFER -> TRANSFER
                         PlayerOptionType.DEBIT -> DEBIT
                         PlayerOptionType.CREDIT -> CREDIT
                     }
-                    navController.navigate(route)
-                }
+//                    navController.navigate(route)
+                },
             )
+        }
+
+        navigation(startDestination = TRANSFER_INPUT_VALUE, route = TRANSFER) {
+            composable(TRANSFER_INPUT_VALUE) {}
+
+            composable(TRANSFER_INPUT_RECIPIENT) {}
+
+            composable(TRANSFER_CONCLUSION) {}
         }
 
         navigation(startDestination = TRANSFER_INPUT_VALUE, route = TRANSFER) {

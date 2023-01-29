@@ -7,6 +7,7 @@ import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.GameSetup
 import com.jgeniselli.banco.core.usecase.HasOngoingGame
 import com.jgeniselli.banco.game.common.BRAZIL
+import com.jgeniselli.banco.game.play.GamePlayViewModel
 import com.jgeniselli.banco.game.play.GameViewModel
 import com.jgeniselli.banco.game.transaction.execute.TransactionViewModel
 import com.jgeniselli.banco.game.transaction.history.TransactionHistoryViewModel
@@ -41,6 +42,7 @@ object DependencyInjection {
 
             viewModel { HomeViewModel(HasOngoingGame()) }
             viewModel { NewGameViewModel() }
+            viewModel { GamePlayViewModel() }
 
             // FORMATTER
             factory { DecimalFormat.getCurrencyInstance(BRAZIL) }

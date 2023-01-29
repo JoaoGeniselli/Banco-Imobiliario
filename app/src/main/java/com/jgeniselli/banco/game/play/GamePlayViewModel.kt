@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.map
 import java.text.NumberFormat
 
 class GamePlayViewModel(
-    val gameRepository: GameRepository,
-    val balanceFormatter: NumberFormat
+    gameRepository: GameRepository = GameRepository(),
+    private val balanceFormatter: NumberFormat = NumberFormat.getCurrencyInstance()
 ) : ViewModel() {
 
     val players = gameRepository.players.map { result ->
