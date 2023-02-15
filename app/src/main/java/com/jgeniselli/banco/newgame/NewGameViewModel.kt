@@ -22,8 +22,8 @@ class NewGameViewModel(
             val players = old.players + PlayerSummary(name, R.drawable.ic_baseline_pets_24)
             old.copy(
                 players = players,
-                canAddNewPlayer = players.size < 6,
-                isGameStartAllowed = players.size >= 2,
+                canAddNewPlayer = players.size < MAX_PLAYERS,
+                isGameStartAllowed = players.size >= MIN_PLAYERS,
             )
         }
 
@@ -34,5 +34,10 @@ class NewGameViewModel(
             gameRepository.startGame(_uiState.value.players.map { it.name })
             _uiState.update { it.copy(isGameStarted = true) }
         }
+    }
+
+    companion object {
+        private const val MAX_PLAYERS = 6
+        private const val MIN_PLAYERS = 2
     }
 }
