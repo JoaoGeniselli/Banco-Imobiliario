@@ -24,10 +24,17 @@ fun NewGameLoader(
 ) {
     val uiState by viewModel.uiState.collectAsState(NewGameUiState())
     var showAddPlayerDialog by remember { mutableStateOf(false) }
+
+    LaunchedEffect(uiState.isGameStarted) {
+        if (uiState.isGameStarted) {
+            onStart()
+        }
+    }
+
     NewGame(
         uiState = uiState,
         onAddPlayerClick = { showAddPlayerDialog = true },
-        onStartClick = onStart
+        onStartClick = viewModel::onStartGame
     )
     if (showAddPlayerDialog) {
         AddPlayerDialogLoader(

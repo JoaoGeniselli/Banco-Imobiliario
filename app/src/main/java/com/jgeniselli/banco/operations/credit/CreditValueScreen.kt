@@ -8,8 +8,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.jgeniselli.banco.compose.Player
+import com.jgeniselli.banco.R
 import com.jgeniselli.banco.ui.component.GenericInput
 import com.jgeniselli.banco.ui.component.NumberInput
 import com.jgeniselli.banco.ui.component.toCurrency
@@ -19,10 +20,10 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun CreditValueScreen(
     playerId: Int,
-    vm: CreditViewModel = koinViewModel { parametersOf(playerId) },
+    viewModel: CreditViewModel = koinViewModel { parametersOf(playerId) },
     onOperationDone: () -> Unit
 ) {
-    val uiState by vm.state.collectAsState()
+    val uiState by viewModel.state.collectAsState()
 
     LaunchedEffect(uiState.isOperationDone) {
         if (uiState.isOperationDone) {
@@ -32,8 +33,8 @@ fun CreditValueScreen(
 
     CreditValueContent(
         state = uiState,
-        onDone = vm::commitOperation,
-        onUpdate = vm::updateValue,
+        onDone = viewModel::commitOperation,
+        onUpdate = viewModel::updateValue,
     )
 }
 
@@ -46,8 +47,8 @@ fun CreditValueContent(
 ) {
     GenericInput(
         modifier = modifier,
-        title = "Credit Value",
-        subtitle = "Current balance ${state.player.balance.toCurrency()}",
+        title = stringResource(R.string.credit_title),
+        subtitle = stringResource(R.string.credit_subtitle, state.balance.toCurrency()),
         actionEnabled = state.isDoneEnabled,
         onAction = onDone
     ) {
@@ -55,7 +56,7 @@ fun CreditValueContent(
             onUpdate = onUpdate,
             onDone = { if (state.isDoneEnabled) onDone() },
             value = state.value,
-            label = "Value"
+            label = stringResource(R.string.credit_input_label)
         )
     }
 }
@@ -66,9 +67,7 @@ private fun PreviewCreditValueContent() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
         CreditValueContent(
             modifier = Modifier,
-            state = CreditState(
-                player = Player(id = 0, name = "John", balance = 650.0)
-            ),
+            state = CreditState(650.0),
             onUpdate = {},
             onDone = {}
         )

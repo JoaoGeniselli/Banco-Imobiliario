@@ -43,7 +43,7 @@ object DependencyInjection {
             viewModel { TransactionHistoryViewModel(get(), get()) }
 
             viewModel { HomeViewModel(HasOngoingGame()) }
-            viewModel { NewGameViewModel() }
+            viewModel { NewGameViewModel(get()) }
             viewModel { GamePlayViewModel(get()) }
             viewModel { (playerId: Int) ->
                 CreditViewModel(playerId, get())
