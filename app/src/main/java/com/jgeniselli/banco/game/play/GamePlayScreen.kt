@@ -20,7 +20,7 @@ import org.koin.androidx.compose.getViewModel
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun GamePlayScreen(
-    onSelectOperation: (selected: GameplayPlayer, operation: PlayerOptionType) -> Unit,
+    onSelectOperation: (selected: GameplayPlayer, operation: OperationType) -> Unit,
     viewModel: GamePlayViewModel = getViewModel()
 ) {
     val players by viewModel.players.collectAsState(initial = listOf())

@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.jgeniselli.banco.game.creation.NewGameLoader
 import com.jgeniselli.banco.game.play.GamePlayScreen
-import com.jgeniselli.banco.game.play.PlayerOptionType
+import com.jgeniselli.banco.game.play.OperationType
 import com.jgeniselli.banco.home.HomeLoader
 import com.jgeniselli.banco.operations.credit.CreditValueScreen
 
@@ -55,9 +55,9 @@ fun MainNavHost(
             GamePlayScreen(
                 onSelectOperation = { player, operation ->
                     val route = when (operation) {
-                        PlayerOptionType.TRANSFER -> TRANSFER
-                        PlayerOptionType.DEBIT -> DEBIT
-                        PlayerOptionType.CREDIT -> CREDIT
+                        OperationType.TRANSFER -> TRANSFER
+                        OperationType.DEBIT -> DEBIT
+                        OperationType.CREDIT -> CREDIT
                     }
                     navController.navigate("$route/${player.id}")
                 },
