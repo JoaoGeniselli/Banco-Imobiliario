@@ -4,21 +4,22 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jgeniselli.banco.R
 
 @Composable
 fun TitleSubtitleRow(
     modifier: Modifier = Modifier,
-    icon: Painter,
+    icon: ImageVector,
     title: String,
+    iconColor: Color = Color.LightGray,
     subtitle: String
 ) {
     Row(modifier.fillMaxWidth()) {
@@ -26,8 +27,8 @@ fun TitleSubtitleRow(
             modifier = Modifier
                 .size(56.dp)
                 .padding(8.dp),
-            color = Color.LightGray,
-            painter = icon
+            color = iconColor,
+            imageVector = icon
         )
         Column(
             modifier = Modifier
@@ -54,7 +55,7 @@ private fun PreviewTitleSubtitleRow() {
     Surface(modifier = Modifier, color = Color.White) {
         TitleSubtitleRow(
             modifier = Modifier,
-            icon = painterResource(id = R.drawable.ic_baseline_pets_24),
+            icon = Icons.Default.Person,
             title = "Title",
             subtitle = "Subtitle"
         )

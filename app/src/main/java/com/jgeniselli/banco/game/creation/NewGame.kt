@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jgeniselli.banco.R
 import com.jgeniselli.banco.newgame.NewGameUiState
 import com.jgeniselli.banco.newgame.NewGameViewModel
 import com.jgeniselli.banco.ui.component.PlayerList
@@ -98,8 +97,8 @@ private fun PreviewNewGame() {
             modifier = Modifier,
             uiState = NewGameUiState(
                 players = listOf(
-                    PlayerSummary("John", R.drawable.ic_baseline_attach_money_24),
-                    PlayerSummary("Emily", R.drawable.ic_baseline_pets_24),
+                    PlayerSummary("John", Color.LightGray),
+                    PlayerSummary("Emily", Color.LightGray),
                 ),
                 isGameStartAllowed = false,
                 canAddNewPlayer = true

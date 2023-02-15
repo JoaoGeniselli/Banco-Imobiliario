@@ -1,5 +1,6 @@
 package com.jgeniselli.banco.compose
 
+import com.jgeniselli.banco.compose.ui.theme.PlayerRed
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -7,6 +8,7 @@ import kotlinx.coroutines.flow.update
 data class Player(
     val id: Int,
     val name: String,
+    val color: ULong,
     val balance: Double
 )
 
@@ -25,7 +27,7 @@ sealed class OperationLog {
 interface GameRepository {
     val players: StateFlow<List<Player>>
     val history: StateFlow<List<OperationLog>>
-    suspend fun startGame(players: List<String>, initialBalance: Double = 1000.0)
+    suspend fun startGame(players: List<Pair<String, ULong>>, initialBalance: Double = 1000.0)
     suspend fun credit(playerId: Int, value: Double)
     suspend fun debit(playerId: Int, value: Double)
     suspend fun transfer(sourceId: Int, recipientId: Int, value: Double)
@@ -35,9 +37,9 @@ class MemoryGameRepository : GameRepository {
 
     private val _players = MutableStateFlow(
         listOf(
-            Player(1, "John", 1000.0),
-            Player(2, "Peter", 1000.0),
-            Player(3, "Alex", 1000.0),
+            Player(1, "John", PlayerRed.value, 1000.0),
+            Player(2, "Peter", PlayerRed.value, 1000.0),
+            Player(3, "Alex", PlayerRed.value, 1000.0),
         )
     )
     override val players: StateFlow<List<Player>> get() = _players
@@ -45,11 +47,12 @@ class MemoryGameRepository : GameRepository {
     private val _history = MutableStateFlow<List<OperationLog>>(emptyList())
     override val history: StateFlow<List<OperationLog>> get() = _history
 
-    override suspend fun startGame(players: List<String>, initialBalance: Double) {
-        _players.value = players.mapIndexed { index, name ->
+    override suspend fun startGame(players: List<Pair<String, ULong>>, initialBalance: Double) {
+        _players.value = players.mapIndexed { index, (name, color) ->
             Player(
                 id = index.inc(),
                 name = name,
+                color = color,
                 balance = initialBalance
             )
         }

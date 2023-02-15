@@ -1,6 +1,7 @@
 package com.jgeniselli.banco.operations.transfer.value
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -12,7 +13,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TransferValueInputLoader(
-    viewModel: TransferInputViewModel = koinViewModel()
+    viewModel: TransferViewModel = koinViewModel()
 ) {
     var value by remember { mutableStateOf(0.0) }
     var isDoneEnabled by remember { mutableStateOf(false) }
@@ -51,6 +52,10 @@ fun TransferValueInput(
             value = value,
             label = "Value"
         )
+
+        LazyColumn {
+
+        }
     }
 }
 

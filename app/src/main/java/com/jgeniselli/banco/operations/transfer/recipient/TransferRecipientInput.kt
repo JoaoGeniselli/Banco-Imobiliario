@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jgeniselli.banco.R
 import com.jgeniselli.banco.ui.component.GenericInput
 import com.jgeniselli.banco.ui.component.PlayerList
 import com.jgeniselli.banco.ui.component.PlayerSummary
@@ -38,9 +37,9 @@ private fun PreviewTransferRecipientInput() {
         TransferRecipientInput(
             modifier = Modifier,
             players = listOf(
-                PlayerSummary("Player 1", R.drawable.ic_baseline_pets_24),
-                PlayerSummary("Player 2", R.drawable.ic_baseline_pets_24),
-                PlayerSummary("Player 3", R.drawable.ic_baseline_pets_24),
+                PlayerSummary("Player 1", Color.LightGray),
+                PlayerSummary("Player 2", Color.LightGray),
+                PlayerSummary("Player 3", Color.LightGray),
             )
         )
     }

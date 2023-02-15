@@ -3,6 +3,8 @@ package com.jgeniselli.banco.game.play
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,19 +36,19 @@ fun PlayerOptions(modifier: Modifier = Modifier, onSelectOption: (OperationType)
     Column(modifier) {
         IconLabelRow(
             modifier = Modifier.clickable { onSelectOption(OperationType.CREDIT) },
-            icon = painterResource(R.drawable.ic_baseline_add_24),
+            icon = Icons.Default.Person,
             label = stringResource(R.string.credit_operation_label)
         )
         Divider(Modifier.padding(start = 56.dp))
         IconLabelRow(
             modifier = Modifier.clickable { onSelectOption(OperationType.DEBIT) },
-            icon = painterResource(R.drawable.ic_baseline_remove_24),
+            icon = Icons.Default.Person,
             label = stringResource(R.string.debit_operation_label)
         )
         Divider(Modifier.padding(start = 56.dp))
         IconLabelRow(
             modifier = Modifier.clickable { onSelectOption(OperationType.TRANSFER) },
-            icon = painterResource(R.drawable.ic_baseline_swap_horiz_24),
+            icon = Icons.Default.Person,
             label = stringResource(R.string.transfer_operation_label)
         )
     }

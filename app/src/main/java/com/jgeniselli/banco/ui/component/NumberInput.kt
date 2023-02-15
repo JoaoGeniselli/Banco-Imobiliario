@@ -27,11 +27,9 @@ fun NumberInput(
     val resolver = remember { CurrencyValueResolver() }
     val formattedValue = resolver.format(value)
 
-    Column(modifier.fillMaxWidth()) {
+    Column(modifier) {
         TextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
+            modifier = Modifier.fillMaxWidth(),
             value = TextFieldValue(
                 text = formattedValue,
                 selection = TextRange(formattedValue.length)

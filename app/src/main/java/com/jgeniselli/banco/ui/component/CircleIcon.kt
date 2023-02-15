@@ -8,12 +8,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Surface
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,7 +26,7 @@ import com.jgeniselli.banco.R
 fun CircleIcon(
     modifier: Modifier = Modifier,
     color: Color,
-    painter: Painter,
+    imageVector: ImageVector,
     contentDescription: String? = null
 ) {
     Box(
@@ -34,7 +37,7 @@ fun CircleIcon(
     ) {
         Image(
             modifier = Modifier.fillMaxSize().padding(8.dp),
-            painter = painter,
+            imageVector = imageVector,
             contentDescription = contentDescription
         )
     }
@@ -49,7 +52,7 @@ private fun PreviewCircleIcon() {
                 .size(72.dp)
                 .padding(16.dp),
             color = Color.Cyan,
-            painter = painterResource(id = R.drawable.ic_baseline_pets_24)
+            imageVector = Icons.Default.Person
         )
     }
 }

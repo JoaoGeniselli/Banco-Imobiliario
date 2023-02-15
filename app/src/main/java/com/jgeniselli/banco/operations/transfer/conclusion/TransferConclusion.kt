@@ -5,6 +5,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -40,7 +42,7 @@ fun TransferConclusion(
             modifier = Modifier
                 .size(72.dp)
                 .align(CenterHorizontally),
-            painter = painterResource(id = R.drawable.ic_baseline_attach_money_24),
+            imageVector = Icons.Default.AttachMoney,
             color = Color.LightGray
         )
         Text(
