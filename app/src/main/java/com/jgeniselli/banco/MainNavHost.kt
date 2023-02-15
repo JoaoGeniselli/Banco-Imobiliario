@@ -9,7 +9,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.jgeniselli.banco.game.creation.NewGameLoader
-import com.jgeniselli.banco.game.play.GamePlayLoader
+import com.jgeniselli.banco.game.play.GamePlayScreen
 import com.jgeniselli.banco.game.play.PlayerOptionType
 import com.jgeniselli.banco.home.HomeLoader
 import com.jgeniselli.banco.operations.credit.CreditValueScreen
@@ -52,7 +52,7 @@ fun MainNavHost(
         }
 
         composable(GAMEPLAY) {
-            GamePlayLoader(
+            GamePlayScreen(
                 onSelectOperation = { player, operation ->
                     val route = when (operation) {
                         PlayerOptionType.TRANSFER -> TRANSFER

@@ -19,7 +19,7 @@ import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun GamePlayLoader(
+fun GamePlayScreen(
     onSelectOperation: (selected: GameplayPlayer, operation: PlayerOptionType) -> Unit,
     viewModel: GamePlayViewModel = getViewModel()
 ) {
@@ -31,10 +31,13 @@ fun GamePlayLoader(
     PlayerOptionsBottomSheet(
         state = bottomSheetState,
         onSelectOption = { operation ->
-            selectedPlayer?.let { player -> onSelectOperation(player, operation) }
+            selectedPlayer?.let { player ->
+                onSelectOperation(player, operation)
+                scope.launch { bottomSheetState.hide() }
+            }
         },
     ) {
-        GamePlay(
+        GamePlayContent(
             players = players,
             onClick = { position ->
                 selectedPlayer = players[position]
@@ -45,7 +48,7 @@ fun GamePlayLoader(
 }
 
 @Composable
-fun GamePlay(
+fun GamePlayContent(
     modifier: Modifier = Modifier,
     players: List<GameplayPlayer>,
     onClick: (position: Int) -> Unit
@@ -67,7 +70,7 @@ fun GamePlay(
 @Composable
 private fun PreviewGamePlay() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        GamePlay(
+        GamePlayContent(
             modifier = Modifier,
             players = listOf(
                 GameplayPlayer(1, R.drawable.ic_baseline_pets_24, "John", "$ 300.00"),
