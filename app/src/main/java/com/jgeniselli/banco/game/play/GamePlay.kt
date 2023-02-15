@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -72,8 +70,8 @@ private fun PreviewGamePlay() {
         GamePlay(
             modifier = Modifier,
             players = listOf(
-                GameplayPlayer(R.drawable.ic_baseline_pets_24, "John", "$ 300.00"),
-                GameplayPlayer(R.drawable.ic_baseline_pets_24, "Emily", "$ 800.00")
+                GameplayPlayer(1, R.drawable.ic_baseline_pets_24, "John", "$ 300.00"),
+                GameplayPlayer(1, R.drawable.ic_baseline_pets_24, "Emily", "$ 800.00")
             ),
             onClick = {}
         )

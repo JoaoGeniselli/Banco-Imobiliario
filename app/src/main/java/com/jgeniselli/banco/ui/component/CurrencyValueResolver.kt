@@ -3,7 +3,7 @@ package com.jgeniselli.banco.ui.component
 import java.text.NumberFormat
 
 class CurrencyValueResolver(
-    private val format: NumberFormat = NumberFormat.getCurrencyInstance(),
+    private val format: NumberFormat = currencyFormat,
 ) {
 
     fun format(number: Double): String = format.format(number)

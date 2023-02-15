@@ -8,27 +8,46 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.jgeniselli.banco.ui.component.GenericInput
 import com.jgeniselli.banco.ui.component.NumberInput
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TransferValueInputLoader(
-
+    viewModel: TransferInputViewModel = koinViewModel()
 ) {
+    var value by remember { mutableStateOf(0.0) }
+    var isDoneEnabled by remember { mutableStateOf(false) }
 
+    TransferValueInput(
+        balance = "R$ 2500,00",
+        value = value,
+        onUpdate = {
+            value = it
+            isDoneEnabled = value >= 0.01
+        },
+        isDoneEnabled = isDoneEnabled,
+        onDone = { viewModel.onInputValue(value) }
+    )
 }
 
 @Composable
-fun TransferValueInput(modifier: Modifier = Modifier, balance: String) {
+fun TransferValueInput(
+    modifier: Modifier = Modifier,
+    balance: String,
+    isDoneEnabled: Boolean,
+    onDone: () -> Unit,
+    onUpdate: (Double) -> Unit,
+    value: Double
+) {
     GenericInput(
         modifier = modifier,
         title = "Transaction Value",
         subtitle = "Current balance $balance",
-        actionEnabled = true,
-        onAction = { /*TODO*/ }
+        actionEnabled = isDoneEnabled,
+        onAction = onDone
     ) {
-        var value by remember { mutableStateOf(0.0) }
         NumberInput(
-            onUpdate = { value = it },
-            onDone = { /*TODO*/ },
+            onUpdate = onUpdate,
+            onDone = onDone,
             value = value,
             label = "Value"
         )
@@ -41,7 +60,11 @@ private fun PreviewTransferValueInput() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
         TransferValueInput(
             modifier = Modifier,
-            balance = "$ 650,00"
+            balance = "$ 650,00",
+            isDoneEnabled = true,
+            onDone = {},
+            onUpdate = {},
+            value = 300.0
         )
     }
 }

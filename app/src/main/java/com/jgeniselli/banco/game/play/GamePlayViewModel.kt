@@ -3,21 +3,19 @@ package com.jgeniselli.banco.game.play
 import androidx.lifecycle.ViewModel
 import com.jgeniselli.banco.R
 import com.jgeniselli.banco.compose.GameRepository
-import com.jgeniselli.banco.compose.MemoryGameRepository
+import com.jgeniselli.banco.ui.component.toCurrency
 import kotlinx.coroutines.flow.map
-import java.text.NumberFormat
 
 class GamePlayViewModel(
-    gameRepository: GameRepository = MemoryGameRepository(),
-    private val balanceFormatter: NumberFormat = NumberFormat.getCurrencyInstance()
+    gameRepository: GameRepository,
 ) : ViewModel() {
-
     val players = gameRepository.players.map { result ->
         result.map { player ->
             GameplayPlayer(
+                player.id,
                 R.drawable.ic_baseline_pets_24,
                 player.name,
-                balanceFormatter.format(player.balance)
+                player.balance.toCurrency()
             )
         }
     }
