@@ -12,7 +12,8 @@ import com.jgeniselli.banco.game.creation.NewGameLoader
 import com.jgeniselli.banco.game.play.GamePlayScreen
 import com.jgeniselli.banco.game.play.OperationType
 import com.jgeniselli.banco.home.HomeLoader
-import com.jgeniselli.banco.operations.credit.CreditValueScreen
+import com.jgeniselli.banco.operations.credit.CreditScreen
+import com.jgeniselli.banco.operations.debit.DebitScreen
 
 // Routes
 private const val HOME = "HOME"
@@ -68,7 +69,17 @@ fun MainNavHost(
             route = "$CREDIT/{$ARG_PLAYER_ID}",
             arguments = listOf(navArgument(ARG_PLAYER_ID) { type = NavType.IntType })
         ) { entry ->
-            CreditValueScreen(
+            CreditScreen(
+                playerId = entry.arguments?.getInt(ARG_PLAYER_ID) ?: 0,
+                onOperationDone = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = "$DEBIT/{$ARG_PLAYER_ID}",
+            arguments = listOf(navArgument(ARG_PLAYER_ID) { type = NavType.IntType })
+        ) { entry ->
+            DebitScreen(
                 playerId = entry.arguments?.getInt(ARG_PLAYER_ID) ?: 0,
                 onOperationDone = { navController.popBackStack() }
             )

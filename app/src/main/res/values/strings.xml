@@ -20,10 +20,11 @@
     </string>
     <string name="title_activity_compose">ComposeActivity</string>
     <string name="credit_title">Credit Value</string>
-    <string name="credit_subtitle">Current balance %1s</string>
-    <string name="credit_input_label">Value</string>
+    <string name="current_balance">Current balance %1s</string>
+    <string name="value_input_label">Value</string>
     <string name="credit_operation_label">Credit</string>
     <string name="debit_operation_label">Debit</string>
     <string name="transfer_operation_label">Transfer</string>
+    <string name="debit_title">Debit Value</string>
 
 </resources>

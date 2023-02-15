@@ -15,6 +15,7 @@ import com.jgeniselli.banco.home.HomeViewModel
 import com.jgeniselli.banco.infra.Infrastructure
 import com.jgeniselli.banco.newgame.NewGameViewModel
 import com.jgeniselli.banco.operations.credit.CreditViewModel
+import com.jgeniselli.banco.operations.debit.DebitViewModel
 import com.jgeniselli.banco.ui.component.CurrencyValueResolver
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -45,9 +46,8 @@ object DependencyInjection {
             viewModel { HomeViewModel(HasOngoingGame()) }
             viewModel { NewGameViewModel(get()) }
             viewModel { GamePlayViewModel(get()) }
-            viewModel { (playerId: Int) ->
-                CreditViewModel(playerId, get())
-            }
+            viewModel { (playerId: Int) -> CreditViewModel(playerId, get()) }
+            viewModel { (playerId: Int) -> DebitViewModel(playerId, get()) }
 
             // FORMATTER
             factory { CurrencyValueResolver(get()) }
