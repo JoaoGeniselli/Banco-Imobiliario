@@ -1,12 +1,10 @@
 package com.jgeniselli.banco.operations.debit
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -57,28 +55,16 @@ fun DebitContent(
         actionEnabled = state.isDoneEnabled,
         onAction = onDone
     ) {
-        Row(
-            Modifier
+        NumberInput(
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp)) {
-            Image(
-                modifier = Modifier
-                    .size(48.dp)
-                    .align(Alignment.CenterVertically)
-                    .padding(end = 16.dp),
-                imageVector = Icons.Default.AttachMoney,
-                contentDescription = null
-            )
-            NumberInput(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .focusRequester(focusRequester),
-                onUpdate = onUpdate,
-                onDone = { if (state.isDoneEnabled) onDone() },
-                value = state.value,
-                label = stringResource(R.string.value_input_label)
-            )
-        }
+                .padding(top = 16.dp)
+                .focusRequester(focusRequester),
+            onUpdate = onUpdate,
+            onDone = { if (state.isDoneEnabled) onDone() },
+            value = state.value,
+            label = stringResource(R.string.value_input_label)
+        )
     }
     LaunchedEffect(Unit) { focusRequester.requestFocus() }
 }
