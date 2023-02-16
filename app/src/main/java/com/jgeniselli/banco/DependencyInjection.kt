@@ -18,6 +18,7 @@ import com.jgeniselli.banco.infra.Infrastructure
 import com.jgeniselli.banco.newgame.NewGameViewModel
 import com.jgeniselli.banco.operations.credit.CreditViewModel
 import com.jgeniselli.banco.operations.debit.DebitViewModel
+import com.jgeniselli.banco.operations.transfer.value.TransferViewModel
 import com.jgeniselli.banco.ui.component.CurrencyValueResolver
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -52,6 +53,7 @@ object DependencyInjection {
             viewModel { GamePlayViewModel(get()) }
             viewModel { (playerId: Int) -> CreditViewModel(playerId, get()) }
             viewModel { (playerId: Int) -> DebitViewModel(playerId, get()) }
+            viewModel { (playerId: Int) -> TransferViewModel(playerId, get()) }
             viewModel { HistoryViewModel(get(), get()) }
 
             // FORMATTER

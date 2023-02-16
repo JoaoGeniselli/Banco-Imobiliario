@@ -21,6 +21,7 @@ import com.jgeniselli.banco.game.play.OperationType
 import com.jgeniselli.banco.home.HomeLoader
 import com.jgeniselli.banco.operations.credit.CreditScreen
 import com.jgeniselli.banco.operations.debit.DebitScreen
+import com.jgeniselli.banco.operations.transfer.value.TransferScreen
 
 private const val ARG_PLAYER_ID = "ARG_PLAYER_ID"
 
@@ -79,6 +80,16 @@ fun MainNavHost(
 
         composable(HISTORY) {
             HistoryScreen()
+        }
+
+        composable(
+            route = "$TRANSFER/{$ARG_PLAYER_ID}",
+            arguments = listOf(navArgument(ARG_PLAYER_ID) { type = NavType.IntType })
+        ) { entry ->
+            TransferScreen(
+                playerId = entry.arguments?.getInt(ARG_PLAYER_ID) ?: 0,
+                onOperationDone = { navController.popBackStack() }
+            )
         }
     }
 }

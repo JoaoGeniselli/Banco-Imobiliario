@@ -27,5 +27,7 @@
     <string name="transfer_operation_label">Transfer</string>
     <string name="debit_title">Debit Value</string>
     <string name="history_transfer">From: %1s to %2s</string>
+    <string name="transfer_title">Transaction Value</string>
+    <string name="recipient">Recipient</string>
 
 </resources>
