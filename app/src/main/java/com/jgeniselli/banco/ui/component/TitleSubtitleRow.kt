@@ -7,7 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -26,16 +26,17 @@ fun TitleSubtitleRow(
         CircleIcon(
             modifier = Modifier
                 .size(56.dp)
-                .padding(8.dp),
+                .padding(8.dp)
+                .align(CenterVertically),
             color = iconColor,
             imageVector = icon
         )
         Column(
             modifier = Modifier
-                .align(Alignment.CenterVertically)
+                .align(CenterVertically)
                 .padding(start = 8.dp)
                 .padding(vertical = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
                 text = title,

@@ -7,6 +7,8 @@ import com.jgeniselli.banco.core.ColorHex
 import com.jgeniselli.banco.core.GameAPI
 import com.jgeniselli.banco.core.GameSetup
 import com.jgeniselli.banco.core.usecase.HasOngoingGame
+import com.jgeniselli.banco.game.history.HistoryViewModel
+import com.jgeniselli.banco.game.history.OperationFormatter
 import com.jgeniselli.banco.game.play.GamePlayViewModel
 import com.jgeniselli.banco.game.play.GameViewModel
 import com.jgeniselli.banco.game.transaction.execute.TransactionViewModel
@@ -17,6 +19,7 @@ import com.jgeniselli.banco.newgame.NewGameViewModel
 import com.jgeniselli.banco.operations.credit.CreditViewModel
 import com.jgeniselli.banco.operations.debit.DebitViewModel
 import com.jgeniselli.banco.ui.component.CurrencyValueResolver
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -36,6 +39,7 @@ object DependencyInjection {
                 }
             }
             single { get<Infrastructure>().storage }
+            factory { OperationFormatter(androidContext()) }
             single<GameRepository> { MemoryGameRepository() }
 
             // VIEW MODELS
@@ -48,6 +52,7 @@ object DependencyInjection {
             viewModel { GamePlayViewModel(get()) }
             viewModel { (playerId: Int) -> CreditViewModel(playerId, get()) }
             viewModel { (playerId: Int) -> DebitViewModel(playerId, get()) }
+            viewModel { HistoryViewModel(get(), get()) }
 
             // FORMATTER
             factory { CurrencyValueResolver(get()) }
