@@ -7,7 +7,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -67,8 +66,8 @@ fun AddPlayerDialog(
 
         Button(
             modifier = Modifier
-                .align(Alignment.End)
-                .padding(top = 16.dp),
+                .padding(top = 8.dp)
+                .fillMaxWidth(),
             enabled = isValidName(name, forbiddenNames),
             onClick = { onDone(name) }
         ) {

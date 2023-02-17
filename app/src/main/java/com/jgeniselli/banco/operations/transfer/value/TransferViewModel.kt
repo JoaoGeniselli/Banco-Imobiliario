@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.math.max
 
 class TransferViewModel(
     private val playerId: Int,
@@ -45,6 +46,10 @@ class TransferViewModel(
 
     fun selectRecipientAt(index: Int) {
         selectedPlayerIndex.value = index
+    }
+
+    fun onShortcut(value: Double) {
+        selectedValue.value = max(selectedValue.value + value, 0.0)
     }
 
     fun onDone() {

@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.math.max
 
 class CreditViewModel(
     playerId: Int,
@@ -21,6 +22,13 @@ class CreditViewModel(
     fun updateValue(value: Double) {
         _state.update {
             it.copy(value = value, isDoneEnabled = value > 0.0)
+        }
+    }
+
+    fun onShortcut(value: Double) {
+        _state.update { old ->
+            val updatedValue = max(old.value + value, 0.0)
+            old.copy(value = updatedValue, isDoneEnabled = updatedValue > 0.0)
         }
     }
 

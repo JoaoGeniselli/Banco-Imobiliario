@@ -28,7 +28,7 @@ fun NumberInput(
     val formattedValue = resolver.format(value)
 
     Column(modifier) {
-        TextField(
+        OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = TextFieldValue(
                 text = formattedValue,
