@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
+import com.jgeniselli.banco.operations.common.ValueInputShortcuts
 import com.jgeniselli.banco.ui.component.GenericInput
 import com.jgeniselli.banco.ui.component.NumberInput
 import com.jgeniselli.banco.ui.component.ShortcutChip
@@ -66,14 +67,7 @@ fun CreditContent(
             value = state.value,
             label = stringResource(R.string.value_input_label)
         )
-        Row(Modifier.padding(top = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ShortcutChip(value = +100.0, onShortcut = onShortcut)
-            ShortcutChip(value = -100.0, onShortcut = onShortcut)
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ShortcutChip(value = +1000.0, onShortcut = onShortcut)
-            ShortcutChip(value = -1000.0, onShortcut = onShortcut)
-        }
+        ValueInputShortcuts(onShortcut = onShortcut)
     }
     LaunchedEffect(Unit) { focusRequester.requestFocus() }
 }

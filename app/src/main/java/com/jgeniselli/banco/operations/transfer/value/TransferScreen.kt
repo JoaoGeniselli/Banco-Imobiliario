@@ -1,12 +1,9 @@
 package com.jgeniselli.banco.operations.transfer.value
 
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -20,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
+import com.jgeniselli.banco.operations.common.ValueInputShortcuts
 import com.jgeniselli.banco.ui.component.*
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -57,45 +55,87 @@ fun TransferContent(
     onDone: () -> Unit,
 ) {
     val focusRequester = remember { FocusRequester() }
-    val scroll = rememberScrollState()
-    val focusManager = LocalFocusManager.current
-    GenericInput(
-        modifier = modifier.scrollable(scroll, Orientation.Vertical),
-        title = stringResource(R.string.transfer_title),
-        subtitle = stringResource(R.string.current_balance, state.balance.toCurrency()),
-        actionEnabled = state.isDoneAvailable,
-        onAction = onDone,
-    ) {
-        NumberInput(
+    Column(modifier = modifier.fillMaxSize()) {
+        LazyColumn(
             modifier = Modifier
-                .focusRequester(focusRequester)
-                .padding(top = 16.dp),
-            onUpdate = onUpdate,
-            onDone = { focusManager.clearFocus() },
-            value = state.transferValue,
-            label = stringResource(id = R.string.value_input_label)
-        )
-        Row(Modifier.padding(top = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ShortcutChip(value = +100.0, onShortcut = onShortcut)
-            ShortcutChip(value = -100.0, onShortcut = onShortcut)
+                .fillMaxSize()
+                .weight(1f),
+            contentPadding = PaddingValues(16.dp),
+        ) {
+            item { Header(state.balance) }
+            item { ValueInput(focusRequester, state.transferValue, onUpdate) }
+            item { ValueInputShortcuts(onShortcut = onShortcut) }
+            item { RecipientsTitle() }
+
+            itemsIndexed(
+                items = state.availableRecipients,
+                key = { _, item -> item.name },
+            ) { index, player ->
+                PlayerRow(
+                    modifier = Modifier.padding(top = 8.dp),
+                    player = player, onClick = { onSelectRecipient(index) }
+                )
+            }
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ShortcutChip(value = +1000.0, onShortcut = onShortcut)
-            ShortcutChip(value = -1000.0, onShortcut = onShortcut)
-        }
-        Text(
-            modifier = Modifier.padding(top = 16.dp),
-            text = stringResource(R.string.recipient),
-            style = MaterialTheme.typography.h5
-        )
-        PlayerList(
-            modifier = Modifier.padding(top = 16.dp),
-            players = state.availableRecipients,
-            onClick = onSelectRecipient
+        ContinueButton(
+            state.isDoneAvailable, onDone
         )
     }
-    LaunchedEffect(focusRequester) {
-        focusRequester.requestFocus()
+    LaunchedEffect(focusRequester) { focusRequester.requestFocus() }
+}
+
+@Composable
+private fun ValueInput(
+    focusRequester: FocusRequester,
+    value: Double,
+    onUpdate: (Double) -> Unit
+) {
+    val focusManager = LocalFocusManager.current
+    NumberInput(
+        modifier = Modifier
+            .focusRequester(focusRequester)
+            .padding(top = 16.dp),
+        onUpdate = onUpdate,
+        onDone = { focusManager.clearFocus() },
+        value = value,
+        label = stringResource(id = R.string.value_input_label)
+    )
+}
+
+@Composable
+private fun Header(balance: Double) {
+    Text(
+        style = MaterialTheme.typography.h4,
+        text = stringResource(R.string.transfer_title)
+    )
+    Text(
+        style = MaterialTheme.typography.subtitle1,
+        text = stringResource(R.string.current_balance, balance.toCurrency())
+    )
+}
+
+@Composable
+private fun RecipientsTitle() {
+    Text(
+        modifier = Modifier.padding(top = 16.dp),
+        text = stringResource(R.string.recipient),
+        style = MaterialTheme.typography.h5
+    )
+}
+
+@Composable
+private fun ContinueButton(
+    isEnabled: Boolean,
+    onClick: () -> Unit
+) {
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        enabled = isEnabled,
+        onClick = onClick
+    ) {
+        Text(text = "Continue")
     }
 }
 
@@ -109,11 +149,9 @@ private fun PreviewTransferValueInput() {
             onUpdate = {},
             state = TransferState(
                 balance = 5000.0,
-                availableRecipients = listOf(
-                    PlayerSummary("Player 1", Color.LightGray),
-                    PlayerSummary("Player 2", Color.LightGray, true),
-                    PlayerSummary("Player 3", Color.LightGray),
-                ),
+                availableRecipients = (1..15).map {
+                    PlayerSummary("Player $it", Color.LightGray)
+                },
                 transferValue = 150.0,
                 isDoneAvailable = true,
                 isOperationDone = false

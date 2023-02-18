@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -41,6 +40,20 @@ fun PlayerList(
             Divider(modifier = Modifier.padding(start = 56.dp))
         }
     }
+}
+
+@Composable
+fun PlayerRow(modifier: Modifier = Modifier, player: PlayerSummary, onClick: () -> Unit = {}) {
+    IconLabelRow(
+        modifier = modifier
+            .background(
+                if (player.isHighlight) Color.LightGray else MaterialTheme.colors.background
+            )
+            .clickable { onClick() },
+        icon = Icons.Default.Person,
+        label = player.name,
+        color = player.color
+    )
 }
 
 @Preview(showBackground = true)

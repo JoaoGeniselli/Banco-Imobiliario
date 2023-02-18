@@ -1,6 +1,8 @@
 package com.jgeniselli.banco.compose
 
+import androidx.compose.ui.graphics.Color
 import com.jgeniselli.banco.compose.ui.theme.PlayerRed
+import com.jgeniselli.banco.ui.component.PlayerSummary
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -36,11 +38,9 @@ interface GameRepository {
 class MemoryGameRepository : GameRepository {
 
     private val _players = MutableStateFlow(
-        listOf(
-            Player(1, "John", PlayerRed.value, 1000.0),
-            Player(2, "Peter", PlayerRed.value, 1000.0),
-            Player(3, "Alex", PlayerRed.value, 1000.0),
-        )
+        (1..15).map {
+            Player(it, "Player $it", Color.LightGray.value, 25000.0)
+        }
     )
     override val players: StateFlow<List<Player>> get() = _players
 
