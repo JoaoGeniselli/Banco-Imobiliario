@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +45,7 @@ fun AddPlayerDialog(
 ) {
     var name by remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
 
     Column(modifier.fillMaxWidth()) {
         Text(text = "Insert the Player's name", style = MaterialTheme.typography.h6)
@@ -59,7 +61,10 @@ fun AddPlayerDialog(
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { if (isValidName(name, forbiddenNames)) onDone(name) }
+                onDone = {
+                    focusManager.clearFocus()
+                    if (isValidName(name, forbiddenNames)) onDone(name)
+                }
             ),
             label = { Text(text = "Name") }
         )
