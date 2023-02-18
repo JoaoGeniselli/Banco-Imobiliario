@@ -33,8 +33,8 @@ fun GamePlayScreen(
     PlayerOptionsBottomSheet(
         state = bottomSheetState,
         onSelectOption = { operation ->
+            scope.launch { bottomSheetState.hide() }
             selectedPlayer?.let { player ->
-                scope.launch { bottomSheetState.hide() }
                 onSelectOperation(player, operation)
             }
         },
