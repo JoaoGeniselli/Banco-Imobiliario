@@ -18,7 +18,7 @@ class DatabaseGameStorage(
     override val players: StateFlow<List<Player>> = playerDao
         .getAll()
         .map { storedPlayers -> storedPlayers.map { entity -> entity.toDomainPlayer() } }
-        .stateIn(scope, SharingStarted.Lazily, listOf())
+        .stateIn(scope, SharingStarted.Eagerly, listOf())
 
     override val history: StateFlow<List<OperationLog>> = MutableStateFlow(emptyList())
 

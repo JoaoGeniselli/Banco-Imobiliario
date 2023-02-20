@@ -12,6 +12,7 @@ class GameRepositoryImpl(
     override suspend fun startGame(players: List<NameAndColor>, initialBalance: Double) {
         storage.run {
             clearHistory()
+            clearPlayerList()
             addPlayers(players, initialBalance)
         }
     }
