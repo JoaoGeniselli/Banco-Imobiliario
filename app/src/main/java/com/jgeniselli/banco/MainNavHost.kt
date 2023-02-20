@@ -38,18 +38,14 @@ fun MainNavHost(
 
         composable(HOME) {
             HomeLoader(
-                onContinueGame = { navController.navigate(GAMEPLAY) },
-                onNewGame = {
-                    navController.navigate(NEW_GAME) {
-                        popUpTo(0)
-                    }
-                }
+                onContinueGame = { navController.navigate(GAMEPLAY) { popUpTo(0) } },
+                onNewGame = { navController.navigate(NEW_GAME) }
             )
         }
 
         composable(NEW_GAME) {
             NewGameLoader(
-                onStart = { navController.navigate(GAMEPLAY) }
+                onStart = { navController.navigate(GAMEPLAY) { popUpTo(0) } }
             )
         }
 

@@ -18,7 +18,7 @@
     <string name="message_reset_game_confirmation">Os dados atuais de saldo serão perdidos. Tem certeza que deseja
         reiniciar a partida?
     </string>
-    <string name="title_activity_compose">ComposeActivity</string>
+    <string name="title_activity_compose">@string/app_name</string>
     <string name="credit_title">Credit Value</string>
     <string name="current_balance">Current balance %1s</string>
     <string name="value_input_label">Value</string>
