@@ -1,7 +1,7 @@
 package com.jgeniselli.banco.infra.database
 
-import com.jgeniselli.banco.core.repository.OperationLog
-import com.jgeniselli.banco.core.repository.Player
+import com.jgeniselli.banco.core.entities.OperationLog
+import com.jgeniselli.banco.core.entities.Player
 
 fun PlayerEntity.toDomainPlayer() = Player(
     id = id,

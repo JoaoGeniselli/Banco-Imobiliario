@@ -2,8 +2,8 @@ package com.jgeniselli.banco.infra
 
 import com.jgeniselli.banco.core.repository.GameStorage
 import com.jgeniselli.banco.core.repository.NameAndColor
-import com.jgeniselli.banco.core.repository.OperationLog
-import com.jgeniselli.banco.core.repository.Player
+import com.jgeniselli.banco.core.entities.OperationLog
+import com.jgeniselli.banco.core.entities.Player
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

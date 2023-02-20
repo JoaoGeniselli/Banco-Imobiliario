@@ -1,7 +1,6 @@
 package com.jgeniselli.banco
 
-import com.jgeniselli.banco.core.repository.GameRepository
-import com.jgeniselli.banco.core.repository.GameRepositoryImpl
+import com.jgeniselli.banco.core.CoreModule
 import com.jgeniselli.banco.core.usecase.HasOngoingGame
 import com.jgeniselli.banco.game.history.HistoryViewModel
 import com.jgeniselli.banco.game.history.OperationFormatter
@@ -22,7 +21,7 @@ object DependencyInjection {
     val mainModule by lazy {
         module {
             //region Core
-            single<GameRepository> { GameRepositoryImpl(get()) }
+            single { CoreModule.gameRepository(get()) }
             factory { HasOngoingGame(get()) }
             //endregion
 

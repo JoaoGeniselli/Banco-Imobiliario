@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jgeniselli.banco.core.repository.GameRepository
-import com.jgeniselli.banco.core.repository.Player
+import com.jgeniselli.banco.core.entities.Player
 import com.jgeniselli.banco.ui.component.PlayerSummary
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine

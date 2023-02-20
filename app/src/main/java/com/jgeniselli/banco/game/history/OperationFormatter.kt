@@ -6,7 +6,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.SwapHoriz
 import com.jgeniselli.banco.R
-import com.jgeniselli.banco.core.repository.OperationLog
+import com.jgeniselli.banco.core.entities.OperationLog
 import com.jgeniselli.banco.ui.component.toCurrency
 
 class OperationFormatter(

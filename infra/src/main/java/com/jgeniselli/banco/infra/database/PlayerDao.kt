@@ -1,7 +1,6 @@
 package com.jgeniselli.banco.infra.database
 
 import androidx.room.*
-import com.jgeniselli.banco.core.repository.Player
 import kotlinx.coroutines.flow.Flow
 
 @Dao

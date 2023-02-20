@@ -1,8 +1,10 @@
 package com.jgeniselli.banco.core.repository
 
+import com.jgeniselli.banco.core.entities.OperationLog
+import com.jgeniselli.banco.core.entities.Player
 import kotlinx.coroutines.flow.StateFlow
 
-class GameRepositoryImpl(
+internal class GameRepositoryImpl(
     private val storage: GameStorage
 ) : GameRepository {
 
