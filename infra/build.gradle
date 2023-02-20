@@ -24,7 +24,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':domain')
 
-    annotationProcessor libs.room.compiler
+    kapt libs.room.compiler
 
     implementation libs.kotlin
     implementation libs.kotlin.core

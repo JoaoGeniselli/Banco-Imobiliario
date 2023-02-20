@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class MemoryGameStorage : GameStorage {
+internal class MemoryGameStorage : GameStorage {
 
     private val _players = MutableStateFlow(
         (1..6).map {

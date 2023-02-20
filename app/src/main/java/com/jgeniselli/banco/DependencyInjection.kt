@@ -2,13 +2,12 @@ package com.jgeniselli.banco
 
 import com.jgeniselli.banco.core.repository.GameRepository
 import com.jgeniselli.banco.core.repository.GameRepositoryImpl
-import com.jgeniselli.banco.core.repository.GameStorage
 import com.jgeniselli.banco.core.usecase.HasOngoingGame
 import com.jgeniselli.banco.game.history.HistoryViewModel
 import com.jgeniselli.banco.game.history.OperationFormatter
 import com.jgeniselli.banco.game.play.GamePlayViewModel
 import com.jgeniselli.banco.home.HomeViewModel
-import com.jgeniselli.banco.infra.MemoryGameStorage
+import com.jgeniselli.banco.infra.database.InfraModule
 import com.jgeniselli.banco.newgame.NewGameViewModel
 import com.jgeniselli.banco.operations.credit.CreditViewModel
 import com.jgeniselli.banco.operations.debit.DebitViewModel
@@ -28,7 +27,7 @@ object DependencyInjection {
             //endregion
 
             //region Infra
-            single<GameStorage> { MemoryGameStorage() }
+            single { InfraModule.databaseGameStorage() }
             //endregion
 
             //region View Model
