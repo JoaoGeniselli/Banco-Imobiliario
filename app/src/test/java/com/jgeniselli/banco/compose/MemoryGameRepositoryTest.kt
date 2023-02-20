@@ -1,5 +1,6 @@
 package com.jgeniselli.banco.compose
 
+import com.jgeniselli.banco.core.repository.MemoryGameRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before

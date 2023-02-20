@@ -1,7 +1,7 @@
 package com.jgeniselli.banco
 
-import com.jgeniselli.banco.compose.GameRepository
-import com.jgeniselli.banco.compose.MemoryGameRepository
+import com.jgeniselli.banco.core.repository.GameRepository
+import com.jgeniselli.banco.core.repository.MemoryGameRepository
 import com.jgeniselli.banco.core.usecase.HasOngoingGame
 import com.jgeniselli.banco.game.history.HistoryViewModel
 import com.jgeniselli.banco.game.history.OperationFormatter

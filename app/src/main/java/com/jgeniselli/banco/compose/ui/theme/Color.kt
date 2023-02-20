@@ -6,7 +6,7 @@ val Primary = Color(0xFF2196f3)
 val PrimaryDark = Color(0xFF0068bf)
 val OnPrimary = Color.White
 
-val Secondary = Color(0xFF9e9e9e)
+val Secondary = Color.LightGray
 val OnSecondary = Color.Black
 
 val PlayerRed = Color(0xffef5350)

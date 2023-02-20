@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.creation
+package com.jgeniselli.banco.newgame
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -10,14 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jgeniselli.banco.newgame.NewGameUiState
-import com.jgeniselli.banco.newgame.NewGameViewModel
 import com.jgeniselli.banco.ui.component.PlayerList
 import com.jgeniselli.banco.ui.component.PlayerSummary
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun NewGameLoader(
+fun NewGameScreen(
     viewModel: NewGameViewModel = koinViewModel(),
     onStart: () -> Unit
 ) {
@@ -30,13 +28,13 @@ fun NewGameLoader(
         }
     }
 
-    NewGame(
+    NewGameContent(
         uiState = uiState,
         onAddPlayerClick = { showAddPlayerDialog = true },
         onStartClick = viewModel::onStartGame
     )
     if (showAddPlayerDialog) {
-        AddPlayerDialogLoader(
+        AddPlayerDialog(
             onDone = {
                 viewModel.onAddNewPlayer(it)
                 showAddPlayerDialog = false
@@ -48,7 +46,7 @@ fun NewGameLoader(
 }
 
 @Composable
-fun NewGame(
+fun NewGameContent(
     modifier: Modifier = Modifier,
     uiState: NewGameUiState,
     onAddPlayerClick: () -> Unit,
@@ -93,7 +91,7 @@ fun NewGame(
 @Composable
 private fun PreviewNewGame() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        NewGame(
+        NewGameContent(
             modifier = Modifier,
             uiState = NewGameUiState(
                 players = listOf(

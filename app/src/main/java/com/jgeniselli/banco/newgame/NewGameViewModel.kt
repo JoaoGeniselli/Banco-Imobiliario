@@ -3,7 +3,7 @@ package com.jgeniselli.banco.newgame
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jgeniselli.banco.compose.GameRepository
+import com.jgeniselli.banco.core.repository.GameRepository
 import com.jgeniselli.banco.compose.ui.theme.*
 import com.jgeniselli.banco.ui.component.PlayerSummary
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.creation
+package com.jgeniselli.banco.newgame
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,14 +21,14 @@ import androidx.compose.ui.window.Dialog
 const val NAME_MINIMUM_LENGTH = 2
 
 @Composable
-fun AddPlayerDialogLoader(
+fun AddPlayerDialog(
     onDone: (name: String) -> Unit,
     forbiddenNames: List<String> = listOf(),
     onCancel: () -> Unit
 ) {
     Dialog(onDismissRequest = onCancel) {
         Surface(shape = MaterialTheme.shapes.large) {
-            AddPlayerDialog(
+            AddPlayerDialogContent(
                 modifier = Modifier.padding(16.dp),
                 forbiddenNames = forbiddenNames,
                 onDone = onDone
@@ -38,7 +38,7 @@ fun AddPlayerDialogLoader(
 }
 
 @Composable
-fun AddPlayerDialog(
+fun AddPlayerDialogContent(
     modifier: Modifier = Modifier,
     forbiddenNames: List<String>,
     onDone: (name: String) -> Unit
@@ -90,7 +90,7 @@ private fun isValidName(name: String, forbidden: List<String>) =
 @Composable
 private fun PreviewAddPlayerDialog() {
     Surface(color = Color.White) {
-        AddPlayerDialog(
+        AddPlayerDialogContent(
             modifier = Modifier.padding(16.dp),
             forbiddenNames = listOf()
         ) {}

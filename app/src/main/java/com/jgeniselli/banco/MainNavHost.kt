@@ -15,7 +15,7 @@ import com.jgeniselli.banco.Routes.HISTORY
 import com.jgeniselli.banco.Routes.HOME
 import com.jgeniselli.banco.Routes.NEW_GAME
 import com.jgeniselli.banco.Routes.TRANSFER
-import com.jgeniselli.banco.game.creation.NewGameLoader
+import com.jgeniselli.banco.newgame.NewGameScreen
 import com.jgeniselli.banco.game.history.HistoryScreen
 import com.jgeniselli.banco.game.play.GamePlayScreen
 import com.jgeniselli.banco.game.play.OperationType
@@ -44,7 +44,7 @@ fun MainNavHost(
         }
 
         composable(NEW_GAME) {
-            NewGameLoader(
+            NewGameScreen(
                 onStart = { navController.navigate(GAMEPLAY) { popUpTo(0) } }
             )
         }

@@ -1,7 +1,7 @@
 package com.jgeniselli.banco.game.history
 
 import androidx.lifecycle.ViewModel
-import com.jgeniselli.banco.compose.GameRepository
+import com.jgeniselli.banco.core.repository.GameRepository
 import kotlinx.coroutines.flow.map
 
 class HistoryViewModel(
