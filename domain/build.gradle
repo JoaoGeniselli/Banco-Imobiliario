@@ -1,20 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
-apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion sdk.compileVersion
-
+    compileSdkVersion libs.versions.sdk.compile.get() as int
 
     defaultConfig {
-        minSdkVersion sdk.minVersion
-        targetSdkVersion sdk.targetVersion
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion libs.versions.sdk.min.get() as int
+        targetSdkVersion libs.versions.sdk.target.get() as int
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -23,15 +17,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4"
-    implementation libs.kotlinCore
     implementation libs.kotlin
+    implementation libs.kotlin.core
+    implementation libs.kotlin.coroutines
 
     testImplementation libs.junit
     testImplementation libs.mockk

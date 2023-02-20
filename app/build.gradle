@@ -2,15 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply from: '../dependencies.gradle'
-
 
 android {
-    compileSdkVersion sdk.compileVersion
+    compileSdkVersion libs.versions.sdk.compile.get() as int
     defaultConfig {
         applicationId "com.jgeniselli.banco"
-        minSdkVersion sdk.minVersion
-        targetSdkVersion sdk.targetVersion
+        minSdkVersion libs.versions.sdk.min.get() as int
+        targetSdkVersion libs.versions.sdk.target.get() as int
         versionCode 1
         versionName "1.0"
         vectorDrawables {
@@ -48,36 +46,27 @@ dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':infra')
 
-    def nav_version = "2.5.3"
-
-
     implementation libs.kotlin
-    implementation libs.appCompat
-    implementation libs.lifecycleExtensions
-    implementation libs.recyclerView
-    implementation libs.koinAndroid
-    implementation libs.constraintLayout
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    implementation "androidx.compose.ui:ui:$compose_ui_version"
-    implementation "androidx.compose.material:material-icons-extended:1.3.1"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.compose.material:material:1.3.1'
-    implementation "io.insert-koin:koin-androidx-compose:${versions.koin}"
-    implementation "androidx.navigation:navigation-compose:$nav_version"
+    implementation libs.app.compat
+    implementation libs.lifecycle.extensions
+    implementation libs.recycler.view
+    implementation libs.koin.android
+    implementation libs.constraint.layout
+    implementation libs.lifecycle
+    implementation libs.bundles.compose
 
     testImplementation libs.robolectric
-    testImplementation libs.androidXTestCore
+    testImplementation libs.androidx.test.core
     testImplementation libs.mockito
     testImplementation libs.mockk
     testImplementation libs.junit
 
-    androidTestImplementation libs.testRunner
-    androidTestImplementation libs.testRules
-    androidTestImplementation libs.espressoIntents
-    androidTestImplementation libs.espressoCore
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+    androidTestImplementation libs.test.runner
+    androidTestImplementation libs.test.rules
+    androidTestImplementation libs.espresso.intents
+    androidTestImplementation libs.espresso.core
+    androidTestImplementation libs.compose.test.ui.junit4
 
+    debugImplementation libs.compose.test.ui.tooling
+    debugImplementation libs.compose.test.ui.manifest
 }

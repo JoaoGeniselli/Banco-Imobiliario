@@ -2,19 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion sdk.compileVersion
+    compileSdkVersion libs.versions.sdk.compile.get() as int
 
     defaultConfig {
-        minSdkVersion sdk.minVersion
-        targetSdkVersion sdk.targetVersion
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion libs.versions.sdk.min.get() as int
+        targetSdkVersion libs.versions.sdk.target.get() as int
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -23,28 +18,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':domain')
 
-    def room_version = "2.4.1"
+    annotationProcessor libs.room.compiler
 
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-
-    implementation libs.appCompat
-    implementation libs.kotlinCoroutines
-    implementation libs.coroutinesAndroid
-    implementation libs.kotlinCore
     implementation libs.kotlin
+    implementation libs.kotlin.core
+    implementation libs.app.compat
+    implementation libs.kotlin.coroutines
+    implementation libs.coroutines.android
+    implementation libs.room
 
     testImplementation libs.junit
 
-    androidTestImplementation libs.testRunner
-    androidTestImplementation libs.espressoCore
+    androidTestImplementation libs.test.runner
+    androidTestImplementation libs.espresso.core
 }
 
 repositories {

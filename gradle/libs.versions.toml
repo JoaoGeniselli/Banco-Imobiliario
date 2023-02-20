@@ -1,0 +1,71 @@
+[versions]
+sdk-compile = "33"
+sdk-min = "24"
+sdk-target = "33"
+gradle = "3.4.2"
+kotlin = "1.3.61"
+room = "2.4.1"
+koin = "3.3.0"
+constraint-layout = "1.1.3"
+kotlin-coroutines = "1.6.4"
+robolectric = "3.5.1"
+androidx-test-core = "1.2.0"
+mockito = "1.10.19"
+mockk = "1.13.4"
+junit = "4.12"
+test-runner = "1.2.0"
+test-rules = "1.2.0"
+espresso-intents = "3.2.0"
+espresso-core = "3.2.0"
+app-compat = "1.1.0"
+kotlin-core = "1.1.0"
+lifecycle-extensions = "1.1.1"
+recycler-view = "1.1.0"
+compose = "1.3.2"
+material = "1.3.1"
+navigation = "2.5.3"
+lifecycle = "2.3.1"
+
+[libraries]
+kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin" }
+kotlin-core = { module = "androidx.core:core-ktx", version.ref = "kotlin-core" }
+app-compat = { module = "androidx.appcompat:appcompat", version.ref = "app-compat" }
+lifecycle-extensions = { module = "android.arch.lifecycle:extensions", version.ref = "lifecycle-extensions" }
+room = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+constraint-layout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraint-layout" }
+recycler-view = { module = "androidx.recyclerview:recyclerview", version.ref = "recycler-view" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
+test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
+test-rules = { module = "androidx.test:rules", version.ref = "test-rules" }
+junit = { module = "junit:junit", version.ref = "junit" }
+mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test-core" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
+espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espresso-intents" }
+lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "material" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-material-icons-ext = { module = "androidx.compose.material:material-icons-extended", version.ref = "material" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "material" }
+compose-koin = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+compose-nativation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+compose-test-ui-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+compose-test-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-test-ui-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+
+[bundles]
+compose = [
+    "compose-activity",
+    "compose-ui",
+    "compose-material-icons-ext",
+    "compose-ui-tooling-preview",
+    "compose-material",
+    "compose-koin",
+    "compose-nativation"
+]
