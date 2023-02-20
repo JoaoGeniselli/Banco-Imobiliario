@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.operations.transfer.value
+package com.jgeniselli.banco.operations.transfer
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

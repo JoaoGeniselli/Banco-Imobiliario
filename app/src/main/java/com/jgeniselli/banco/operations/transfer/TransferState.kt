@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.operations.transfer.value
+package com.jgeniselli.banco.operations.transfer
 
 import com.jgeniselli.banco.ui.component.PlayerSummary
 

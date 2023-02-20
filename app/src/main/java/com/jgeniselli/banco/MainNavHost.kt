@@ -22,7 +22,7 @@ import com.jgeniselli.banco.game.play.OperationType
 import com.jgeniselli.banco.home.HomeLoader
 import com.jgeniselli.banco.operations.credit.CreditScreen
 import com.jgeniselli.banco.operations.debit.DebitScreen
-import com.jgeniselli.banco.operations.transfer.value.TransferScreen
+import com.jgeniselli.banco.operations.transfer.TransferScreen
 import com.jgeniselli.banco.topbar.TopBarAction
 import com.jgeniselli.banco.topbar.createHistoryTopBarAction
 
