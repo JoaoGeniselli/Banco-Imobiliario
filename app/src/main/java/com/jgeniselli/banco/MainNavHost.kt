@@ -1,6 +1,7 @@
 package com.jgeniselli.banco
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -22,13 +23,16 @@ import com.jgeniselli.banco.home.HomeLoader
 import com.jgeniselli.banco.operations.credit.CreditScreen
 import com.jgeniselli.banco.operations.debit.DebitScreen
 import com.jgeniselli.banco.operations.transfer.value.TransferScreen
+import com.jgeniselli.banco.topbar.TopBarAction
+import com.jgeniselli.banco.topbar.createHistoryTopBarAction
 
 private const val ARG_PLAYER_ID = "ARG_PLAYER_ID"
 
 @Composable
 fun MainNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = HOME
+    startDestination: String = HOME,
+    onChangeActions: (List<TopBarAction>) -> Unit = {}
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
 
@@ -50,6 +54,11 @@ fun MainNavHost(
         }
 
         composable(GAMEPLAY) {
+            SideEffect {
+                onChangeActions(
+                    listOf(createHistoryTopBarAction(navController))
+                )
+            }
             GamePlayScreen(
                 onSelectOperation = { player, operation ->
                     val route = when (operation) {
@@ -66,6 +75,7 @@ fun MainNavHost(
             route = "$CREDIT/{$ARG_PLAYER_ID}",
             arguments = listOf(navArgument(ARG_PLAYER_ID) { type = NavType.IntType })
         ) { entry ->
+            SideEffect { onChangeActions(emptyList()) }
             CreditScreen(
                 playerId = entry.arguments?.getInt(ARG_PLAYER_ID) ?: 0,
                 onOperationDone = { navController.popBackStack() }
@@ -76,6 +86,7 @@ fun MainNavHost(
             route = "$DEBIT/{$ARG_PLAYER_ID}",
             arguments = listOf(navArgument(ARG_PLAYER_ID) { type = NavType.IntType })
         ) { entry ->
+            SideEffect { onChangeActions(emptyList()) }
             DebitScreen(
                 playerId = entry.arguments?.getInt(ARG_PLAYER_ID) ?: 0,
                 onOperationDone = { navController.popBackStack() }
@@ -83,6 +94,7 @@ fun MainNavHost(
         }
 
         composable(HISTORY) {
+            SideEffect { onChangeActions(emptyList()) }
             HistoryScreen()
         }
 
@@ -90,6 +102,7 @@ fun MainNavHost(
             route = "$TRANSFER/{$ARG_PLAYER_ID}",
             arguments = listOf(navArgument(ARG_PLAYER_ID) { type = NavType.IntType })
         ) { entry ->
+            SideEffect { onChangeActions(emptyList()) }
             TransferScreen(
                 playerId = entry.arguments?.getInt(ARG_PLAYER_ID) ?: 0,
                 onOperationDone = { navController.popBackStack() }

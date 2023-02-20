@@ -1,12 +1,15 @@
 package com.jgeniselli.banco.operations.credit
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -14,7 +17,6 @@ import com.jgeniselli.banco.R
 import com.jgeniselli.banco.operations.common.ValueInputShortcuts
 import com.jgeniselli.banco.ui.component.GenericInput
 import com.jgeniselli.banco.ui.component.NumberInput
-import com.jgeniselli.banco.ui.component.ShortcutChip
 import com.jgeniselli.banco.ui.component.toCurrency
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -50,6 +52,7 @@ fun CreditContent(
     onUpdate: (Double) -> Unit
 ) {
     val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
     GenericInput(
         modifier = modifier,
         title = stringResource(R.string.credit_title),
@@ -63,7 +66,10 @@ fun CreditContent(
                 .padding(top = 16.dp)
                 .focusRequester(focusRequester),
             onUpdate = onUpdate,
-            onDone = { if (state.isDoneEnabled) onDone() },
+            onDone = {
+                focusManager.clearFocus()
+                if (state.isDoneEnabled) onDone()
+            },
             value = state.value,
             label = stringResource(R.string.value_input_label)
         )
