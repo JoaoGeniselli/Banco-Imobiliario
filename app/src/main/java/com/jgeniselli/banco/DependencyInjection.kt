@@ -22,23 +22,29 @@ object DependencyInjection {
 
     val mainModule by lazy {
         module {
-            factory { OperationFormatter(androidContext()) }
-            single<GameStorage> { MemoryGameStorage() }
+            //region Core
             single<GameRepository> { GameRepositoryImpl(get()) }
+            factory { HasOngoingGame(get()) }
+            //endregion
 
-            // VIEW MODELS
-            viewModel { HomeViewModel(HasOngoingGame()) }
+            //region Infra
+            single<GameStorage> { MemoryGameStorage() }
+            //endregion
+
+            //region View Model
+            viewModel { HomeViewModel(get()) }
             viewModel { NewGameViewModel(get()) }
             viewModel { GamePlayViewModel(get()) }
             viewModel { (playerId: Int) -> CreditViewModel(playerId, get()) }
             viewModel { (playerId: Int) -> DebitViewModel(playerId, get()) }
             viewModel { (playerId: Int) -> TransferViewModel(playerId, get()) }
             viewModel { HistoryViewModel(get(), get()) }
+            //endregion
 
-            // FORMATTER
+            //region Utility
             factory { CurrencyValueResolver(get()) }
+            factory { OperationFormatter(androidContext()) }
+            //endregion
         }
     }
-
-    private fun initialPlayerCash() = 25000.00
 }

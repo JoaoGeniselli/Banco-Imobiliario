@@ -6,6 +6,7 @@ interface GameStorage {
     val players: StateFlow<List<Player>>
     val history: StateFlow<List<OperationLog>>
 
+    suspend fun isOngoingGameAvailable(): Boolean
     suspend fun clearPlayerList()
     suspend fun addPlayers(players: List<NameAndColor>, balance: Double)
     suspend fun updateBalance(playerId: Int, value: Double)

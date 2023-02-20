@@ -1,6 +1,10 @@
 package com.jgeniselli.banco.core.usecase
 
-class HasOngoingGame {
+import com.jgeniselli.banco.core.repository.GameStorage
 
-    suspend fun invoke(): Boolean = true
+class HasOngoingGame(
+    private val gameStorage: GameStorage
+) {
+
+    suspend fun invoke(): Boolean = gameStorage.isOngoingGameAvailable()
 }

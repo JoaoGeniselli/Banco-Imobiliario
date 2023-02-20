@@ -20,6 +20,8 @@ class MemoryGameStorage : GameStorage {
     private val _history = MutableStateFlow<List<OperationLog>>(emptyList())
     override val history: StateFlow<List<OperationLog>> get() = _history
 
+    override suspend fun isOngoingGameAvailable() = true
+
     override suspend fun clearPlayerList() {
         _players.value = emptyList()
     }

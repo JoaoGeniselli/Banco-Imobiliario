@@ -20,7 +20,7 @@ fun HomeLoader(
     onContinueGame: () -> Unit,
     onNewGame: () -> Unit
 ) {
-    val isContinueGameEnabled = viewModel.isGameAvailable.collectAsState(initial = false)
+    val isContinueGameEnabled = viewModel.isContinueEnabled.collectAsState(initial = false)
     Home(
         onNewGame = onNewGame,
         onContinueGame = onContinueGame,

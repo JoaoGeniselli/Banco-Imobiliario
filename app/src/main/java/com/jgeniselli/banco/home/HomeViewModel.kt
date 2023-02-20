@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class HomeViewModel(
-    private val hasOngoingGame: HasOngoingGame = HasOngoingGame()
+    private val hasOngoingGame: HasOngoingGame
 ) : ViewModel() {
 
-    val isGameAvailable: Flow<Boolean> = flow {
+    val isContinueEnabled: Flow<Boolean> = flow {
         emit(hasOngoingGame.invoke())
     }
 }
