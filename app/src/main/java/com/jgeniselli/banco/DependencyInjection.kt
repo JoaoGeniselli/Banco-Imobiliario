@@ -1,12 +1,14 @@
 package com.jgeniselli.banco
 
 import com.jgeniselli.banco.core.repository.GameRepository
-import com.jgeniselli.banco.core.repository.MemoryGameRepository
+import com.jgeniselli.banco.core.repository.GameRepositoryImpl
+import com.jgeniselli.banco.core.repository.GameStorage
 import com.jgeniselli.banco.core.usecase.HasOngoingGame
 import com.jgeniselli.banco.game.history.HistoryViewModel
 import com.jgeniselli.banco.game.history.OperationFormatter
 import com.jgeniselli.banco.game.play.GamePlayViewModel
 import com.jgeniselli.banco.home.HomeViewModel
+import com.jgeniselli.banco.infra.MemoryGameStorage
 import com.jgeniselli.banco.newgame.NewGameViewModel
 import com.jgeniselli.banco.operations.credit.CreditViewModel
 import com.jgeniselli.banco.operations.debit.DebitViewModel
@@ -21,7 +23,8 @@ object DependencyInjection {
     val mainModule by lazy {
         module {
             factory { OperationFormatter(androidContext()) }
-            single<GameRepository> { MemoryGameRepository() }
+            single<GameStorage> { MemoryGameStorage() }
+            single<GameRepository> { GameRepositoryImpl(get()) }
 
             // VIEW MODELS
             viewModel { HomeViewModel(HasOngoingGame()) }
