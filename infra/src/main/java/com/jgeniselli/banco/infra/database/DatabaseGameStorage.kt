@@ -20,7 +20,10 @@ class DatabaseGameStorage(
         .map { storedPlayers -> storedPlayers.map { entity -> entity.toDomainPlayer() } }
         .stateIn(scope, SharingStarted.Eagerly, listOf())
 
-    override val history: StateFlow<List<OperationLog>> = MutableStateFlow(emptyList())
+    override val history: StateFlow<List<OperationLog>> = historyDao
+        .getAllWithPlayers()
+        .map { logs -> logs.map { it.toDomainOperation() } }
+        .stateIn(scope, SharingStarted.Lazily, listOf())
 
     override suspend fun isOngoingGameAvailable(): Boolean = players.value.isNotEmpty()
 

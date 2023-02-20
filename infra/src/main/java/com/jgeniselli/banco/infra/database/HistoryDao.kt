@@ -18,4 +18,7 @@ interface HistoryDao {
 
     @Query("DELETE FROM history")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM history ")
+    fun getAllWithPlayers(): Flow<List<HistoryWithPlayers>>
 }
