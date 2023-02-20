@@ -19,7 +19,7 @@ fun TitleSubtitleRow(
     modifier: Modifier = Modifier,
     icon: ImageVector,
     title: String,
-    iconColor: Color = Color.LightGray,
+    iconColor: Color = MaterialTheme.colors.secondary,
     subtitle: String
 ) {
     Row(modifier.fillMaxWidth()) {

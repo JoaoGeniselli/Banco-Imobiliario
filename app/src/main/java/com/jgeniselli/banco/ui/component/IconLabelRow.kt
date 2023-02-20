@@ -25,7 +25,7 @@ fun IconLabelRow(
     modifier: Modifier = Modifier,
     icon: ImageVector,
     label: String,
-    color: Color = Color.LightGray
+    color: Color = MaterialTheme.colors.secondary,
 ) {
     Row(modifier.fillMaxWidth()) {
         CircleIcon(

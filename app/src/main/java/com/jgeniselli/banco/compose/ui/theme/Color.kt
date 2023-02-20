@@ -2,10 +2,12 @@ package com.jgeniselli.banco.compose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Primary = Color(0xFF2196f3)
+val PrimaryDark = Color(0xFF0068bf)
+val OnPrimary = Color.White
+
+val Secondary = Color(0xFF9e9e9e)
+val OnSecondary = Color.Black
 
 val PlayerRed = Color(0xffef5350)
 val PlayerGreen = Color(0xff66bb6a)

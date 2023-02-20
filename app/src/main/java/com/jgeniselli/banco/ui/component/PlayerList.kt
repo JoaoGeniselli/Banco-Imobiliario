@@ -30,7 +30,8 @@ fun PlayerList(
             IconLabelRow(
                 modifier = Modifier
                     .background(
-                        if (player.isHighlight) Color.LightGray else MaterialTheme.colors.background
+                        if (player.isHighlight) MaterialTheme.colors.secondary
+                        else MaterialTheme.colors.background
                     )
                     .clickable { onClick(index) },
                 icon = Icons.Default.Person,
@@ -47,7 +48,8 @@ fun PlayerRow(modifier: Modifier = Modifier, player: PlayerSummary, onClick: () 
     IconLabelRow(
         modifier = modifier
             .background(
-                if (player.isHighlight) Color.LightGray else MaterialTheme.colors.background
+                if (player.isHighlight) MaterialTheme.colors.secondary
+                else MaterialTheme.colors.background
             )
             .clickable { onClick() },
         icon = Icons.Default.Person,
