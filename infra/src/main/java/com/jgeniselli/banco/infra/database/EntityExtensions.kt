@@ -10,13 +10,6 @@ fun PlayerEntity.toDomainPlayer() = Player(
     balance = balance ?: 0.0
 )
 
-fun Player.toEntity() = PlayerEntity(
-    id = id,
-    name = name,
-    color = color.toLong(),
-    balance = balance
-)
-
 fun OperationLog.toEntity(): HistoryLogEntity =
     when (this) {
         is OperationLog.Credit -> HistoryLogEntity(

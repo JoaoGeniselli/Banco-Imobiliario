@@ -6,5 +6,5 @@ class HasOngoingGame(
     private val gameStorage: GameStorage
 ) {
 
-    suspend fun invoke(): Boolean = gameStorage.isOngoingGameAvailable()
+    suspend operator fun invoke(): Boolean = gameStorage.isOngoingGameAvailable()
 }

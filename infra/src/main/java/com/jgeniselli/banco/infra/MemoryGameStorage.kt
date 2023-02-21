@@ -1,26 +1,22 @@
 package com.jgeniselli.banco.infra
 
-import com.jgeniselli.banco.core.repository.GameStorage
-import com.jgeniselli.banco.core.repository.NameAndColor
 import com.jgeniselli.banco.core.entities.OperationLog
 import com.jgeniselli.banco.core.entities.Player
+import com.jgeniselli.banco.core.repository.GameStorage
+import com.jgeniselli.banco.core.repository.NameAndColor
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
 internal class MemoryGameStorage : GameStorage {
 
-    private val _players = MutableStateFlow(
-        (1..6).map {
-            Player(it, "Player $it", (0xff9e9e9eL.toULong() and 0xffffffffUL) shl 32, 25000.0)
-        }
-    )
+    private val _players = MutableStateFlow(emptyList<Player>())
     override val players: StateFlow<List<Player>> get() = _players
 
     private val _history = MutableStateFlow<List<OperationLog>>(emptyList())
     override val history: StateFlow<List<OperationLog>> get() = _history
 
-    override suspend fun isOngoingGameAvailable() = true
+    override suspend fun isOngoingGameAvailable() = _players.value.isNotEmpty()
 
     override suspend fun clearPlayerList() {
         _players.value = emptyList()

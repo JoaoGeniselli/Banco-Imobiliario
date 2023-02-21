@@ -34,6 +34,8 @@ dependencies {
     implementation libs.room
 
     testImplementation libs.junit
+    testImplementation libs.mockk
+    testImplementation libs.coroutines.test
 
     androidTestImplementation libs.test.runner
     androidTestImplementation libs.espresso.core
