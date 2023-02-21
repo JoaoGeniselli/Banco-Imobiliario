@@ -42,7 +42,7 @@ internal class GameRepositoryImpl(
         val updatedSourceBalance = source.balance - value
 
         val recipient = playerById(recipientId)
-        val updatedRecipientBalance = source.balance + value
+        val updatedRecipientBalance = recipient.balance + value
 
         storage.run {
             updateBalance(sourceId, updatedSourceBalance)
