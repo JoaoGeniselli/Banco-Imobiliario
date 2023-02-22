@@ -61,6 +61,7 @@ dependencies {
 
     testImplementation libs.robolectric
     testImplementation libs.androidx.test.core
+    testImplementation libs.coroutines.test
     testImplementation libs.mockito
     testImplementation libs.mockk
     testImplementation libs.junit

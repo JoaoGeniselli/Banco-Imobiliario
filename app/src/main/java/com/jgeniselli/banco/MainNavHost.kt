@@ -18,7 +18,7 @@ import com.jgeniselli.banco.Routes.TRANSFER
 import com.jgeniselli.banco.game.history.HistoryScreen
 import com.jgeniselli.banco.game.play.GamePlayScreen
 import com.jgeniselli.banco.game.play.OperationType
-import com.jgeniselli.banco.home.HomeLoader
+import com.jgeniselli.banco.home.HomeScreen
 import com.jgeniselli.banco.newgame.NewGameScreen
 import com.jgeniselli.banco.operations.credit.CreditScreen
 import com.jgeniselli.banco.operations.debit.DebitScreen
@@ -37,7 +37,7 @@ fun MainNavHost(
     NavHost(navController = navController, startDestination = startDestination) {
 
         composable(HOME) {
-            HomeLoader(
+            HomeScreen(
                 onContinueGame = { navController.navigate(GAMEPLAY) { popUpTo(0) } },
                 onNewGame = { navController.navigate(NEW_GAME) }
             )

@@ -18,13 +18,13 @@ import com.jgeniselli.banco.R
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeLoader(
+fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel(),
     onContinueGame: () -> Unit,
     onNewGame: () -> Unit
 ) {
     val isContinueGameEnabled = viewModel.isContinueEnabled.collectAsState(initial = false)
-    Home(
+    HomeContent(
         onNewGame = onNewGame,
         onContinueGame = onContinueGame,
         isContinueGameEnabled = isContinueGameEnabled.value
@@ -32,7 +32,7 @@ fun HomeLoader(
 }
 
 @Composable
-fun Home(
+fun HomeContent(
     modifier: Modifier = Modifier,
     onNewGame: () -> Unit,
     onContinueGame: () -> Unit,
@@ -70,7 +70,7 @@ fun Home(
 @Composable
 private fun PreviewHome() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        Home(
+        HomeContent(
             modifier = Modifier,
             onContinueGame = {},
             onNewGame = {},
