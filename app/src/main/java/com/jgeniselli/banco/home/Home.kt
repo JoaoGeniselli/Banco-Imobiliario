@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
@@ -41,7 +42,12 @@ fun Home(
 
         Spacer(modifier = Modifier.fillMaxHeight(.25f))
 
-        Text(text = stringResource(id = R.string.app_name), style = MaterialTheme.typography.h3)
+        Text(
+            modifier = Modifier.padding(horizontal = 40.dp),
+            text = stringResource(id = R.string.app_name),
+            style = MaterialTheme.typography.h3,
+            textAlign = TextAlign.Center
+        )
 
         Spacer(modifier = Modifier.weight(1f))
 
