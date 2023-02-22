@@ -11,10 +11,8 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jgeniselli.banco.R
 import com.jgeniselli.banco.ui.component.TitleSubtitleRow
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel

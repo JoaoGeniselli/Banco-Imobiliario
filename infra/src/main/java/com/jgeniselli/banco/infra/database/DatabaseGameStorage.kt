@@ -1,12 +1,15 @@
 package com.jgeniselli.banco.infra.database
 
-import com.jgeniselli.banco.core.repository.GameStorage
-import com.jgeniselli.banco.core.repository.NameAndColor
 import com.jgeniselli.banco.core.entities.OperationLog
 import com.jgeniselli.banco.core.entities.Player
+import com.jgeniselli.banco.core.repository.GameStorage
+import com.jgeniselli.banco.core.repository.NameAndColor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class DatabaseGameStorage(

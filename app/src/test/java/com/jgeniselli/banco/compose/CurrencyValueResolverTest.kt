@@ -4,7 +4,7 @@ import com.jgeniselli.banco.ui.component.CurrencyValueResolver
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.text.NumberFormat
