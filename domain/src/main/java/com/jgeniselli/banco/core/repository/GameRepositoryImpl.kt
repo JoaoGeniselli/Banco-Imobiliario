@@ -20,7 +20,7 @@ internal class GameRepositoryImpl(
     }
 
     override suspend fun credit(playerId: Int, value: Double) {
-        val player = playerById(playerId)
+        val player = this.playerById(playerId)
         val updatedBalance = player.balance + value
         storage.run {
             updateBalance(playerId, updatedBalance)
@@ -29,7 +29,7 @@ internal class GameRepositoryImpl(
     }
 
     override suspend fun debit(playerId: Int, value: Double) {
-        val player = playerById(playerId)
+        val player = this.playerById(playerId)
         val updatedBalance = player.balance - value
         storage.run {
             updateBalance(playerId, updatedBalance)
@@ -38,10 +38,10 @@ internal class GameRepositoryImpl(
     }
 
     override suspend fun transfer(sourceId: Int, recipientId: Int, value: Double) {
-        val source = playerById(sourceId)
+        val source = this.playerById(sourceId)
         val updatedSourceBalance = source.balance - value
 
-        val recipient = playerById(recipientId)
+        val recipient = this.playerById(recipientId)
         val updatedRecipientBalance = recipient.balance + value
 
         storage.run {
@@ -51,5 +51,5 @@ internal class GameRepositoryImpl(
         }
     }
 
-    private fun playerById(id: Int) = players.value.first { it.id == id }
+    override fun playerById(id: Int): Player = players.value.first { it.id == id }
 }

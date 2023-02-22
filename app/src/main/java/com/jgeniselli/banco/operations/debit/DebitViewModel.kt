@@ -14,7 +14,7 @@ class DebitViewModel(
     private val gameRepository: GameRepository,
 ) : ViewModel() {
 
-    private val player = gameRepository.players.value.first { it.id == playerId }
+    private val player = gameRepository.playerById(playerId)
 
     private val _state = MutableStateFlow(DebitState(player.balance))
     val state: StateFlow<DebitState> get() = _state

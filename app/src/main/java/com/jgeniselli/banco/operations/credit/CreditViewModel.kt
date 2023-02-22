@@ -14,7 +14,7 @@ class CreditViewModel(
     private val gameRepository: GameRepository,
 ) : ViewModel() {
 
-    private val player = gameRepository.players.value.first { it.id == playerId }
+    private val player = gameRepository.playerById(playerId)
 
     private val _state = MutableStateFlow(CreditState(player.balance))
     val state: StateFlow<CreditState> get() = _state

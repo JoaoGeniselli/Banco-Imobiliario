@@ -6,6 +6,7 @@ import com.jgeniselli.banco.operations.MainDispatcherRule
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
@@ -24,20 +25,26 @@ class CreditViewModelTest {
     @Before
     fun setup() {
         gameRepository = mockk(relaxed = true) {
-            every { players.value } returns listOf(
-                Player(1, "john", 1uL, 0.0)
-            )
+            val player = Player(1, "john", 1uL, 500.0)
+            every { players.value } returns listOf(player)
+            every { playerById(playerId) } returns player
         }
         viewModel = CreditViewModel(playerId, gameRepository)
     }
 
     @Test
-    fun `test update value`() = runBlocking {
+    fun `test initial state`() {
         with(viewModel.state.value) {
             assertEquals(0.0, value, .001)
+            assertEquals(500.0, balance, .001)
             assertFalse(isDoneEnabled)
+            assertFalse(isOperationDone)
         }
+        verify { gameRepository.playerById(playerId) }
+    }
 
+    @Test
+    fun `test update value`() = runBlocking {
         viewModel.updateValue(500.31)
 
         with(viewModel.state.value) {

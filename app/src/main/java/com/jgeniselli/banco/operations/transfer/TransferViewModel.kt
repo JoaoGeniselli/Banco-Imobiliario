@@ -17,7 +17,7 @@ class TransferViewModel(
     private val gameRepository: GameRepository
 ) : ViewModel() {
 
-    private val sourcePlayer = gameRepository.players.value.first { it.id == playerId }
+    private val sourcePlayer = gameRepository.playerById(playerId)
     private val selectedPlayerIndex = MutableStateFlow<Int?>(null)
     private val selectedValue = MutableStateFlow(0.0)
     private val isOperationDone = MutableStateFlow(false)

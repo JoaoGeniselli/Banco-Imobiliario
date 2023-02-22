@@ -19,4 +19,6 @@ interface GameRepository {
     suspend fun credit(playerId: Int, value: Double)
     suspend fun debit(playerId: Int, value: Double)
     suspend fun transfer(sourceId: Int, recipientId: Int, value: Double)
+
+    fun playerById(id: Int): Player
 }
