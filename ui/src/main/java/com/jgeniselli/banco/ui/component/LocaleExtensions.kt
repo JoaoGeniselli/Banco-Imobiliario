@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.common
+package com.jgeniselli.banco.ui.component
 
 import java.util.*
 

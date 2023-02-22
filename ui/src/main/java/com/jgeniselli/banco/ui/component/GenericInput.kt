@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jgeniselli.banco.R
+import com.jgeniselli.banco.ui.R
 
 @Composable
 fun GenericInput(
@@ -20,7 +20,7 @@ fun GenericInput(
     title: String,
     subtitle: String,
     actionEnabled: Boolean,
-    actionLabel: String = stringResource(id = R.string.action_continue),
+    actionLabel: String = stringResource(id = R.string.generic_input_label),
     onAction: () -> Unit,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -44,7 +44,6 @@ fun GenericInput(
             Text(text = actionLabel)
         }
     }
-
 }
 
 @Preview(showBackground = true)

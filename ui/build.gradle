@@ -1,23 +1,20 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
-    id 'org.jetbrains.kotlinx.kover' version '0.6.1'
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
+    namespace 'com.jgeniselli.banco.ui'
     compileSdkVersion libs.versions.sdk.compile.get() as int
+
     defaultConfig {
-        applicationId "com.jgeniselli.banco"
         minSdkVersion libs.versions.sdk.min.get() as int
         targetSdkVersion libs.versions.sdk.target.get() as int
-        versionCode 1
-        versionName "1.0"
-        vectorDrawables {
-            useSupportLibrary true
-        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -45,10 +42,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':domain')
-    implementation project(path: ':infra')
-    implementation project(path: ':ui')
 
     implementation libs.kotlin
     implementation libs.app.compat
