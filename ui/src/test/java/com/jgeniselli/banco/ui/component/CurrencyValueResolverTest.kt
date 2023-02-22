@@ -5,6 +5,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 import java.text.NumberFormat
@@ -43,6 +44,15 @@ class CurrencyValueResolverTest {
 
         assertEquals(0.02, resolver.resolve("$ 0.02", "$ 0.02"), .001)
         verify { format.parse("$ 0.02") }
+    }
+
+    @Test
+    fun `test error`() {
+        every { format.parse("x") } returns null
+
+        assertThrows(NumberFormatException::class.java) {
+            resolver.resolve("$ 0.00", "x")
+        }
     }
 
 

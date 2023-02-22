@@ -52,6 +52,7 @@ koverMerged {
                     "*Activity",
                     "*Activity\$*",
                     "*.databinding.*",
+                    "com.jgeniselli.banco.ui.theme.*",
                     "com.jgeniselli.banco.ui.component.*",
                     "com.jgeniselli.banco.*.BuildConfig",
                     "*Module*"
