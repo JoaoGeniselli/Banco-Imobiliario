@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.compose.ui.theme
+package com.jgeniselli.banco.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

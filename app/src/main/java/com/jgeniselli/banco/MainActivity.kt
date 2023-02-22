@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.jgeniselli.banco.compose.ui.theme.BancoImobiliarioTheme
+import com.jgeniselli.banco.ui.theme.BancoImobiliarioTheme
 import com.jgeniselli.banco.topbar.TopBarAction
 import com.jgeniselli.banco.topbar.TopBarActionButton
 
