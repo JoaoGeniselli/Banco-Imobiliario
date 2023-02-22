@@ -10,8 +10,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jgeniselli.banco.R
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -39,14 +41,14 @@ fun Home(
 
         Spacer(modifier = Modifier.fillMaxHeight(.25f))
 
-        Text(text = "Banker App", style = MaterialTheme.typography.h3)
+        Text(text = stringResource(id = R.string.app_name), style = MaterialTheme.typography.h3)
 
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = onNewGame
-        ) { Text(text = "New Game") }
+        ) { Text(text = stringResource(R.string.home_option_new_game)) }
 
         Button(
             modifier = Modifier
@@ -54,7 +56,7 @@ fun Home(
                 .fillMaxWidth(),
             enabled = isContinueGameEnabled,
             onClick = onContinueGame
-        ) { Text(text = "Continue Game") }
+        ) { Text(text = stringResource(R.string.home_option_continue_game)) }
     }
 }
 

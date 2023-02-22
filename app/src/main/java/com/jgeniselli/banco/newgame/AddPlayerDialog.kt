@@ -12,11 +12,13 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.jgeniselli.banco.R
 
 const val NAME_MINIMUM_LENGTH = 2
 
@@ -48,7 +50,10 @@ fun AddPlayerDialogContent(
     val focusManager = LocalFocusManager.current
 
     Column(modifier.fillMaxWidth()) {
-        Text(text = "Insert the Player's name", style = MaterialTheme.typography.h6)
+        Text(
+            text = stringResource(R.string.insert_player_name),
+            style = MaterialTheme.typography.h6
+        )
         OutlinedTextField(
             modifier = Modifier
                 .padding(top = 16.dp)
@@ -66,7 +71,7 @@ fun AddPlayerDialogContent(
                     if (isValidName(name, forbiddenNames)) onDone(name)
                 }
             ),
-            label = { Text(text = "Name") }
+            label = { Text(text = stringResource(R.string.label_name)) }
         )
 
         Button(
@@ -76,7 +81,7 @@ fun AddPlayerDialogContent(
             enabled = isValidName(name, forbiddenNames),
             onClick = { onDone(name) }
         ) {
-            Text(text = "OK")
+            Text(text = stringResource(R.string.action_ok))
         }
 
         LaunchedEffect(Unit) { focusRequester.requestFocus() }

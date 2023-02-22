@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Banco Imobiliário</string>
+    <string name="app_name">Banker App</string>
     <string name="title_activity_compose">@string/app_name</string>
     <string name="credit_title">Credit Value</string>
     <string name="current_balance">Current balance %1s</string>
@@ -11,4 +11,12 @@
     <string name="history_transfer">From %1s to %2s</string>
     <string name="transfer_title">Transaction Value</string>
     <string name="recipient">Recipient</string>
+    <string name="action_continue">Continue</string>
+    <string name="home_option_new_game">New Game</string>
+    <string name="home_option_continue_game">Continue Game</string>
+    <string name="add_player">Add Player</string>
+    <string name="action_start">Start</string>
+    <string name="insert_player_name">Insert the Player\'s name</string>
+    <string name="label_name">Name</string>
+    <string name="action_ok">OK</string>
 </resources>

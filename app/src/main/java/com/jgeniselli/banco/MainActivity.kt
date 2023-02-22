@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.jgeniselli.banco.compose.ui.theme.BancoImobiliarioTheme
@@ -43,28 +44,15 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun TopBar(actions: List<TopBarAction>) {
     TopAppBar(
-        title = { Text("Banker App") },
+        title = { Text(stringResource(id = R.string.app_name)) },
         actions = {
             actions.forEach { TopBarActionButton(action = it) }
         }
     )
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
 @Preview
 @Composable
 fun PreviewTopBar() {
     TopBar(listOf())
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    BancoImobiliarioTheme {
-        Greeting("Android")
-    }
 }

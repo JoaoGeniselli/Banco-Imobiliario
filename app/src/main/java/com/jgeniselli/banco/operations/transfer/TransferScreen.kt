@@ -135,7 +135,7 @@ private fun ContinueButton(
         enabled = isEnabled,
         onClick = onClick
     ) {
-        Text(text = "Continue")
+        Text(text = stringResource(R.string.action_continue))
     }
 }
 

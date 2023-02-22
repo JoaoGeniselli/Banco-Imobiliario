@@ -8,8 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jgeniselli.banco.R
 import com.jgeniselli.banco.ui.component.PlayerList
 import com.jgeniselli.banco.ui.component.PlayerSummary
 import org.koin.androidx.compose.koinViewModel
@@ -71,7 +73,7 @@ fun NewGameContent(
                 onClick = onAddPlayerClick,
                 enabled = uiState.canAddNewPlayer
             ) {
-                Text(text = "Add Player")
+                Text(text = stringResource(R.string.add_player))
             }
 
             Button(
@@ -81,7 +83,7 @@ fun NewGameContent(
                 onClick = onStartClick,
                 enabled = uiState.isGameStartAllowed
             ) {
-                Text(text = "Start")
+                Text(text = stringResource(R.string.action_start))
             }
         }
     }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Banco Imobiliário</string>
+    <string name="title_activity_compose">@string/app_name</string>
+    <string name="credit_title">Creditar</string>
+    <string name="current_balance">Saldo atual %1s</string>
+    <string name="value_input_label">Valor da operação</string>
+    <string name="credit_operation_label">Crédito</string>
+    <string name="debit_operation_label">Débito</string>
+    <string name="transfer_operation_label">Transferência</string>
+    <string name="debit_title">Debitar</string>
+    <string name="history_transfer">De %1s para %2s</string>
+    <string name="transfer_title">Transferir</string>
+    <string name="recipient">Destinatário</string>
+    <string name="action_continue">Continuar</string>
+    <string name="home_option_new_game">Novo Jogo</string>
+    <string name="home_option_continue_game">Continuar Jogo Anterior</string>
+    <string name="add_player">Adicionar Jogador</string>
+    <string name="action_start">Iniciar</string>
+    <string name="insert_player_name">Insira o nome do jogador</string>
+    <string name="label_name">Nome</string>
+    <string name="action_ok">OK</string>
+</resources>
