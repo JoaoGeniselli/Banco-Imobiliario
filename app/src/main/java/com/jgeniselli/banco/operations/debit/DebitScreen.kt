@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
-import com.jgeniselli.banco.operations.common.ValueInputShortcuts
+import com.jgeniselli.banco.operations.common.component.ValueInputShortcuts
 import com.jgeniselli.banco.ui.component.GenericInput
 import com.jgeniselli.banco.ui.component.NumberInput
 import com.jgeniselli.banco.ui.toolbox.toCurrency

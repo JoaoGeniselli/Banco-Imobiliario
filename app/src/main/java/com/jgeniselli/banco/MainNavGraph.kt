@@ -29,7 +29,7 @@ import com.jgeniselli.banco.topbar.createHistoryTopBarAction
 private const val ARG_PLAYER_ID = "ARG_PLAYER_ID"
 
 @Composable
-fun MainNavHost(
+fun MainNavGraph(
     navController: NavHostController = rememberNavController(),
     startDestination: String = HOME,
     onChangeActions: (List<TopBarAction>) -> Unit = {}

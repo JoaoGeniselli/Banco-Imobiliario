@@ -42,19 +42,21 @@ koverMerged {
     filters {
         classes {
             excludes.addAll(
+                    "*Application*",
+                    "*DependencyInjection*",
+                    "*NavGraph*",
+                    "*Routes*",
                     "*Screen*",
                     "*ComposableSingletons*",
-                    "*Dialog*",
-                    "*BottomSheet*",
                     "*_Impl*",
-                    "*Fragment",
+                    "*Fragment*",
                     "*Fragment\$*",
-                    "*Activity",
+                    "*Activity*",
                     "*Activity\$*",
                     "*.databinding.*",
                     "com.jgeniselli.banco.ui.theme.*",
-                    "com.jgeniselli.banco.ui.component.*",
-                    "com.jgeniselli.banco.*.BuildConfig",
+                    "*.component.*",
+                    "com.jgeniselli.banco.*BuildConfig",
                     "*Module*"
             )
         }

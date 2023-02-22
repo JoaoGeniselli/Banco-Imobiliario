@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.newgame
+package com.jgeniselli.banco.newgame.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

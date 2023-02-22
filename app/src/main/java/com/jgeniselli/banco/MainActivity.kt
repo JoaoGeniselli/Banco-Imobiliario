@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                             TopBar(actions = actions)
                         }
                     ) { _ ->
-                        MainNavHost(
+                        MainNavGraph(
                             navController = navController,
                             onChangeActions = { actions = it }
                         )

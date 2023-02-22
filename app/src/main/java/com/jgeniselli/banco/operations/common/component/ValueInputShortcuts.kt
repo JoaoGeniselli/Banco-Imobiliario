@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.operations.common
+package com.jgeniselli.banco.operations.common.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

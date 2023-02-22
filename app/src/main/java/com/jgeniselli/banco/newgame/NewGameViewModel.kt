@@ -45,7 +45,8 @@ class NewGameViewModel(
 
     fun onStartGame() {
         viewModelScope.launch {
-            gameRepository.startGame(_uiState.value.players.map { it.name to it.color.value })
+            val mapped = _uiState.value.players.map { it.name to it.color.value }
+            gameRepository.startGame(mapped)
             _uiState.update { it.copy(isGameStarted = true) }
         }
     }
