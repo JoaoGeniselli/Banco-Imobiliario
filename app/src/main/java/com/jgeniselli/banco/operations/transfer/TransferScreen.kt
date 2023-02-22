@@ -21,7 +21,7 @@ import com.jgeniselli.banco.operations.common.ValueInputShortcuts
 import com.jgeniselli.banco.ui.component.NumberInput
 import com.jgeniselli.banco.ui.component.PlayerRow
 import com.jgeniselli.banco.ui.component.PlayerSummary
-import com.jgeniselli.banco.ui.component.toCurrency
+import com.jgeniselli.banco.ui.toolbox.toCurrency
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 

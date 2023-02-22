@@ -11,7 +11,7 @@ import com.jgeniselli.banco.newgame.NewGameViewModel
 import com.jgeniselli.banco.operations.credit.CreditViewModel
 import com.jgeniselli.banco.operations.debit.DebitViewModel
 import com.jgeniselli.banco.operations.transfer.TransferViewModel
-import com.jgeniselli.banco.ui.component.CurrencyValueResolver
+import com.jgeniselli.banco.ui.toolbox.CurrencyValueResolver
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlinx.kover' version libs.versions.kover
 }
 
 android {
@@ -66,4 +67,12 @@ dependencies {
 
     debugImplementation libs.compose.test.ui.tooling
     debugImplementation libs.compose.test.ui.manifest
+}
+
+kover {
+    filters {
+        classes {
+            excludes.addAll("com.jgeniselli.banco.ui.component")
+        }
+    }
 }

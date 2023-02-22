@@ -1,5 +1,6 @@
 package com.jgeniselli.banco.ui.component
 
+import com.jgeniselli.banco.ui.toolbox.CurrencyValueResolver
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

@@ -3,7 +3,7 @@ package com.jgeniselli.banco.game.play
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import com.jgeniselli.banco.core.repository.GameRepository
-import com.jgeniselli.banco.ui.component.toCurrency
+import com.jgeniselli.banco.ui.toolbox.toCurrency
 import kotlinx.coroutines.flow.map
 
 class GamePlayViewModel(

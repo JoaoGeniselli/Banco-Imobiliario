@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
+import com.jgeniselli.banco.ui.toolbox.toCurrency
 import kotlin.math.abs
 
 @OptIn(ExperimentalMaterialApi::class)

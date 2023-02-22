@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.ui.component
+package com.jgeniselli.banco.ui.toolbox
 
 import java.util.*
 
