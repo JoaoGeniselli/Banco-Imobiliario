@@ -19,6 +19,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'org.jetbrains.kotlinx.kover' version "0.6.1"
+}
+
 allprojects {
     repositories {
         google()
@@ -30,4 +34,25 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+koverMerged {
+    enable()
+
+    filters {
+        classes {
+            excludes.addAll(
+                    "*Screen*",
+                    "*ComposableSingletons*",
+                    "*Dialog*",
+                    "*BottomSheet*",
+                    "*Fragment",
+                    "*Fragment\$*",
+                    "*Activity",
+                    "*Activity\$*",
+                    "*.databinding.*",
+                    "com.jgeniselli.banco.core.BuildConfig"
+            )
+        }
+    }
 }

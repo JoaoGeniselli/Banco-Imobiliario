@@ -1,6 +1,9 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android-extensions'
+    id 'kotlin-android'
+    id 'org.jetbrains.kotlinx.kover' version '0.6.1'
+}
 
 android {
     compileSdkVersion libs.versions.sdk.compile.get() as int
@@ -32,4 +35,10 @@ dependencies {
 
 repositories {
     mavenCentral()
+}
+
+kover {
+    instrumentation {
+        excludeTasks.add "testReleaseUnitTest"
+    }
 }
