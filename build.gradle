@@ -47,6 +47,7 @@ koverMerged {
                     "*NavGraph*",
                     "*Routes*",
                     "*Screen*",
+                    "*Database*",
                     "*ComposableSingletons*",
                     "*_Impl*",
                     "*Fragment*",

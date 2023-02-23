@@ -11,8 +11,8 @@ const val LOG_TYPE_TRANSFER = "T"
 @Entity(tableName = "history")
 data class HistoryLogEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    @ColumnInfo(name = "type") val type: String?,
-    @ColumnInfo(name = "source_id") val sourceId: Int?,
+    @ColumnInfo(name = "type") val type: String,
+    @ColumnInfo(name = "source_id") val sourceId: Int,
     @ColumnInfo(name = "recipient_id") val recipientId: Int?,
-    @ColumnInfo(name = "value") val value: Double?,
+    @ColumnInfo(name = "value") val value: Double,
 )

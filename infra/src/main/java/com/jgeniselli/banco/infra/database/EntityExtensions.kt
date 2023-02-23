@@ -5,9 +5,9 @@ import com.jgeniselli.banco.core.entity.Player
 
 fun PlayerEntity.toDomainPlayer() = Player(
     id = id,
-    name = name.orEmpty(),
-    color = color?.toULong() ?: 0uL,
-    balance = balance ?: 0.0
+    name = name,
+    color = color.toULong(),
+    balance = balance
 )
 
 fun OperationLog.toEntity(): HistoryLogEntity =
@@ -37,12 +37,12 @@ fun OperationLog.toEntity(): HistoryLogEntity =
 
 fun HistoryWithPlayers.toDomainOperation() =
     when (this.history.type) {
-        LOG_TYPE_CREDIT -> OperationLog.Credit(source.toDomainPlayer(), history.value ?: 0.0)
-        LOG_TYPE_DEBIT -> OperationLog.Debit(source.toDomainPlayer(), history.value ?: 0.0)
+        LOG_TYPE_CREDIT -> OperationLog.Credit(source.toDomainPlayer(), history.value)
+        LOG_TYPE_DEBIT -> OperationLog.Debit(source.toDomainPlayer(), history.value)
         LOG_TYPE_TRANSFER -> OperationLog.Transfer(
             source.toDomainPlayer(),
             recipient!!.toDomainPlayer(),
-            history.value ?: 0.0
+            history.value
         )
         else -> throw Error("Unknown type")
     }
