@@ -2,6 +2,8 @@ package com.jgeniselli.banco.infra.database
 
 import com.jgeniselli.banco.core.entity.OperationLog
 import com.jgeniselli.banco.core.entity.Player
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
 import org.junit.Test
@@ -49,7 +51,7 @@ class EntityExtensionsKtTest {
         val credit = HistoryLogEntity(0, LOG_TYPE_CREDIT, 10, null, 85.0)
         val debit = HistoryLogEntity(0, LOG_TYPE_DEBIT, 10, null, 40.0)
         val transfer = HistoryLogEntity(0, LOG_TYPE_TRANSFER, 10, 20, 25.0)
-        val invalid = HistoryLogEntity(0, "J", 10, null, 15.0)
+        val invalid = HistoryLogEntity(0, "", 10, null, 15.0)
 
         assertEquals(
             OperationLog.Credit(source.toDomainPlayer(), 85.0),
@@ -70,7 +72,7 @@ class EntityExtensionsKtTest {
             HistoryWithPlayers(transfer, source, null).toDomainOperation()
         }
 
-        assertThrows(Error::class.java) {
+        assertThrows("Unknown Type", Error::class.java) {
             HistoryWithPlayers(invalid, source, null).toDomainOperation()
         }
     }

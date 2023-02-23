@@ -1,5 +1,6 @@
 package com.jgeniselli.banco.newgame
 
+import com.jgeniselli.banco.core.repository.DEFAULT_INITIAL_BALANCE
 import com.jgeniselli.banco.core.repository.GameRepository
 import com.jgeniselli.banco.operations.MainDispatcherRule
 import com.jgeniselli.banco.ui.component.PlayerSummary
@@ -78,13 +79,16 @@ class NewGameViewModelTest {
 
     @Test
     fun `test start game`() {
-        viewModel.onAddNewPlayer("1")
-        viewModel.onAddNewPlayer("2")
-        viewModel.onStartGame()
+        viewModel.run {
+            onAddNewPlayer("1")
+            onAddNewPlayer("2")
+            onStartGame()
+        }
 
         coVerify {
             repository.startGame(
-                viewModel.uiState.value.players.map { it.name to it.color.value }
+                viewModel.uiState.value.players.map { it.name to it.color.value },
+                DEFAULT_INITIAL_BALANCE
             )
         }
 
@@ -97,5 +101,31 @@ class NewGameViewModelTest {
             assertEquals(PlayerSummary("1", PlayerRed, false), players[0])
             assertEquals(PlayerSummary("2", PlayerBlue, false), players[1])
         }
+    }
+
+    @Test
+    fun `test add players - too many players`() {
+        viewModel.run {
+            onAddNewPlayer("1")
+            onAddNewPlayer("2")
+            onAddNewPlayer("3")
+            onAddNewPlayer("4")
+            onAddNewPlayer("5")
+            onAddNewPlayer("6")
+        }
+
+        assertThrows(Error::class.java) {
+            viewModel.onAddNewPlayer("7")
+        }
+    }
+
+    @Test
+    fun `test start game - less than minimum player amount`() {
+        viewModel.run {
+            onAddNewPlayer("1")
+            onStartGame()
+        }
+
+        coVerify(exactly = 0) { repository.startGame(any()) }
     }
 }

@@ -55,6 +55,17 @@ class DebitViewModelTest {
     }
 
     @Test
+    fun `test update value - invalid`() = runBlocking {
+        viewModel.updateValue(-10.0)
+
+        with(viewModel.state.value) {
+            assertEquals(0.0, value, .001)
+            assertFalse(isDoneEnabled)
+            assertFalse(isOperationDone)
+        }
+    }
+
+    @Test
     fun `test shortcut`() = runBlocking {
         with(viewModel.state.value) {
             assertEquals(0.0, value, .001)
@@ -74,6 +85,16 @@ class DebitViewModelTest {
             assertEquals(50.0, value, .001)
             assertTrue(isDoneEnabled)
             assertFalse(isOperationDone)
+        }
+    }
+
+    @Test
+    fun `test shortcut - invalid`() = runBlocking {
+        viewModel.onShortcut(-10.0)
+
+        with(viewModel.state.value) {
+            assertEquals(0.0, value, .001)
+            assertFalse(isDoneEnabled)
         }
     }
 

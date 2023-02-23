@@ -21,7 +21,8 @@ class DebitViewModel(
 
     fun updateValue(value: Double) {
         _state.update {
-            it.copy(value = value, isDoneEnabled = value > 0.0)
+            val updatedValue = max(value, 0.0)
+            it.copy(value = updatedValue, isDoneEnabled = updatedValue > 0.0)
         }
     }
 

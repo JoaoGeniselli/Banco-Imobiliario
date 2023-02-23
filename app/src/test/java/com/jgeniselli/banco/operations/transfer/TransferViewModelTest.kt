@@ -121,4 +121,18 @@ class TransferViewModelTest {
             assertTrue(isOperationDone)
         }
     }
+
+    @Test
+    fun `test done without select recipient`() = runTest {
+        with(viewModel) {
+            updateValue(250.0)
+            onDone()
+        }
+
+        coVerify(exactly = 0) { gameRepository.transfer(any(), any(), any()) }
+
+        with(viewModel.uiState.first()) {
+            assertFalse(isOperationDone)
+        }
+    }
 }

@@ -55,6 +55,17 @@ class CreditViewModelTest {
     }
 
     @Test
+    fun `test update value - invalid`() = runBlocking {
+        viewModel.updateValue(-10.0)
+
+        with(viewModel.state.value) {
+            assertEquals(0.0, value, .001)
+            assertFalse(isDoneEnabled)
+            assertFalse(isOperationDone)
+        }
+    }
+
+    @Test
     fun `test shortcut`() = runBlocking {
         with(viewModel.state.value) {
             assertEquals(0.0, value, .001)
@@ -78,6 +89,16 @@ class CreditViewModelTest {
     }
 
     @Test
+    fun `test shortcut - invalid`() = runBlocking {
+        viewModel.onShortcut(-50.0)
+
+        with(viewModel.state.value) {
+            assertEquals(0.0, value, .001)
+            assertFalse(isDoneEnabled)
+        }
+    }
+
+    @Test
     fun `test commit operation`() = runBlocking {
         with(viewModel) {
             updateValue(250.5)
@@ -94,6 +115,4 @@ class CreditViewModelTest {
             assertTrue(isOperationDone)
         }
     }
-
-
 }

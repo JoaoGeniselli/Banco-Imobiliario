@@ -3,6 +3,7 @@ package com.jgeniselli.banco.newgame
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jgeniselli.banco.core.repository.DEFAULT_INITIAL_BALANCE
 import com.jgeniselli.banco.core.repository.GameRepository
 import com.jgeniselli.banco.ui.component.PlayerSummary
 import com.jgeniselli.banco.ui.theme.*
@@ -29,6 +30,7 @@ class NewGameViewModel(
     val uiState: StateFlow<NewGameUiState> get() = _uiState
 
     fun onAddNewPlayer(name: String) {
+        if (availableColors.isEmpty()) throw Error("Too many players")
         _uiState.update { old ->
             val players = old.players + PlayerSummary(
                 name,
@@ -45,8 +47,10 @@ class NewGameViewModel(
 
     fun onStartGame() {
         viewModelScope.launch {
-            val mapped = _uiState.value.players.map { it.name to it.color.value }
-            gameRepository.startGame(mapped)
+            val mapped = _uiState.value.players
+                .map { it.name to it.color.value }
+                .takeIf { it.size >= MIN_PLAYERS } ?: return@launch
+            gameRepository.startGame(mapped, DEFAULT_INITIAL_BALANCE)
             _uiState.update { it.copy(isGameStarted = true) }
         }
     }
