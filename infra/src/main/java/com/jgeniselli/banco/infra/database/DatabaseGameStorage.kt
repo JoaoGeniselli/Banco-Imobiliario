@@ -1,7 +1,7 @@
 package com.jgeniselli.banco.infra.database
 
-import com.jgeniselli.banco.core.entities.OperationLog
-import com.jgeniselli.banco.core.entities.Player
+import com.jgeniselli.banco.core.entity.OperationLog
+import com.jgeniselli.banco.core.entity.Player
 import com.jgeniselli.banco.core.repository.GameStorage
 import com.jgeniselli.banco.core.repository.NameAndColor
 import kotlinx.coroutines.CoroutineScope

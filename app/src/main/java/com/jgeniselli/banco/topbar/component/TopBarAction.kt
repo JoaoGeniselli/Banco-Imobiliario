@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.topbar
+package com.jgeniselli.banco.topbar.component
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

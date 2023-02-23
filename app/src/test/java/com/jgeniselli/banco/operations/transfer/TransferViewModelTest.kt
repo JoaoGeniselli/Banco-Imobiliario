@@ -1,7 +1,7 @@
 package com.jgeniselli.banco.operations.transfer
 
 import androidx.compose.ui.graphics.Color
-import com.jgeniselli.banco.core.entities.Player
+import com.jgeniselli.banco.core.entity.Player
 import com.jgeniselli.banco.core.repository.GameRepository
 import com.jgeniselli.banco.operations.MainDispatcherRule
 import com.jgeniselli.banco.ui.component.PlayerSummary

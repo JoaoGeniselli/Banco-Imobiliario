@@ -2,8 +2,8 @@ package com.jgeniselli.banco.game.history
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import com.jgeniselli.banco.core.entities.OperationLog
-import com.jgeniselli.banco.core.entities.Player
+import com.jgeniselli.banco.core.entity.OperationLog
+import com.jgeniselli.banco.core.entity.Player
 import com.jgeniselli.banco.core.repository.GameRepository
 import io.mockk.every
 import io.mockk.mockk

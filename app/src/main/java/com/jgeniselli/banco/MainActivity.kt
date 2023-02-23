@@ -11,8 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.jgeniselli.banco.ui.theme.BancoImobiliarioTheme
-import com.jgeniselli.banco.topbar.TopBarAction
-import com.jgeniselli.banco.topbar.TopBarActionButton
+import com.jgeniselli.banco.topbar.component.TopBarAction
+import com.jgeniselli.banco.topbar.component.TopBarActionButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

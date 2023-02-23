@@ -1,7 +1,7 @@
 package com.jgeniselli.banco.infra
 
-import com.jgeniselli.banco.core.entities.OperationLog
-import com.jgeniselli.banco.core.entities.Player
+import com.jgeniselli.banco.core.entity.OperationLog
+import com.jgeniselli.banco.core.entity.Player
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before

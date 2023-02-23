@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.play
+package com.jgeniselli.banco.core.entity
 
 enum class OperationType {
     TRANSFER,

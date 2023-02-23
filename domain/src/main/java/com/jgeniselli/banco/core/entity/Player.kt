@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.core.entities
+package com.jgeniselli.banco.core.entity
 
 data class Player(
     val id: Int,

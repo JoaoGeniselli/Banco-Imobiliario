@@ -1,6 +1,6 @@
 package com.jgeniselli.banco.operations.debit
 
-import com.jgeniselli.banco.core.entities.Player
+import com.jgeniselli.banco.core.entity.Player
 import com.jgeniselli.banco.core.repository.GameRepository
 import com.jgeniselli.banco.operations.MainDispatcherRule
 import io.mockk.coVerify

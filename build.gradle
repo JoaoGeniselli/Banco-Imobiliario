@@ -56,6 +56,7 @@ koverMerged {
                     "*.databinding.*",
                     "com.jgeniselli.banco.ui.theme.*",
                     "*.component.*",
+                    "*.entity.*",
                     "com.jgeniselli.banco.*BuildConfig",
                     "*Module*"
             )

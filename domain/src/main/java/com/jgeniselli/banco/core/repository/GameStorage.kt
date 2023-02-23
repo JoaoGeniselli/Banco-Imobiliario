@@ -1,7 +1,7 @@
 package com.jgeniselli.banco.core.repository
 
-import com.jgeniselli.banco.core.entities.OperationLog
-import com.jgeniselli.banco.core.entities.Player
+import com.jgeniselli.banco.core.entity.OperationLog
+import com.jgeniselli.banco.core.entity.Player
 import kotlinx.coroutines.flow.StateFlow
 
 interface GameStorage {

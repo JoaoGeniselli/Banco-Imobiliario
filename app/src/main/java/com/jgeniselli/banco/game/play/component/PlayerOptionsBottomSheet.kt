@@ -1,4 +1,4 @@
-package com.jgeniselli.banco.game.play
+package com.jgeniselli.banco.game.play.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jgeniselli.banco.R
+import com.jgeniselli.banco.core.entity.OperationType
 import com.jgeniselli.banco.ui.component.IconLabelRow
 
 @Composable
@@ -26,14 +27,14 @@ fun PlayerOptionsBottomSheet(
     ModalBottomSheetLayout(
         sheetState = state,
         sheetContent = {
-            PlayerOptions(onSelectOption = onSelectOption)
+            PlayerOptionsContent(onSelectOption = onSelectOption)
         },
         content = content
     )
 }
 
 @Composable
-fun PlayerOptions(modifier: Modifier = Modifier, onSelectOption: (OperationType) -> Unit) {
+fun PlayerOptionsContent(modifier: Modifier = Modifier, onSelectOption: (OperationType) -> Unit) {
     Column(modifier) {
         IconLabelRow(
             modifier = Modifier.clickable { onSelectOption(OperationType.CREDIT) },
@@ -60,7 +61,7 @@ fun PlayerOptions(modifier: Modifier = Modifier, onSelectOption: (OperationType)
 @Composable
 private fun PreviewPlayerOptions() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        PlayerOptions(
+        PlayerOptionsContent(
             modifier = Modifier,
             onSelectOption = {}
         )

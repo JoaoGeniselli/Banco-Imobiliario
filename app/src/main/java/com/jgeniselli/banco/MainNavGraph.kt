@@ -17,14 +17,14 @@ import com.jgeniselli.banco.Routes.NEW_GAME
 import com.jgeniselli.banco.Routes.TRANSFER
 import com.jgeniselli.banco.game.history.HistoryScreen
 import com.jgeniselli.banco.game.play.GamePlayScreen
-import com.jgeniselli.banco.game.play.OperationType
+import com.jgeniselli.banco.core.entity.OperationType
 import com.jgeniselli.banco.home.HomeScreen
 import com.jgeniselli.banco.newgame.NewGameScreen
 import com.jgeniselli.banco.operations.credit.CreditScreen
 import com.jgeniselli.banco.operations.debit.DebitScreen
 import com.jgeniselli.banco.operations.transfer.TransferScreen
-import com.jgeniselli.banco.topbar.TopBarAction
-import com.jgeniselli.banco.topbar.createHistoryTopBarAction
+import com.jgeniselli.banco.topbar.component.TopBarAction
+import com.jgeniselli.banco.topbar.component.createHistoryTopBarAction
 
 private const val ARG_PLAYER_ID = "ARG_PLAYER_ID"
 
