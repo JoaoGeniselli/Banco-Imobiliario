@@ -32,6 +32,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,15 +46,33 @@ import androidx.navigation.NavHostController
 import com.dosei.games.toybank.data.model.LeadPlayer
 import com.dosei.games.toybank.ui.widget.BackButton
 
+const val MAX_PLAYERS = 6
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameSetupScreen(
-    controller: NavHostController
+    controller: NavHostController,
+    viewModel: GameSetupViewModel,
 ) {
-//    GameSetupContent(
-//        actions = GameSetupActions(
-//            onBack = { controller.popBackStack() }
-//        )
-//    )
+    var showAddPlayerBottomSheet by remember { mutableStateOf(false) }
+    val state by viewModel.state.collectAsState()
+    GameSetupContent(
+        players = state.players,
+        actions = GameSetupActions(
+            onBack = { controller.popBackStack() }
+        )
+    )
+
+    if (showAddPlayerBottomSheet) {
+        AddPlayerBottomSheet(
+            availableColors = state.availableColors,
+            onDismiss = { showAddPlayerBottomSheet = false },
+            onConfirm = { name, color ->
+                viewModel.createPlayer(name, color)
+                showAddPlayerBottomSheet = false
+            }
+        )
+    }
 }
 
 private data class GameSetupActions(
@@ -85,15 +108,17 @@ private fun GameSetupContent(
             }
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = actions.onAddPlayer,
-                content = {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add Player"
-                    )
-                }
-            )
+            if (players.size < MAX_PLAYERS) {
+                FloatingActionButton(
+                    onClick = actions.onAddPlayer,
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "Add Player"
+                        )
+                    }
+                )
+            }
         }
     ) { innerPadding ->
         LazyColumn(Modifier.padding(innerPadding)) {

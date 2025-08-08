@@ -1,9 +1,9 @@
 package com.dosei.games.toybank.feature.game.setup
 
-import androidx.compose.animation.core.snap
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.util.copy
 import com.dosei.games.toybank.AppRoutes
 import com.dosei.games.toybank.data.model.LeadPlayer
 import com.dosei.games.toybank.data.model.Navigate
@@ -30,19 +30,17 @@ class GameSetupViewModel @Inject constructor(
     private val _events = Channel<UiEvent>()
     val events = _events.receiveAsFlow()
 
-    fun updateDefaultBalance(balanceInCents: Int) {
-        _state.update { it.copy(initialBalanceInCents = balanceInCents) }
-    }
-
-    fun createPlayer(name: String, color: Int) {
-        val newPlayer = LeadPlayer(name = name, colorARGB = color)
+    fun createPlayer(name: String, color: Color) {
+        val newPlayer = LeadPlayer(name = name, colorARGB = color.toArgb())
         val updatedPlayers = _state.value.players + newPlayer
-        _state.update { it.copy(players = updatedPlayers) }
+        val updatedColors = _state.value.availableColors - color
+        _state.update { it.copy(players = updatedPlayers, availableColors = updatedColors) }
     }
 
     fun removePlayer(player: LeadPlayer) {
         val updatedPlayers = _state.value.players - player
-        _state.update { it.copy(players = updatedPlayers) }
+        val updatedColors = _state.value.availableColors + Color(player.colorARGB)
+        _state.update { it.copy(players = updatedPlayers, availableColors = updatedColors) }
     }
 
     fun onNewGameClick() {

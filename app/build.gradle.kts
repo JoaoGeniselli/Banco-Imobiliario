@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.kotlin.serialization.json)
+    implementation(libs.androidx.navigation.compose)
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)
