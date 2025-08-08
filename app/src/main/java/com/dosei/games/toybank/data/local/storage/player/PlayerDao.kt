@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface PlayerDao {
 
     @Query("SELECT * FROM players")
-    fun fetchAllPlayers(): Flow<List<PlayerEntity>>
+    fun fetchAllPlayers(): Flow<List<Player>>
 
     @Query("SELECT COUNT(*) FROM players")
     suspend fun fetchPlayersCount(): Int
@@ -22,10 +22,10 @@ interface PlayerDao {
     suspend fun fetchPlayerBalance(playerId: Int): Int
 
     @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
-    suspend fun insertAll(players: List<PlayerEntity>)
+    suspend fun insertAll(players: List<Player>)
 
     @Delete
-    suspend fun deleteAll(vararg players: PlayerEntity)
+    suspend fun deleteAll(vararg players: Player)
 
     @Query("DELETE FROM transactions")
     suspend fun clearAll()
