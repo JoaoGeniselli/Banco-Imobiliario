@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.dosei.games.toybank.AppRoutes
 
 @Composable
 fun HomeScreen(
@@ -32,7 +33,9 @@ fun HomeScreen(
     HomeContent(
         isContinueEnabled = isContinueEnabled,
         actions = HomeActions(
-            onBack = { controller.popBackStack() }
+            onBack = { controller.popBackStack() },
+            onClickNewGame = { controller.navigate(AppRoutes.GameSetup) },
+            onClickContinue = { controller.navigate(AppRoutes.Gameplay) }
         )
     )
 }
@@ -75,12 +78,13 @@ private fun HomeContent(
             OutlinedButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp),
+                    .padding(top = 16.dp),
                 enabled = isContinueEnabled,
                 onClick = actions.onClickContinue
             ) {
                 Text("Continue")
             }
+            Spacer(Modifier.height(24.dp))
         }
     }
 }

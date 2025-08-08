@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -17,6 +18,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,6 +26,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dosei.games.toybank.ui.widget.ColorChip
@@ -35,11 +39,18 @@ fun AddPlayerBottomSheet(
     availableColors: List<Color>,
     onDismiss: () -> Unit,
     onConfirm: (name: String, color: Color) -> Unit,
+    forbiddenNames: List<String> = emptyList(),
     sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
 ) {
     val scope = rememberCoroutineScope()
     var name by remember { mutableStateOf("") }
     var selectedColor by remember { mutableStateOf(availableColors.first()) }
+
+    val nameError by remember(name) {
+        derivedStateOf {
+            name in forbiddenNames
+        }
+    }
 
     ModalBottomSheet(
         sheetState = sheetState,
@@ -54,7 +65,15 @@ fun AddPlayerBottomSheet(
                 .fillMaxWidth(),
             value = name,
             onValueChange = { name = it },
-            placeholder = { Text(text = "Player Name") }
+            placeholder = { Text(text = "Player Name") },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                capitalization = KeyboardCapitalization.Words
+            ),
+            isError = nameError,
+            supportingText = if (nameError) {
+                { Text(text = "Name already exists") }
+            } else null
         )
 
         Text(
