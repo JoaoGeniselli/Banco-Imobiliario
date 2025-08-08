@@ -1,43 +1,26 @@
 package com.dosei.games.toybank.feature.game.setup
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.SwipeToDismissBox
-import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -45,9 +28,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment.Companion.BottomEnd
-import androidx.compose.ui.Alignment.Companion.CenterEnd
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -56,8 +36,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.data.model.LeadPlayer
 import com.dosei.games.toybank.ui.widget.BackButton
+import com.dosei.games.toybank.ui.widget.RemovalBox
 
-const val MAX_PLAYERS = 6
+val PLAYERS_RANGE = 2 .. 6
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,14 +48,18 @@ fun GameSetupScreen(
 ) {
     var showAddPlayerBottomSheet by remember { mutableStateOf(false) }
     val state by viewModel.state.collectAsState()
-    GameSetupContent(
-        players = state.players,
-        actions = GameSetupActions(
+    val actions = remember {
+        GameSetupActions(
             onBack = { controller.popBackStack() },
             onAddPlayer = { showAddPlayerBottomSheet = true },
             onStart = { viewModel.onNewGameClick() },
             onRemove = { viewModel.removePlayer(it) }
         )
+    }
+
+    GameSetupContent(
+        players = state.players,
+        actions = actions
     )
 
     if (showAddPlayerBottomSheet) {
@@ -95,8 +80,8 @@ fun GameSetupScreen(
 
 private data class GameSetupActions(
     val onBack: () -> Unit = {},
-    val onAddPlayer: () -> Unit = {},
     val onStart: () -> Unit = {},
+    val onAddPlayer: () -> Unit = {},
     val onRemove: (LeadPlayer) -> Unit = {},
 )
 
@@ -127,7 +112,7 @@ private fun GameSetupContent(
             }
         },
         floatingActionButton = {
-            if (players.size < MAX_PLAYERS) {
+            if (players.size < PLAYERS_RANGE.last) {
                 FloatingActionButton(
                     onClick = actions.onAddPlayer,
                     content = {
@@ -141,21 +126,13 @@ private fun GameSetupContent(
         }
     ) { innerPadding ->
         LazyColumn(Modifier.padding(innerPadding)) {
-
             if (players.isEmpty()) {
-                item {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        text = "Add players to start a new game.",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
-            }
-            items(players) { player ->
-                RemovalBox(player, actions.onRemove) {
-                    PlayerRow(player)
+                item { EmptyMessage() }
+            } else {
+                items(players) { player ->
+                    RemovalBox(player, actions.onRemove) {
+                        PlayerRow(player)
+                    }
                 }
             }
         }
@@ -163,48 +140,13 @@ private fun GameSetupContent(
 }
 
 @Composable
-private fun RemovalBox(
-    player: LeadPlayer,
-    onRemove: (LeadPlayer) -> Unit,
-    content: @Composable RowScope.() -> Unit,
-) {
-    val swipeState = rememberSwipeToDismissBoxState(
-        confirmValueChange = { dismissValue ->
-            if (dismissValue == SwipeToDismissBoxValue.EndToStart) {
-                onRemove(player)
-                true
-            } else {
-                false
-            }
-        }
-    )
-    SwipeToDismissBox(
-        state = swipeState,
-        enableDismissFromEndToStart = true,
-        backgroundContent = {
-            val color by animateColorAsState(
-                when (swipeState.targetValue) {
-                    SwipeToDismissBoxValue.Settled -> Color.LightGray
-                    SwipeToDismissBoxValue.StartToEnd -> Color.Green
-                    SwipeToDismissBoxValue.EndToStart -> MaterialTheme.colorScheme.error
-                }
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(color)
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .align(CenterEnd)
-                        .padding(16.dp),
-                    imageVector = Icons.Default.Delete,
-                    tint = MaterialTheme.colorScheme.onError,
-                    contentDescription = ""
-                )
-            }
-        },
-        content = content
+private fun EmptyMessage() {
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        text = "Add players to start a new game.",
+        style = MaterialTheme.typography.bodyLarge
     )
 }
 

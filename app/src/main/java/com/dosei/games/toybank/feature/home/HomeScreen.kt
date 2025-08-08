@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,13 +31,16 @@ fun HomeScreen(
     viewModel: HomeViewModel,
 ) {
     val isContinueEnabled by viewModel.isContinueEnabled.collectAsState(false)
-    HomeContent(
-        isContinueEnabled = isContinueEnabled,
-        actions = HomeActions(
+    val actions = remember {
+        HomeActions(
             onBack = { controller.popBackStack() },
             onClickNewGame = { controller.navigate(AppRoutes.GameSetup) },
             onClickContinue = { controller.navigate(AppRoutes.Gameplay) }
         )
+    }
+    HomeContent(
+        isContinueEnabled = isContinueEnabled,
+        actions = actions
     )
 }
 

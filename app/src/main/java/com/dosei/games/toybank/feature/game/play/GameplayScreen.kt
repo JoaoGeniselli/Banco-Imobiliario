@@ -15,6 +15,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -27,13 +30,19 @@ import com.dosei.games.toybank.ui.widget.ColorChip
 
 @Composable
 fun GameplayScreen(
-    controller: NavHostController
+    controller: NavHostController,
+    viewModel: GameplayViewModel,
 ) {
-//    GameplayContent(
-//        actions = GameplayActions(
-//            onBack = { controller.popBackStack() }
-//        )
-//    )
+    val players by viewModel.players.collectAsState()
+    val actions = remember {
+        GameplayActions(
+            onBack = { controller.popBackStack() }
+        )
+    }
+    GameplayContent(
+        players = players,
+        actions = actions
+    )
 }
 
 private data class GameplayActions(
