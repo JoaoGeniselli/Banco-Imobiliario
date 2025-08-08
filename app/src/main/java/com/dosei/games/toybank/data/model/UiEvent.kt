@@ -6,7 +6,7 @@ interface UiEvent
 
 data object None : UiEvent
 
-data class Navigate<T>(
+data class Navigate<T : Any>(
     val route: T,
     val options: Bundle? = null,
 ) : UiEvent

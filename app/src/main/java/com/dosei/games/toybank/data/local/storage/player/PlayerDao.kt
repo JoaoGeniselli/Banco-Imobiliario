@@ -27,6 +27,6 @@ interface PlayerDao {
     @Delete
     suspend fun deleteAll(vararg players: Player)
 
-    @Query("DELETE FROM transactions")
+    @Query("DELETE FROM players")
     suspend fun clearAll()
 }

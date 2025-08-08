@@ -1,14 +1,10 @@
 package com.dosei.games.toybank.feature.game.setup
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
@@ -22,6 +18,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -35,7 +32,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.data.model.LeadPlayer
+import com.dosei.games.toybank.data.model.Navigate
+import com.dosei.games.toybank.data.model.None
 import com.dosei.games.toybank.ui.widget.BackButton
+import com.dosei.games.toybank.ui.widget.ColorChip
 import com.dosei.games.toybank.ui.widget.RemovalBox
 
 val PLAYERS_RANGE = 2 .. 6
@@ -76,6 +76,13 @@ fun GameSetupScreen(
             }
         )
     }
+
+    val event by viewModel.events.collectAsState(None)
+    LaunchedEffect(event) {
+        when (event) {
+            is Navigate<*> -> controller.navigate((event as Navigate<*>).route)
+        }
+    }
 }
 
 private data class GameSetupActions(
@@ -104,7 +111,7 @@ private fun GameSetupContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-                    enabled = players.isNotEmpty(),
+                    enabled = players.size in PLAYERS_RANGE,
                     onClick = actions.onStart
                 ) {
                     Text("Start")
@@ -156,13 +163,7 @@ private fun PlayerRow(player: LeadPlayer) {
         shape = RectangleShape
     ) {
         ListItem(
-            leadingContent = {
-                Box(
-                    modifier = Modifier
-                        .size(24.dp)
-                        .background(Color(player.colorARGB), CircleShape)
-                )
-            },
+            leadingContent = { ColorChip(Color(player.colorARGB)) },
             headlineContent = { Text(player.name) }
         )
     }
