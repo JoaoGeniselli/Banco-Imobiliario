@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.toolbox
+package com.dosei.games.toybank.core.toolbox
 
 import java.math.BigDecimal
 import java.text.NumberFormat

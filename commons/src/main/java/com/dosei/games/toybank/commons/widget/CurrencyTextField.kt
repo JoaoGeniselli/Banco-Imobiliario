@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.ui.widget
+package com.dosei.games.toybank.commons.widget
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
@@ -12,7 +12,7 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import com.dosei.games.toybank.toolbox.formatBlr
+import com.dosei.games.toybank.core.toolbox.formatBlr
 
 @Composable
 fun CurrencyTextField(

@@ -19,18 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.dosei.games.toybank.data.model.LeadPlayer
 
 @Composable
 fun RemovalBox(
-    player: LeadPlayer,
-    onRemove: (LeadPlayer) -> Unit,
+    onRemove: () -> Unit,
     content: @Composable RowScope.() -> Unit,
 ) {
     val swipeState = rememberSwipeToDismissBoxState(
         confirmValueChange = { dismissValue ->
             if (dismissValue == SwipeToDismissBoxValue.EndToStart) {
-                onRemove(player)
+                onRemove()
                 true
             } else {
                 false

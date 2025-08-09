@@ -38,7 +38,7 @@ import com.dosei.games.toybank.ui.widget.BackButton
 import com.dosei.games.toybank.ui.widget.ColorChip
 import com.dosei.games.toybank.ui.widget.RemovalBox
 
-val PLAYERS_RANGE = 2 .. 6
+val PLAYERS_RANGE = 2..6
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -137,7 +137,7 @@ private fun GameSetupContent(
                 item { EmptyMessage() }
             } else {
                 items(players) { player ->
-                    RemovalBox(player, actions.onRemove) {
+                    RemovalBox(onRemove = { actions.onRemove(player) }) {
                         PlayerRow(player)
                     }
                 }
