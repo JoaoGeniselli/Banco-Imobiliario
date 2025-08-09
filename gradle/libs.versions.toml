@@ -48,3 +48,15 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
+[bundles]
+compose = [
+    "androidx-ui",
+    "androidx-ui-graphics",
+    "androidx-ui-tooling-preview",
+    "androidx-material3",
+    "hilt-android",
+    "androidx-room-runtime",
+    "androidx-hilt-navigation-compose",
+    "androidx-navigation-compose",
+    "androidx-activity-compose"
+]
