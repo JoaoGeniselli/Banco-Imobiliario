@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.dosei.games.toybank.AppRoutes
+import com.dosei.games.toybank.core.navigation.AppRoutes
 
 @Composable
 fun HomeScreen(
@@ -34,8 +34,8 @@ fun HomeScreen(
     val actions = remember {
         HomeActions(
             onBack = { controller.popBackStack() },
-            onClickNewGame = { controller.navigate(AppRoutes.GameSetup) },
-            onClickContinue = { controller.navigate(AppRoutes.Gameplay) }
+            onClickNewGame = { controller.navigate(AppRoutes.Game.Setup) },
+            onClickContinue = { controller.navigate(AppRoutes.Game.Play) }
         )
     }
     HomeContent(

@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dosei.games.toybank.AppRoutes
+import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.data.model.LeadPlayer
 import com.dosei.games.toybank.data.model.Navigate
 import com.dosei.games.toybank.data.model.UiError
@@ -51,7 +51,7 @@ class GameSetupViewModel @Inject constructor(
                 repository.setupNewGame(snapshot.players, snapshot.initialBalanceInCents)
             }.onSuccess {
                 stopLoading()
-                _events.send(Navigate(AppRoutes.Gameplay))
+                _events.send(Navigate(AppRoutes.Game.Play))
             }.onFailure { failure ->
                 stopLoading()
                 _events.send(UiError(failure))

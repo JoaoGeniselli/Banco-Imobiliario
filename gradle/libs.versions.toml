@@ -31,6 +31,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-hilt-navigation-compose = "androidx.hilt:hilt-navigation-compose:1.2.0"
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version = "2.9.3" }
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -56,5 +57,6 @@ compose = [
     "androidx-material3",
     "androidx-hilt-navigation-compose",
     "androidx-navigation-compose",
-    "androidx-activity-compose"
+    "androidx-activity-compose",
+    "androidx-compose-material-icons-extended"
 ]

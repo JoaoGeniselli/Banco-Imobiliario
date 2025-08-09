@@ -22,8 +22,8 @@ dependencyResolutionManagement {
 rootProject.name = "Toy Bank"
 include(":app")
 include(":features")
-include(":features:debit")
-include(":features:credit")
+include(":features:withdraw")
+include(":features:deposit")
 include(":features:transfer")
 include(":core")
 include(":ui")
