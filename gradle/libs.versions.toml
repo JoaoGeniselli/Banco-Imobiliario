@@ -54,8 +54,6 @@ compose = [
     "androidx-ui-graphics",
     "androidx-ui-tooling-preview",
     "androidx-material3",
-    "hilt-android",
-    "androidx-room-runtime",
     "androidx-hilt-navigation-compose",
     "androidx-navigation-compose",
     "androidx-activity-compose"

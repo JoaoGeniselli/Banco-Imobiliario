@@ -1,7 +1,7 @@
 package com.dosei.games.toybank.data.repository
 
-import com.dosei.games.toybank.data.local.storage.player.PlayerDao
-import com.dosei.games.toybank.data.local.storage.transaction.TransactionDao
+import com.dosei.games.toybank.core.data.storage.player.PlayerDao
+import com.dosei.games.toybank.core.data.storage.transaction.TransactionDao
 import com.dosei.games.toybank.data.mapper.toDatabaseEntity
 import com.dosei.games.toybank.data.model.Transaction
 import com.dosei.games.toybank.data.model.error.BusinessException

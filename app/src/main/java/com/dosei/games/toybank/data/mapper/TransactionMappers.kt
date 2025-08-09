@@ -1,6 +1,6 @@
 package com.dosei.games.toybank.data.mapper
 
-import com.dosei.games.toybank.data.local.storage.transaction.TransactionEntity
+import com.dosei.games.toybank.core.data.storage.transaction.TransactionEntity
 import com.dosei.games.toybank.data.model.Transaction
 
 const val TRANSACTION_TYPE_DEPOSIT = 'D'

@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import com.dosei.games.toybank.data.local.storage.player.Player
+import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.toolbox.formatBlr
 import com.dosei.games.toybank.ui.widget.BackButton
 import com.dosei.games.toybank.ui.widget.ColorChip

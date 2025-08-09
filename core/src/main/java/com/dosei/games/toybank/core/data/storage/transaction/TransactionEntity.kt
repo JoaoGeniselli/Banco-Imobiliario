@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.data.local.storage.transaction
+package com.dosei.games.toybank.core.data.storage.transaction
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

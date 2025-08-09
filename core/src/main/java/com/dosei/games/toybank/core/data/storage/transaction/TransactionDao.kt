@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.data.local.storage.transaction
+package com.dosei.games.toybank.core.data.storage.transaction
 
 import androidx.room.Dao
 import androidx.room.Delete

@@ -2,7 +2,7 @@ package com.dosei.games.toybank.di
 
 import android.content.Context
 import androidx.room.Room
-import com.dosei.games.toybank.data.local.storage.AppDatabase
+import com.dosei.games.toybank.core.data.storage.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

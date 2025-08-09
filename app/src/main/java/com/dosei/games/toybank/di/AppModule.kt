@@ -1,8 +1,8 @@
 package com.dosei.games.toybank.di
 
-import com.dosei.games.toybank.data.local.storage.AppDatabase
-import com.dosei.games.toybank.data.local.storage.player.PlayerDao
-import com.dosei.games.toybank.data.local.storage.transaction.TransactionDao
+import com.dosei.games.toybank.core.data.storage.AppDatabase
+import com.dosei.games.toybank.core.data.storage.player.PlayerDao
+import com.dosei.games.toybank.core.data.storage.transaction.TransactionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
