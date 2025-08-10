@@ -17,15 +17,5 @@ object AppRoutes {
     }
 
     @Serializable
-    data object Operations {
-
-        @Serializable
-        data object Withdraw
-
-        @Serializable
-        data object Deposit
-
-        @Serializable
-        data object Transfer
-    }
+    data class Transaction(val playerId: String)
 }

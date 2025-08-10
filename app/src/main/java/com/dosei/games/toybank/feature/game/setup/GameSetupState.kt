@@ -1,7 +1,7 @@
 package com.dosei.games.toybank.feature.game.setup
 
 import androidx.compose.ui.graphics.Color
-import com.dosei.games.toybank.data.model.LeadPlayer
+import com.dosei.games.toybank.core.data.model.LeadPlayer
 import com.dosei.games.toybank.ui.theme.Amber
 import com.dosei.games.toybank.ui.theme.Blue500
 import com.dosei.games.toybank.ui.theme.DeepOrange

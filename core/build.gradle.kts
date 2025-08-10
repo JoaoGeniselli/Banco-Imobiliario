@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.kotlin.serialization.json)
     implementation(libs.androidx.room.runtime)
     implementation(libs.hilt.android)

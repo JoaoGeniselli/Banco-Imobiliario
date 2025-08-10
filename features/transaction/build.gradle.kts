@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dosei.games.toybank.features"
+    namespace = "com.dosei.games.toybank.transaction"
     kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
@@ -26,8 +26,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":commons"))
     implementation(project(":ui"))
-
-    api(project(":features:transaction"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

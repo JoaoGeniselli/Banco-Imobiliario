@@ -31,9 +31,10 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.dosei.games.toybank.data.model.LeadPlayer
-import com.dosei.games.toybank.data.model.Navigate
-import com.dosei.games.toybank.data.model.None
+import com.dosei.games.toybank.commons.navigation.navigateTo
+import com.dosei.games.toybank.core.data.model.LeadPlayer
+import com.dosei.games.toybank.core.data.model.NavigateTo
+import com.dosei.games.toybank.core.data.model.None
 import com.dosei.games.toybank.ui.widget.BackButton
 import com.dosei.games.toybank.ui.widget.ColorChip
 import com.dosei.games.toybank.ui.widget.RemovalBox
@@ -80,7 +81,7 @@ fun GameSetupScreen(
     val event by viewModel.events.collectAsState(None)
     LaunchedEffect(event) {
         when (event) {
-            is Navigate<*> -> controller.navigate((event as Navigate<*>).route)
+            is NavigateTo -> controller.navigateTo(event)
         }
     }
 }
