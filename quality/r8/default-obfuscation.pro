@@ -1,0 +1,4 @@
+-verbose
+-optimizationpasses 50
+-dontusemixedcaseclassnames
+-keepattributes *Annotation*, Signature
