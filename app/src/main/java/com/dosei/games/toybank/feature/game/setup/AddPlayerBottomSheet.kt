@@ -34,7 +34,7 @@ import com.dosei.games.toybank.ui.widget.ColorChip
 import kotlinx.coroutines.launch
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 fun AddPlayerBottomSheet(
     availableColors: List<Color>,
     onDismiss: () -> Unit,
@@ -81,26 +81,11 @@ fun AddPlayerBottomSheet(
             text = "Select the color"
         )
 
-        FlowRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp),
-            horizontalArrangement = spacedBy(8.dp)
-        ) {
-            availableColors.forEach { color ->
-                Surface(
-                    color = if (selectedColor == color) {
-                        MaterialTheme.colorScheme.surfaceVariant
-                    } else {
-                        Color.Transparent
-                    },
-                    shape = MaterialTheme.shapes.small,
-                    onClick = { selectedColor = color }
-                ) {
-                    ColorChip(modifier = Modifier.padding(6.dp), color = color)
-                }
-            }
-        }
+        ColorPicker(
+            availableColors = availableColors,
+            selectedColor = selectedColor,
+            onSelect = { selectedColor = it }
+        )
 
         Button(
             onClick = {
@@ -116,6 +101,35 @@ fun AddPlayerBottomSheet(
         }
     }
 
+}
+
+@Composable
+@OptIn(ExperimentalLayoutApi::class)
+private fun ColorPicker(
+    availableColors: List<Color>,
+    selectedColor: Color,
+    onSelect: (Color) -> Unit
+) {
+    FlowRow(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, top = 8.dp),
+        horizontalArrangement = spacedBy(8.dp)
+    ) {
+        availableColors.forEach { color ->
+            Surface(
+                color = if (selectedColor == color) {
+                    MaterialTheme.colorScheme.surfaceVariant
+                } else {
+                    Color.Transparent
+                },
+                shape = MaterialTheme.shapes.small,
+                onClick = { onSelect(color) }
+            ) {
+                ColorChip(modifier = Modifier.padding(6.dp), color = color)
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

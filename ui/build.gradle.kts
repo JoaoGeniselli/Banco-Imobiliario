@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+apply { from("$rootDir/quality/quality.gradle") }
+
 android {
     namespace = "com.dosei.games.toybank.ui"
     kotlin {
