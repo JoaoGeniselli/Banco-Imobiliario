@@ -1,16 +1,16 @@
 name: "Setup Workflow"
-description: "Sets up Android and Project env"
+description: "Sets up Android and Project environment"
 runs:
   using: "composite"
   steps:
     - name: Setup JDK
-      uses: actions/setup-env-java@v3
+      uses: actions/setup-java@v3
       with:
         java-version: '21'
         distribution: 'temurin'
 
     - name: Setup Android SDK
-      uses: android-actions/setup-env-android@v3
+      uses: android-actions/setup-android@v3
 
     - name: Setup Gradle Wrapper
       shell: bash
