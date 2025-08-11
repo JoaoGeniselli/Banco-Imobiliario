@@ -1,6 +1,5 @@
 package com.dosei.games.toybank.core.data.repository
 
-import com.dosei.games.toybank.core.data.model.Transaction
 import com.dosei.games.toybank.core.data.storage.transaction.TransactionDao
 import javax.inject.Inject
 
@@ -9,8 +8,4 @@ class TransactionRepository @Inject constructor(
 ) {
 
     suspend fun clearHistory() = transactionDao.clearAll()
-
-    suspend fun addToHistory(transaction: Transaction) {
-
-    }
 }

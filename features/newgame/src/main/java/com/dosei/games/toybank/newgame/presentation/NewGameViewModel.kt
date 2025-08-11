@@ -3,10 +3,9 @@ package com.dosei.games.toybank.newgame.presentation
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.dosei.games.toybank.core.base.StatefulViewModel
-import com.dosei.games.toybank.newgame.data.model.LeadPlayer
 import com.dosei.games.toybank.core.data.model.NavigateTo
-import com.dosei.games.toybank.core.data.repository.GameSetupRepository
 import com.dosei.games.toybank.core.navigation.AppRoutes
+import com.dosei.games.toybank.newgame.data.model.LeadPlayer
 import com.dosei.games.toybank.newgame.data.usecase.StartNewGame
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
