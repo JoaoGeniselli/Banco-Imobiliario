@@ -3,7 +3,7 @@ package com.dosei.games.toybank.core.data.repository
 import com.dosei.games.toybank.core.data.mapper.toNewEntity
 import com.dosei.games.toybank.core.data.model.LeadPlayer
 import com.dosei.games.toybank.core.data.model.error.BusinessException
-import com.dosei.games.toybank.core.data.model.error.ErrorCodes
+import com.dosei.games.toybank.core.data.model.error.ErrorCode
 import com.dosei.games.toybank.core.data.storage.player.PlayerDao
 import com.dosei.games.toybank.core.data.storage.transaction.TransactionDao
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class GameSetupRepository @Inject constructor(
 ) {
 
     suspend fun setupNewGame(players: List<LeadPlayer>, initialBalanceInCents: Int) {
-        if (initialBalanceInCents <= 0) throw BusinessException(ErrorCodes.INVALID_INITIAL_BALANCE)
+        if (initialBalanceInCents <= 0) throw BusinessException(ErrorCode.INVALID_INITIAL_BALANCE)
 
         val playerEntities = players.map { it.toNewEntity(initialBalanceInCents) }
         transactionDao.clearAll()

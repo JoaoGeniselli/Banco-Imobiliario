@@ -2,7 +2,7 @@ package com.dosei.games.toybank.transaction.data.usecase
 
 import com.dosei.games.toybank.core.data.model.TransactionType
 import com.dosei.games.toybank.core.data.model.error.BusinessException
-import com.dosei.games.toybank.core.data.model.error.ErrorCodes
+import com.dosei.games.toybank.core.data.model.error.ErrorCode
 import com.dosei.games.toybank.core.data.repository.PlayerRepository
 import com.dosei.games.toybank.transaction.TransactionState
 import javax.inject.Inject
@@ -12,7 +12,7 @@ class PerformTransaction @Inject constructor(
 ) {
 
     suspend operator fun invoke(state: TransactionState) {
-        if (state.amountInCents <= 0) throw BusinessException(ErrorCodes.INVALID_INITIAL_BALANCE)
+        if (state.amountInCents <= 0) throw BusinessException(ErrorCode.INVALID_AMOUNT)
         when (state.type) {
             TransactionType.DEPOSIT -> repository.deposit(
                 playerId = state.playerId,
@@ -26,7 +26,7 @@ class PerformTransaction @Inject constructor(
 
             TransactionType.TRANSFER -> {
                 if (state.destinationPlayerId == null) {
-                    throw BusinessException(ErrorCodes.INVALID_DESTINATION_PLAYER)
+                    throw BusinessException(ErrorCode.INVALID_DESTINATION_PLAYER)
                 }
                 repository.withdraw(
                     playerId = state.playerId,

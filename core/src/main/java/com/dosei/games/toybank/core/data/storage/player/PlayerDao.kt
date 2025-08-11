@@ -18,8 +18,14 @@ interface PlayerDao {
     @Query("UPDATE players SET balance = :newBalanceInCents WHERE id = :playerId")
     suspend fun updatePlayerBalance(playerId: Int, newBalanceInCents: Int)
 
+    @Query("SELECT * FROM players WHERE id = :playerId")
+    suspend fun fetchPlayerById(playerId: Int): Player?
+
     @Query("SELECT balance FROM players WHERE id = :playerId")
     suspend fun fetchPlayerBalance(playerId: Int): Int
+
+    @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
+    suspend fun insert(player: Player)
 
     @Insert(onConflict = androidx.room.OnConflictStrategy.REPLACE)
     suspend fun insertAll(players: List<Player>)

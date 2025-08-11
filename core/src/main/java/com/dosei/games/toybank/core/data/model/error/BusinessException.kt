@@ -1,7 +1,7 @@
 package com.dosei.games.toybank.core.data.model.error
 
 open class BusinessException(
-    val code: String,
+    val code: ErrorCode,
     message: String? = null,
     cause: Throwable? = null
 ) : Throwable(message, cause)
