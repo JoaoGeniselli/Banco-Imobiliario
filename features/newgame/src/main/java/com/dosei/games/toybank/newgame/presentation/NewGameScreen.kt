@@ -38,13 +38,12 @@ import com.dosei.games.toybank.newgame.data.model.LeadPlayer
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.None
 import com.dosei.games.toybank.core.navigation.AppRoutes
+import com.dosei.games.toybank.newgame.data.usecase.PLAYERS_RANGE
 import com.dosei.games.toybank.newgame.widget.AddPlayerBottomSheet
 import com.dosei.games.toybank.newgame.widget.GameSettingsBottomSheet
 import com.dosei.games.toybank.ui.widget.BackButton
 import com.dosei.games.toybank.ui.widget.ColorChip
 import com.dosei.games.toybank.ui.widget.RemovalBox
-
-val PLAYERS_RANGE = 2..6
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
