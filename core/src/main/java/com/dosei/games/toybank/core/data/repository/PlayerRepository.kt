@@ -11,10 +11,6 @@ class PlayerRepository @Inject constructor(
 ) {
     val players = playerDao.fetchAllPlayers()
 
-    suspend fun overrideAllPlayers() {
-
-    }
-
     suspend fun deposit(
         playerId: Int,
         amountInCents: Int

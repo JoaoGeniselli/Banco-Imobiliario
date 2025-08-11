@@ -1,0 +1,33 @@
+name: New Code Validation
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - develop
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup-env
+
+      - name: Android Lint
+        run: ./gradlew lintDebug
+
+      - name: Detekt
+        run: ./gradlew detekt
+
+      - name: Tests
+        run: ./gradlew testDebugUnitTest
+
+

@@ -39,7 +39,7 @@ fun TransactionBeneficiaryScreen(
     parentViewModel: TransactionViewModel,
     viewModel: TransactionBeneficiaryViewModel,
 ) {
-    val playerId by parentViewModel.state.map { it.playerId }.collectAsState(0)
+    val playerId by remember { parentViewModel.state.map { it.playerId } }.collectAsState(0)
     val players by remember(playerId) {
         viewModel.loadPlayers(playerId)
     }.collectAsState(emptyList())

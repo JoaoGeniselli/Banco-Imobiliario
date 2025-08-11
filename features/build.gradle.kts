@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+apply { from("$rootDir/quality/quality.gradle") }
+
 android {
     namespace = "com.dosei.games.toybank.features"
     kotlin {
