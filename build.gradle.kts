@@ -26,9 +26,11 @@ subprojects {
 
                 buildTypes {
                     named("release") {
-                        isMinifyEnabled = false
+                        isMinifyEnabled = isAndroidApplication
+                        isShrinkResources = isAndroidApplication
                         proguardFiles(
                             getDefaultProguardFile("proguard-android-optimize.txt"),
+                            "$rootDir/quality/r8/default-obfuscation.pro",
                             "proguard-rules.pro"
                         )
                     }
