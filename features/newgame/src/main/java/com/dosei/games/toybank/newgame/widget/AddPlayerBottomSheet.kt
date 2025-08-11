@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.feature.game.setup
+package com.dosei.games.toybank.newgame.widget
 
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.ExperimentalLayoutApi

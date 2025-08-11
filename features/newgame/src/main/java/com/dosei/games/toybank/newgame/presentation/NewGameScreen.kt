@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.feature.game.setup
+package com.dosei.games.toybank.newgame.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -7,10 +7,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -32,78 +34,95 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.commons.navigation.navigateTo
-import com.dosei.games.toybank.core.data.model.LeadPlayer
+import com.dosei.games.toybank.newgame.data.model.LeadPlayer
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.None
+import com.dosei.games.toybank.core.navigation.AppRoutes
+import com.dosei.games.toybank.newgame.data.usecase.PLAYERS_RANGE
+import com.dosei.games.toybank.newgame.widget.AddPlayerBottomSheet
+import com.dosei.games.toybank.newgame.widget.GameSettingsBottomSheet
 import com.dosei.games.toybank.ui.widget.BackButton
 import com.dosei.games.toybank.ui.widget.ColorChip
 import com.dosei.games.toybank.ui.widget.RemovalBox
 
-val PLAYERS_RANGE = 2..6
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GameSetupScreen(
+fun NewGameScreen(
     controller: NavHostController,
-    viewModel: GameSetupViewModel,
+    viewModel: NewGameViewModel,
 ) {
     var showAddPlayerBottomSheet by remember { mutableStateOf(false) }
+    var showSettings by remember { mutableStateOf(false) }
     val state by viewModel.state.collectAsState()
     val actions = remember {
-        GameSetupActions(
+        NewGameActions(
             onBack = { controller.popBackStack() },
             onAddPlayer = { showAddPlayerBottomSheet = true },
             onStart = { viewModel.onNewGameClick() },
-            onRemove = { viewModel.removePlayer(it) }
+            onRemove = { viewModel.removePlayer(it) },
+            onClickSettings = { showSettings = true }
         )
     }
 
-    GameSetupContent(
+    NewGameContent(
         players = state.players,
         actions = actions
     )
 
-    if (showAddPlayerBottomSheet) {
-        val forbiddenNames by remember(state.players) {
-            derivedStateOf { state.players.map { it.name } }
-        }
-        AddPlayerBottomSheet(
-            availableColors = state.availableColors,
-            forbiddenNames = forbiddenNames,
-            onDismiss = { showAddPlayerBottomSheet = false },
-            onConfirm = { name, color ->
-                viewModel.createPlayer(name, color)
-                showAddPlayerBottomSheet = false
+    when {
+        showAddPlayerBottomSheet -> {
+            val forbiddenNames by remember(state.players) {
+                derivedStateOf { state.players.map { it.name } }
             }
-        )
-    }
+            AddPlayerBottomSheet(
+                availableColors = state.availableColors,
+                forbiddenNames = forbiddenNames,
+                onDismiss = { showAddPlayerBottomSheet = false },
+                onConfirm = { name, color ->
+                    viewModel.createPlayer(name, color)
+                    showAddPlayerBottomSheet = false
+                }
+            )
+        }
 
-    val event by viewModel.events.collectAsState(None)
-    LaunchedEffect(event) {
-        when (event) {
-            is NavigateTo -> controller.navigateTo(event)
+        showSettings -> {
+            GameSettingsBottomSheet(
+                initialBalance = state.initialBalanceInCents,
+                onDismiss = { showSettings = false },
+                onConfirm = { viewModel.onUpdateInitialBalance(it); showSettings = false }
+            )
         }
     }
+    EventHandler(viewModel, controller)
 }
 
-private data class GameSetupActions(
+private data class NewGameActions(
     val onBack: () -> Unit = {},
     val onStart: () -> Unit = {},
     val onAddPlayer: () -> Unit = {},
     val onRemove: (LeadPlayer) -> Unit = {},
+    val onClickSettings: () -> Unit = {},
 )
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun GameSetupContent(
+private fun NewGameContent(
     players: List<LeadPlayer>,
-    actions: GameSetupActions,
+    actions: NewGameActions,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("New Game") },
-                navigationIcon = { BackButton(actions.onBack) }
+                navigationIcon = { BackButton(actions.onBack) },
+                actions = {
+                    IconButton(onClick = actions.onClickSettings) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Game Settings"
+                        )
+                    }
+                }
             )
         },
         bottomBar = {
@@ -148,6 +167,21 @@ private fun GameSetupContent(
 }
 
 @Composable
+private fun EventHandler(
+    viewModel: NewGameViewModel,
+    controller: NavHostController
+) {
+    val event by viewModel.events.collectAsState(None)
+    LaunchedEffect(event) {
+        when (event) {
+            is NavigateTo -> controller.navigateTo(event) {
+                popUpTo(AppRoutes.Game.New) { inclusive = true }
+            }
+        }
+    }
+}
+
+@Composable
 private fun EmptyMessage() {
     Text(
         modifier = Modifier
@@ -174,14 +208,14 @@ private fun PlayerRow(player: LeadPlayer) {
 @Composable
 private fun Preview() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        GameSetupContent(
+        NewGameContent(
             players = listOf(
                 LeadPlayer("John", 0xFF6200EE.toInt()),
                 LeadPlayer("Jane", 0xFF03DAC5.toInt()),
                 LeadPlayer("Doe", 0xFFFF5722.toInt()),
                 LeadPlayer("Alice", 0xFF4CAF50.toInt())
             ),
-            actions = GameSetupActions()
+            actions = NewGameActions()
         )
     }
 }
@@ -190,9 +224,9 @@ private fun Preview() {
 @Composable
 private fun PreviewEmpty() {
     Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-        GameSetupContent(
+        NewGameContent(
             players = emptyList(),
-            actions = GameSetupActions()
+            actions = NewGameActions()
         )
     }
 }

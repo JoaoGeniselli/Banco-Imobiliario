@@ -11,6 +11,13 @@ class PlayerRepository @Inject constructor(
 ) {
     val players = playerDao.fetchAllPlayers()
 
+    suspend fun overridePlayerList(newPlayers: List<Player>) {
+        playerDao.run {
+            clearAll()
+            insertAll(newPlayers)
+        }
+    }
+
     suspend fun deposit(
         playerId: Int,
         amountInCents: Int
@@ -29,4 +36,6 @@ class PlayerRepository @Inject constructor(
         playerId: Int,
         amountInCents: Int
     ): Player = deposit(playerId, amountInCents * -1)
+
+    suspend fun countPlayers() = playerDao.fetchPlayersCount()
 }

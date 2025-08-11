@@ -2,6 +2,7 @@
 <resources>
     <string name="message_invalid_amount">Amount must be greater than zero.</string>
     <string name="message_invalid_initial_balance">Initial balance must be greater than zero.</string>
+    <string name="message_invalid_player_amount">Invalid player amount!</string>
     <string name="message_invalid_player">Invalid player!</string>
     <string name="message_invalid_destination_player">Invalid beneficiary!</string>
     <string name="generic_error_message">Ooops, error! Try again later.</string>

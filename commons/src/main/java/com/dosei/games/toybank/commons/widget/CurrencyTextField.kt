@@ -19,6 +19,9 @@ fun CurrencyTextField(
     value: Int,
     onUpdateValue: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    label: (@Composable () -> Unit)? = null,
+    supportingText: (@Composable () -> Unit)? = null,
+    isError: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions()
 ) {
     val formattedValue by remember(value) {
@@ -36,7 +39,10 @@ fun CurrencyTextField(
             val rawValueInCents = newValue.text.filter { it.isDigit() }
             val intValueInCents = runCatching { rawValueInCents.toInt() }.getOrDefault(0)
             onUpdateValue(intValueInCents)
-        }
+        },
+        isError = isError,
+        label = label,
+        supportingText = supportingText
     )
 }
 

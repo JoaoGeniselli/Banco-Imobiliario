@@ -29,6 +29,7 @@ dependencies {
     implementation(project(":commons"))
     implementation(project(":ui"))
 
+    api(project(":features:newgame"))
     api(project(":features:transaction"))
 
     implementation(libs.androidx.core.ktx)
@@ -44,7 +45,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)
 
-    testImplementation(libs.junit)
+    testImplementation(project(":test"))
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 

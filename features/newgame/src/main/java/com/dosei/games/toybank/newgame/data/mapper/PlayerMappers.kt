@@ -1,7 +1,7 @@
-package com.dosei.games.toybank.core.data.mapper
+package com.dosei.games.toybank.newgame.data.mapper
 
 import com.dosei.games.toybank.core.data.storage.player.Player
-import com.dosei.games.toybank.core.data.model.LeadPlayer
+import com.dosei.games.toybank.newgame.data.model.LeadPlayer
 
 fun LeadPlayer.toNewEntity(balanceInCents: Int) = Player(
     name = name,

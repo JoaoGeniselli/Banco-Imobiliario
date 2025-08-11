@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.core.data.model
+package com.dosei.games.toybank.newgame.data.model
 
 data class LeadPlayer(
     val name: String,
