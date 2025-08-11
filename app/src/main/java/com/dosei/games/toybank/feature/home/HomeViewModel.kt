@@ -8,11 +8,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: GameSetupRepository
+    hasOngoingGame: HasOngoingGame
 ): ViewModel() {
 
-    val isContinueEnabled = flow {
-        emit(repository.hasOngoingGame())
-    }
-
+    val isContinueEnabled = flow { emit(hasOngoingGame()) }
 }

@@ -34,7 +34,7 @@ fun HomeScreen(
     val actions = remember {
         HomeActions(
             onBack = { controller.popBackStack() },
-            onClickNewGame = { controller.navigate(AppRoutes.Game.Setup) },
+            onClickNewGame = { controller.navigate(AppRoutes.Game.New) },
             onClickContinue = { controller.navigate(AppRoutes.Game.Play) }
         )
     }

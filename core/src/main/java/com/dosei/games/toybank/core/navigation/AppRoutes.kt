@@ -11,7 +11,7 @@ object AppRoutes {
     @Serializable
     data object Game {
         @Serializable
-        data object Setup
+        data object New
 
         @Serializable
         data object Play
