@@ -9,10 +9,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-apply { from("$rootDir/quality/quality.gradle") }
-
 android {
-    namespace = "com.dosei.games.toybank.features"
+    namespace = "com.dosei.games.toybank.history"
     kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
@@ -28,9 +26,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":commons"))
     implementation(project(":ui"))
-
-    api(project(":features:newgame"))
-    api(project(":features:transaction"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

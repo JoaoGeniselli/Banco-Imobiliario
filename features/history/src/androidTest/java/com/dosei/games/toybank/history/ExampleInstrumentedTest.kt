@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.features
+package com.dosei.games.toybank.history
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.dosei.games.toybank.features.test", appContext.packageName)
+        assertEquals("com.dosei.games.toybank.history.test", appContext.packageName)
     }
 }

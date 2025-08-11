@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.features
+package com.dosei.games.toybank.history
 
 import org.junit.Test
 
