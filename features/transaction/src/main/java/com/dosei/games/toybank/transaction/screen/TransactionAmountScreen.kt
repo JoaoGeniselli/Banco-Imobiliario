@@ -59,7 +59,7 @@ fun TransactionAmountScreen(
     LaunchedEffect(event) {
         when (event) {
             is NavigateTo -> controller.navigateTo(event)
-            is Close -> controller.popBackStack(AppRoutes.Transaction, true)
+            is Close -> controller.popBackStack(AppRoutes.Transaction::class, true)
             is UiError -> Toast
                 .makeText(context, context.errorMessage(event), Toast.LENGTH_LONG)
                 .show()
