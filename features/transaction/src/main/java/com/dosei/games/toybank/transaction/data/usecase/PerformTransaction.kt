@@ -3,12 +3,12 @@ package com.dosei.games.toybank.transaction.data.usecase
 import com.dosei.games.toybank.core.data.model.TransactionType
 import com.dosei.games.toybank.core.data.model.error.BusinessException
 import com.dosei.games.toybank.core.data.model.error.ErrorCodes
-import com.dosei.games.toybank.core.data.repository.TransactionRepository
+import com.dosei.games.toybank.core.data.repository.PlayerRepository
 import com.dosei.games.toybank.transaction.TransactionState
 import javax.inject.Inject
 
 class PerformTransaction @Inject constructor(
-    private val repository: TransactionRepository
+    private val repository: PlayerRepository
 ) {
 
     suspend operator fun invoke(state: TransactionState) {

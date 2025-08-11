@@ -13,7 +13,4 @@ data object TransactionRoutes {
 
     @Serializable
     data object AmountInput
-
-    @Serializable
-    data object Receipt
 }

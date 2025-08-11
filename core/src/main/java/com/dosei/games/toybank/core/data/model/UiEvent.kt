@@ -6,6 +6,8 @@ interface UiEvent
 
 data object None : UiEvent
 
+data object Close : UiEvent
+
 sealed interface NavigateTo : UiEvent {
 
     data class StringRoute(

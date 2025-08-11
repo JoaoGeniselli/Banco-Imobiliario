@@ -32,9 +32,7 @@ open class StatefulViewModel<T : Any>(initialState: T) : ViewModel() {
     }
 
     fun request(
-        onError: suspend (Throwable) -> Unit = {
-            sendEvent(UiError(it))
-        },
+        onError: suspend (Throwable) -> Unit = { sendEvent(UiError(it)) },
         coroutineContext: CoroutineContext = EmptyCoroutineContext,
         block: suspend () -> Unit,
     ) {

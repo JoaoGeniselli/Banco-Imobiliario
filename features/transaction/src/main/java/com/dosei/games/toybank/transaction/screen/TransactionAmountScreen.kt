@@ -1,9 +1,11 @@
-package com.dosei.games.toybank.transaction.amount
+package com.dosei.games.toybank.transaction.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -13,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -22,11 +25,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.dosei.games.toybank.commons.navigation.navigateTo
 import com.dosei.games.toybank.commons.widget.CurrencyTextField
+import com.dosei.games.toybank.commons.widget.errorMessage
+import com.dosei.games.toybank.core.data.model.Close
+import com.dosei.games.toybank.core.data.model.NavigateTo
+import com.dosei.games.toybank.core.data.model.None
+import com.dosei.games.toybank.core.data.model.UiError
+import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.transaction.TransactionViewModel
 
 @Composable
@@ -42,6 +53,18 @@ fun TransactionAmountScreen(
             viewModel.onConfirmAmount(amount)
         }
     )
+
+    val context = LocalContext.current
+    val event by viewModel.events.collectAsState(None)
+    LaunchedEffect(event) {
+        when (event) {
+            is NavigateTo -> controller.navigateTo(event)
+            is Close -> controller.popBackStack(AppRoutes.Transaction, true)
+            is UiError -> Toast
+                .makeText(context, context.errorMessage(event), Toast.LENGTH_LONG)
+                .show()
+        }
+    }
 }
 
 @Composable
@@ -54,7 +77,7 @@ fun TransactionAmountContent(
     val focusRequester = remember { FocusRequester() }
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Transferência") })
+            TopAppBar(title = { Text("Transaction") })
         }
     ) { innerPadding ->
         Column(
@@ -63,6 +86,9 @@ fun TransactionAmountContent(
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp, vertical = 24.dp)
         ) {
+            Text("Enter the transaction amount:")
+            Spacer(Modifier.height(16.dp))
+
             CurrencyTextField(
                 modifier = Modifier
                     .fillMaxWidth()

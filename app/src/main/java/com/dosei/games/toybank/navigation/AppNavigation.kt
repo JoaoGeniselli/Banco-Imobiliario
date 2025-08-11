@@ -30,7 +30,7 @@ fun AppNavigation(controller: NavHostController) {
             GameplayScreen(controller, hiltViewModel())
         }
 
-        transactionGraph(controller, Modifier)
+        transactionGraph(controller)
 
     }
 }

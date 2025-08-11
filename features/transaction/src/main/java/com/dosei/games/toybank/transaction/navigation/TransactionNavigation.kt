@@ -2,6 +2,7 @@ package com.dosei.games.toybank.transaction.navigation
 
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -10,12 +11,12 @@ import androidx.navigation.toRoute
 import com.dosei.games.toybank.commons.navigation.sharedViewModel
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.transaction.TransactionViewModel
-import com.dosei.games.toybank.transaction.amount.TransactionAmountScreen
-import com.dosei.games.toybank.transaction.type.TransactionTypeScreen
+import com.dosei.games.toybank.transaction.screen.TransactionAmountScreen
+import com.dosei.games.toybank.transaction.screen.TransactionTypeScreen
+import com.dosei.games.toybank.transaction.screen.beneficiary.TransactionBeneficiaryScreen
 
 fun NavGraphBuilder.transactionGraph(
     controller: NavHostController,
-    modifier: Modifier,
 ) {
     navigation<AppRoutes.Transaction>(
         startDestination = TransactionRoutes.TypeSelection(playerId = 0) // playerId will be overridden
@@ -26,7 +27,7 @@ fun NavGraphBuilder.transactionGraph(
             val viewModel = entry.sharedViewModel<TransactionViewModel>(controller)
 
             LaunchedEffect(Unit) {
-                viewModel.load(route.playerId)
+                viewModel.start(route.playerId)
             }
 
             TransactionTypeScreen(
@@ -42,8 +43,13 @@ fun NavGraphBuilder.transactionGraph(
             )
         }
 
-        composable<TransactionRoutes.Receipt> {
-
+        composable<TransactionRoutes.BeneficiarySelection> { entry ->
+            TransactionBeneficiaryScreen(
+                controller = controller,
+                parentViewModel = entry.sharedViewModel(controller),
+                viewModel = hiltViewModel()
+            )
         }
+
     }
 }

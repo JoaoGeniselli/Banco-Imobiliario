@@ -6,7 +6,7 @@ import com.dosei.games.toybank.core.data.storage.player.PlayerDao
 import com.dosei.games.toybank.core.data.storage.transaction.TransactionDao
 import javax.inject.Inject
 
-class TransactionRepository @Inject constructor(
+class PlayerRepository @Inject constructor(
     private val playerDao: PlayerDao,
     private val transactionDao: TransactionDao
 ) {

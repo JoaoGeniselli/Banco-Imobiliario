@@ -2,6 +2,7 @@ package com.dosei.games.toybank.core.navigation
 
 import kotlinx.serialization.Serializable
 
+@Serializable
 object AppRoutes {
 
     @Serializable
@@ -17,5 +18,5 @@ object AppRoutes {
     }
 
     @Serializable
-    data class Transaction(val playerId: String)
+    data class Transaction(val playerId: Int)
 }

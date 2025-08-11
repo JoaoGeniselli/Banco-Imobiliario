@@ -2,7 +2,7 @@ package com.dosei.games.toybank.feature.game.play
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dosei.games.toybank.core.data.repository.TransactionRepository
+import com.dosei.games.toybank.core.data.repository.PlayerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameplayViewModel @Inject constructor(
-    private val repository: TransactionRepository
+    private val repository: PlayerRepository
 ) : ViewModel() {
 
     val players = repository.players

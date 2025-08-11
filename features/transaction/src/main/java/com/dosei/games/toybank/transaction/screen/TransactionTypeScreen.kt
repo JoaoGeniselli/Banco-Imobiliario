@@ -1,10 +1,14 @@
-package com.dosei.games.toybank.transaction.type
+package com.dosei.games.toybank.transaction.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -17,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.commons.navigation.navigateTo
 import com.dosei.games.toybank.core.data.model.NavigateTo
@@ -32,7 +37,8 @@ fun TransactionTypeScreen(
 ) {
     TransactionTypeContent(
         actions = TransactionTypeActions(
-            onBack = { controller.popBackStack() }
+            onBack = { controller.popBackStack() },
+            onSelectType = { type -> viewModel.onSelectType(type) }
         )
     )
 
@@ -65,20 +71,41 @@ private fun TransactionTypeContent(
         }
     ) { innerPadding ->
         Column(Modifier.padding(innerPadding)) {
-            ListItem(
-                modifier = Modifier.clickable { actions.onSelectType(TransactionType.DEPOSIT) },
-                headlineContent = { Text(text = "Deposit") }
+            Text(
+                modifier = Modifier.padding(16.dp),
+                text = "Select the transaction type:"
             )
-            ListItem(
-                modifier = Modifier.clickable { actions.onSelectType(TransactionType.WITHDRAW) },
-                headlineContent = { Text(text = "Withdraw") }
+            Option(
+                onClick =  { actions.onSelectType(TransactionType.DEPOSIT) },
+                title = "Deposit"
             )
-            ListItem(
-                modifier = Modifier.clickable { actions.onSelectType(TransactionType.TRANSFER) },
-                headlineContent = { Text(text = "Transfer") }
+            HorizontalDivider()
+            Option(
+                onClick = { actions.onSelectType(TransactionType.WITHDRAW) },
+                title = "Withdraw"
             )
+            HorizontalDivider()
+            Option(
+                onClick = { actions.onSelectType(TransactionType.TRANSFER) },
+                title = "Transfer",
+            )
+            HorizontalDivider()
         }
     }
+}
+
+@Composable
+private fun Option(onClick: () -> Unit, title: String) {
+    ListItem(
+        modifier = Modifier.clickable(onClick = onClick),
+        headlineContent = { Text(text = title) },
+        trailingContent = {
+            Icon(
+                imageVector = Icons.AutoMirrored.Default.KeyboardArrowRight,
+                contentDescription = "Navigate to $title"
+            )
+        }
+    )
 }
 
 @Preview(showBackground = true)

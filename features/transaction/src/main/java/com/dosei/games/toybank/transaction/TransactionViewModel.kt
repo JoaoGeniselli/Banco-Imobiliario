@@ -2,6 +2,7 @@ package com.dosei.games.toybank.transaction
 
 import androidx.lifecycle.viewModelScope
 import com.dosei.games.toybank.core.base.StatefulViewModel
+import com.dosei.games.toybank.core.data.model.Close
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.TransactionType
 import com.dosei.games.toybank.transaction.data.usecase.PerformTransaction
@@ -17,7 +18,7 @@ class TransactionViewModel @Inject constructor(
     initialState = TransactionState()
 ) {
 
-    fun load(playerId: Int) {
+    fun start(playerId: Int) {
         updateState { old -> old.copy(playerId = playerId) }
     }
 
@@ -40,15 +41,10 @@ class TransactionViewModel @Inject constructor(
     }
 
     fun onConfirmAmount(amount: Int) {
-        updateState { old -> old.copy(amountInCents = amount) }
-    }
-
-    fun onConfirmTransaction() {
         request {
+            updateState { old -> old.copy(amountInCents = amount) }
             performTransaction(state.value)
-            sendEvent(NavigateTo(TransactionRoutes.Receipt))
+            sendEvent(Close)
         }
     }
-
-
 }

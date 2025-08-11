@@ -1,5 +1,6 @@
 package com.dosei.games.toybank.feature.game.play
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +25,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.core.data.storage.player.Player
+import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.core.toolbox.formatBlr
 import com.dosei.games.toybank.ui.widget.BackButton
 import com.dosei.games.toybank.ui.widget.ColorChip
@@ -36,7 +38,10 @@ fun GameplayScreen(
     val players by viewModel.players.collectAsState()
     val actions = remember {
         GameplayActions(
-            onBack = { controller.popBackStack() }
+            onBack = { controller.popBackStack() },
+            onClickPlayer = { player ->
+                controller.navigate(AppRoutes.Transaction(player.id))
+            }
         )
     }
     GameplayContent(
@@ -48,6 +53,7 @@ fun GameplayScreen(
 private data class GameplayActions(
     val onBack: () -> Unit = {},
     val onMore: () -> Unit = {},
+    val onClickPlayer: (Player) -> Unit = {},
 )
 
 @Composable
@@ -78,6 +84,7 @@ private fun GameplayContent(
         ) {
             items(players) { player ->
                 ListItem(
+                    modifier = Modifier.clickable { actions.onClickPlayer(player) },
                     leadingContent = { ColorChip(Color(player.colorARGB)) },
                     headlineContent = { Text(player.name) },
                     trailingContent = { Text(player.balanceInCents.formatBlr()) }
