@@ -94,7 +94,7 @@ comments:
 complexity:
   active: true
   CognitiveComplexMethod:
-    active: false
+    active: true
     threshold: 15
   ComplexCondition:
     active: true
@@ -534,7 +534,7 @@ style:
     active: false
     includeElvis: true
   ClassOrdering:
-    active: false
+    active: true
   CollapsibleIfStatements:
     active: false
   DataClassContainsFunctions:
@@ -543,7 +543,7 @@ style:
       - 'to'
     allowOperators: false
   DataClassShouldBeImmutable:
-    active: false
+    active: true
   DestructuringDeclarationWithTooManyEntries:
     active: true
     maxDestructuringEntries: 3
@@ -744,7 +744,7 @@ style:
   UntilInsteadOfRangeTo:
     active: false
   UnusedImports:
-    active: false
+    active: true
   UnusedParameter:
     active: true
     allowedNames: 'ignored|expected'

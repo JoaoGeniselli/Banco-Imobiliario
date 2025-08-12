@@ -7,5 +7,7 @@ class TransactionRepository @Inject constructor(
     private val transactionDao: TransactionDao
 ) {
 
+    val history = transactionDao.fetchLastTransactions()
+
     suspend fun clearHistory() = transactionDao.clearAll()
 }
