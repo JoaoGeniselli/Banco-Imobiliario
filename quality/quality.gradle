@@ -1,1 +1,2 @@
 apply from: "$rootDir/quality/detekt/detekt.gradle"
+apply from: "$rootDir/quality/kover/kover.gradle"

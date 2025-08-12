@@ -1,0 +1,29 @@
+apply plugin: "org.jetbrains.kotlinx.kover"
+
+kover {
+    reports {
+        filters {
+            excludes {
+                classes(
+                        "*.R",
+                        "*.R\$*",
+                        "*.BuildConfig",
+                        "*.*Screen*",
+                        "*.*Widget*",
+                        "*.*Actions*",
+                        "*.*State*",
+                        "*.widget.*",
+                        "*.model.*",
+                        "*.navigation.*",
+                        "*.ComposableSingletons",
+                        "*.Hilt_*",
+                        "*.*_HiltModules*",
+                        "*.*_Factory*",
+                        "*.*Module*",
+                        "dagger.*",
+                        "hilt_aggregated_deps.*",
+                )
+            }
+        }
+    }
+}
