@@ -27,7 +27,6 @@ import androidx.navigation.NavHostController
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.core.toolbox.formatBlr
-import com.dosei.games.toybank.ui.widget.BackButton
 import com.dosei.games.toybank.ui.widget.ColorChip
 
 @Composable
