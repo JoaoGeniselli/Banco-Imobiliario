@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,7 +40,8 @@ fun GameplayScreen(
             onBack = { controller.popBackStack() },
             onClickPlayer = { player ->
                 controller.navigate(AppRoutes.Transaction(player.id))
-            }
+            },
+            onClickHistory = { controller.navigate(AppRoutes.Game.History) }
         )
     }
     GameplayContent(
@@ -51,8 +52,8 @@ fun GameplayScreen(
 
 private data class GameplayActions(
     val onBack: () -> Unit = {},
-    val onMore: () -> Unit = {},
     val onClickPlayer: (Player) -> Unit = {},
+    val onClickHistory: () -> Unit = {},
 )
 
 @Composable
@@ -66,10 +67,10 @@ private fun GameplayContent(
             TopAppBar(
                 title = { Text("Toy Bank") },
                 actions = {
-                    IconButton(onClick = actions.onMore) {
+                    IconButton(onClick = actions.onClickHistory) {
                         Icon(
-                            imageVector = Icons.Default.MoreVert,
-                            contentDescription = "More options"
+                            imageVector = Icons.Default.History,
+                            contentDescription = "History"
                         )
                     }
                 }

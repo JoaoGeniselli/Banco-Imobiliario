@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="history_feature_title">History</string>
+    <string name="history_empty_message">There are no transactions yet.</string>
+    <string name="history_transaction_deposit">Deposit</string>
+    <string name="history_transaction_transfer">Transfer</string>
+    <string name="history_transaction_withdraw">Withdraw</string>
+</resources>

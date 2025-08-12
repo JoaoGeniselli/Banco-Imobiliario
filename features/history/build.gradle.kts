@@ -36,11 +36,9 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
     implementation(libs.kotlin.serialization.json)
-    implementation(libs.androidx.room.runtime)
     implementation(libs.hilt.android)
 
     ksp(libs.hilt.compiler)
-    ksp(libs.androidx.room.compiler)
 
     testImplementation(project(":test"))
     androidTestImplementation(libs.androidx.junit)

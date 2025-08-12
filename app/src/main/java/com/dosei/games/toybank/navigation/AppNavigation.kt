@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.feature.game.play.GameplayScreen
 import com.dosei.games.toybank.feature.home.HomeScreen
+import com.dosei.games.toybank.history.navigation.historyGraph
 import com.dosei.games.toybank.newgame.navigation.newGameGraph
 import com.dosei.games.toybank.transaction.navigation.transactionGraph
 
@@ -27,6 +28,6 @@ fun AppNavigation(controller: NavHostController) {
 
         transactionGraph(controller)
         newGameGraph(controller)
-
+        historyGraph(controller)
     }
 }

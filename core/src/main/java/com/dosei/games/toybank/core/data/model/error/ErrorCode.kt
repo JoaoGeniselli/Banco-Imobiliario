@@ -9,4 +9,5 @@ enum class ErrorCode(@StringRes val resourceMessage: Int?) {
     INVALID_PLAYER_AMOUNT(R.string.message_invalid_player_amount),
     INVALID_PLAYER(R.string.message_invalid_player),
     INVALID_DESTINATION_PLAYER(R.string.message_invalid_destination_player),
+    INTERNAL_ERROR(R.string.generic_error_message),
 }

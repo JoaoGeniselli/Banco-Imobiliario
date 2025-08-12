@@ -2,16 +2,19 @@ package com.dosei.games.toybank.history.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dosei.games.toybank.core.data.repository.TransactionRepository
+import com.dosei.games.toybank.history.data.model.HistoryEntry
+import com.dosei.games.toybank.history.data.usecase.LoadHistory
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted.Companion.Lazily
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 
 @HiltViewModel
-class HistoryViewModel(
-    private val repository: TransactionRepository
+class HistoryViewModel @Inject constructor(
+    private val loadHistory: LoadHistory
 ) : ViewModel() {
 
-    val history = repository.history
-        .stateIn(viewModelScope, Lazily, emptyList())
+    fun fetchHistory(): StateFlow<List<HistoryEntry>> = loadHistory()
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 }

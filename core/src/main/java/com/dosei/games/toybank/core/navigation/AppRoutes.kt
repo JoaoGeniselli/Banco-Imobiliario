@@ -15,6 +15,9 @@ object AppRoutes {
 
         @Serializable
         data object Play
+
+        @Serializable
+        data object History
     }
 
     @Serializable
