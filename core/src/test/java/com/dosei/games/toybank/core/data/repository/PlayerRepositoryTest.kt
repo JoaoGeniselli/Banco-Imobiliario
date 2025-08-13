@@ -1,6 +1,7 @@
 package com.dosei.games.toybank.core.data.repository
 
 import com.dosei.games.toybank.core.data.model.error.BusinessException
+import com.dosei.games.toybank.core.data.model.error.ErrorCode
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.core.data.storage.player.PlayerDao
 import com.dosei.games.toybank.test.coAssertThrows
@@ -62,17 +63,19 @@ class PlayerRepositoryTest {
     @Test
     fun `throw error when deposit player is unknown`() = runTest {
         coEvery { dao.fetchPlayerById(1) } returns null
-        coAssertThrows<BusinessException> {
+        val error = coAssertThrows<BusinessException> {
             repository.withdraw(1, 30)
         }
+        assertEquals(ErrorCode.INVALID_PLAYER, error.code)
     }
 
     @Test
     fun `throw error when withdraw player is unknown`() = runTest {
         coEvery { dao.fetchPlayerById(1) } returns null
-        coAssertThrows<BusinessException> {
+        val error = coAssertThrows<BusinessException> {
             repository.withdraw(1, 30)
         }
+        assertEquals(ErrorCode.INVALID_PLAYER, error.code)
     }
 
     @Test

@@ -4,6 +4,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertThrows
 
 inline fun <reified T: Throwable> coAssertThrows(
+    noinline validate: (T) -> Unit = {},
     noinline executable: suspend () -> Unit
 ) = assertThrows(T::class.java) {
     runBlocking { executable() }

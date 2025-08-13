@@ -6,13 +6,17 @@ import com.dosei.games.toybank.history.data.model.HistoryEntry
 import com.dosei.games.toybank.history.data.usecase.LoadHistory
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.util.Date
+import kotlin.time.Duration.Companion.seconds
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class HistoryViewModelTest {
 
     private lateinit var loadHistory: LoadHistory
@@ -32,7 +36,7 @@ class HistoryViewModelTest {
         )
         every { loadHistory.invoke() } returns flowOf(entries)
         viewModel.fetchHistory().test {
-            assertEquals(emptyList<HistoryEntry>(), awaitItem()) // initial state value
+            advanceTimeBy(1.seconds)
             assertEquals(entries, awaitItem())
         }
     }

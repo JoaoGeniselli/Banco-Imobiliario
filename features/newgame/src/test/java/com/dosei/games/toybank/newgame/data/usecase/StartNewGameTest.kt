@@ -2,6 +2,7 @@ package com.dosei.games.toybank.newgame.data.usecase
 
 import androidx.compose.ui.graphics.toArgb
 import com.dosei.games.toybank.core.data.model.error.BusinessException
+import com.dosei.games.toybank.core.data.model.error.ErrorCode
 import com.dosei.games.toybank.core.data.repository.PlayerRepository
 import com.dosei.games.toybank.core.data.repository.TransactionRepository
 import com.dosei.games.toybank.newgame.data.mapper.toNewEntity
@@ -13,6 +14,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -33,28 +35,33 @@ class StartNewGameTest {
     }
 
     @Test
-    fun `throw error when balance is invalid`() = runTest {
+    fun `throw error when balance is negative`() = runTest {
         val players = listOf(
             LeadPlayer("John", Purple.toArgb()),
             LeadPlayer("William", DeepOrange.toArgb()),
         )
-        coAssertThrows<BusinessException> {
+        val error = coAssertThrows<BusinessException> {
             startNewGame(leadPlayers = players, initialBalance = -1)
         }
-        coAssertThrows<BusinessException> {
+        assertEquals(ErrorCode.INVALID_INITIAL_BALANCE, error.code)
+
+        val error1 = coAssertThrows<BusinessException> {
             startNewGame(leadPlayers = players, initialBalance = 0)
         }
+        assertEquals(ErrorCode.INVALID_INITIAL_BALANCE, error1.code)
     }
 
     @Test
     fun `throw error when player amount is invalid`() = runTest {
-        coAssertThrows<BusinessException> {
+        val error1 = coAssertThrows<BusinessException> {
             startNewGame(
                 leadPlayers = emptyList(),
                 initialBalance = 200
             )
         }
-        coAssertThrows<BusinessException> {
+        assertEquals(ErrorCode.INVALID_PLAYER_AMOUNT, error1.code)
+
+        val error2 = coAssertThrows<BusinessException> {
             startNewGame(
                 leadPlayers = listOf(
                     LeadPlayer("John", Purple.toArgb()),
@@ -62,7 +69,9 @@ class StartNewGameTest {
                 initialBalance = 200
             )
         }
-        coAssertThrows<BusinessException> {
+        assertEquals(ErrorCode.INVALID_PLAYER_AMOUNT, error2.code)
+
+        val error3 = coAssertThrows<BusinessException> {
             startNewGame(
                 leadPlayers = MutableList(PLAYERS_RANGE.last.inc()) { v ->
                     LeadPlayer("$v", v)
@@ -70,6 +79,7 @@ class StartNewGameTest {
                 initialBalance = 200
             )
         }
+        assertEquals(ErrorCode.INVALID_PLAYER_AMOUNT, error3.code)
     }
 
     @Test

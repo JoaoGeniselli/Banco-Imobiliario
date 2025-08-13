@@ -1,0 +1,33 @@
+apply plugin: "org.jetbrains.kotlinx.kover"
+
+kover {
+    reports {
+        filters {
+            excludes {
+                classes(
+                        "*.ToyBankApp",                 // Android application
+                        "*.R",                          // Android resources index
+                        "*.R\$*",                       // Android resources index
+                        "*.BuildConfig",                // Gradle build config files
+                        "*.*Screen*",                   // Composable screens
+                        "*.*Activity*",                 // Android Activities (UI)
+                        "*.*_Impl*",                     // Room generated implementations
+                        "*.*Widget*",                   // Composable widgets
+                        "*.*Actions*",                  // Action objects (data classes)
+                        "*.*State*",                    // Ui State (data classes)
+                        "*.widget.*",                   // Composable widgets
+                        "*.model.*",                    // data classes
+                        "*.theme.*",                    // Compose theming
+                        "*.navigation.*",               // Compose navigation graphs
+                        "*.ComposableSingletons",       // Compose generated code
+                        "*.Hilt_*",                     // Hilt generated injectors
+                        "*.*_HiltModules*",             // Hilt generated injectors
+                        "*.*_Factory*",                 // Hilt generated factories
+                        "*.*Module*",                   // Hilt injection module
+                        "dagger.*",                     // Hilt generated code
+                        "hilt_aggregated_deps.*",       // Hilt generated code
+                )
+            }
+        }
+    }
+}

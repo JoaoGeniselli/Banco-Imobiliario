@@ -16,5 +16,5 @@ class HistoryViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun fetchHistory(): StateFlow<List<HistoryEntry>> = loadHistory()
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 }

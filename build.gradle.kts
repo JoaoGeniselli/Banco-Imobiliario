@@ -8,6 +8,19 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.kover) apply true
+}
+
+apply { from("$rootDir/quality/kover/kover.gradle") }
+
+dependencies {
+    kover(project(":app"))
+    kover(project(":features:newgame"))
+    kover(project(":features:history"))
+    kover(project(":features:transaction"))
+    kover(project(":core"))
+    kover(project(":commons"))
+    kover(project(":ui"))
 }
 
 subprojects {
