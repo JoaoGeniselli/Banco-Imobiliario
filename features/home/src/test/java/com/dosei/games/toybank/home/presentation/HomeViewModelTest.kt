@@ -10,7 +10,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
-class HomeViewModelTest {
+internal class HomeViewModelTest {
 
     private lateinit var hasOngoingGame: HasOngoingGame
     private lateinit var viewModel: HomeViewModel
@@ -32,7 +32,7 @@ class HomeViewModelTest {
 
     @Test
     fun `disable continue button when there is no ongoing game`() = runTest {
-        coEvery { hasOngoingGame() } returns true
+        coEvery { hasOngoingGame() } returns false
         viewModel.isContinueEnabled().test {
             assertFalse(awaitItem())
             awaitComplete()
