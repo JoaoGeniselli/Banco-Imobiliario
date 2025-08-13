@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.feature.game.play
+package com.dosei.games.toybank.gameplay.presentation
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,11 +30,11 @@ import com.dosei.games.toybank.core.toolbox.formatBlr
 import com.dosei.games.toybank.ui.widget.ColorChip
 
 @Composable
-fun GameplayScreen(
+internal fun GameplayScreen(
     controller: NavHostController,
     viewModel: GameplayViewModel,
 ) {
-    val players by viewModel.players.collectAsState()
+    val players by remember { viewModel.fetchPlayers() }.collectAsState()
     val actions = remember {
         GameplayActions(
             onBack = { controller.popBackStack() },

@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.feature.game.play
+package com.dosei.games.toybank.gameplay.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,11 +9,10 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class GameplayViewModel @Inject constructor(
+internal class GameplayViewModel @Inject constructor(
     private val repository: PlayerRepository
 ) : ViewModel() {
 
-    val players = repository.players
+    fun fetchPlayers() = repository.players
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
-
 }
