@@ -8,15 +8,16 @@ kover {
                         "*.ToyBankApp",                 // Android application
                         "*.R",                          // Android resources index
                         "*.R\$*",                       // Android resources index
+                        "*.AppDatabase",                // Room abstract database
                         "*.BuildConfig",                // Gradle build config files
                         "*.*Screen*",                   // Composable screens
                         "*.*Activity*",                 // Android Activities (UI)
-                        "*.*_Impl*",                     // Room generated implementations
+                        "*.*_Impl*",                    // Room generated implementations
                         "*.*Widget*",                   // Composable widgets
                         "*.*Actions*",                  // Action objects (data classes)
                         "*.*State*",                    // Ui State (data classes)
                         "*.widget.*",                   // Composable widgets
-                        "*.model.*",                    // data classes
+                        "*.model.*",                    // Model data classes
                         "*.theme.*",                    // Compose theming
                         "*.navigation.*",               // Compose navigation graphs
                         "*.ComposableSingletons",       // Compose generated code

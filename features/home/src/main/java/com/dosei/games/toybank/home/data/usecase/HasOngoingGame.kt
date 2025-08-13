@@ -1,9 +1,9 @@
-package com.dosei.games.toybank.feature.home
+package com.dosei.games.toybank.home.data.usecase
 
 import com.dosei.games.toybank.core.data.repository.PlayerRepository
 import javax.inject.Inject
 
-class HasOngoingGame @Inject constructor(
+internal class HasOngoingGame @Inject constructor(
     private val playerRepository: PlayerRepository
 ) {
 

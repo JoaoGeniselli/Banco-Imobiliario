@@ -18,6 +18,8 @@ dependencies {
     kover(project(":features:newgame"))
     kover(project(":features:history"))
     kover(project(":features:transaction"))
+    kover(project(":features:gameplay"))
+    kover(project(":features:home"))
     kover(project(":core"))
     kover(project(":commons"))
     kover(project(":ui"))

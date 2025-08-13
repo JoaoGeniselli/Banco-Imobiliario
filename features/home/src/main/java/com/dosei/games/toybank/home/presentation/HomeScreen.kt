@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.feature.home
+package com.dosei.games.toybank.home.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,11 +26,11 @@ import androidx.navigation.NavHostController
 import com.dosei.games.toybank.core.navigation.AppRoutes
 
 @Composable
-fun HomeScreen(
+internal fun HomeScreen(
     controller: NavHostController,
     viewModel: HomeViewModel,
 ) {
-    val isContinueEnabled by viewModel.isContinueEnabled.collectAsState(false)
+    val isContinueEnabled by remember { viewModel.isContinueEnabled() }.collectAsState(false)
     val actions = remember {
         HomeActions(
             onBack = { controller.popBackStack() },
