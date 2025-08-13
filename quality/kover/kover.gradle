@@ -11,7 +11,7 @@ kover {
                         "*.BuildConfig",                // Gradle build config files
                         "*.*Screen*",                   // Composable screens
                         "*.*Activity*",                 // Android Activities (UI)
-                        "*.*_Impl",                     // Room generated implementations
+                        "*.*_Impl*",                     // Room generated implementations
                         "*.*Widget*",                   // Composable widgets
                         "*.*Actions*",                  // Action objects (data classes)
                         "*.*State*",                    // Ui State (data classes)
