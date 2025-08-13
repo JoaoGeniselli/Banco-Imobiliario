@@ -1,14 +1,15 @@
-package com.dosei.games.toybank.feature.home
+package com.dosei.games.toybank.home.presentation
 
 import androidx.lifecycle.ViewModel
+import com.dosei.games.toybank.home.data.usecase.HasOngoingGame
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    hasOngoingGame: HasOngoingGame
+    private val hasOngoingGame: HasOngoingGame
 ): ViewModel() {
 
-    val isContinueEnabled = flow { emit(hasOngoingGame()) }
+    fun isContinueEnabled() = flow { emit(hasOngoingGame()) }
 }
