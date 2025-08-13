@@ -6,7 +6,6 @@ import com.dosei.games.toybank.core.data.model.error.ErrorCode
 import com.dosei.games.toybank.core.data.repository.PlayerRepository
 import com.dosei.games.toybank.core.data.repository.TransactionRepository
 import com.dosei.games.toybank.core.data.storage.player.Player
-import com.dosei.games.toybank.core.toolbox.now
 import com.dosei.games.toybank.test.coAssertThrows
 import com.dosei.games.toybank.transaction.TransactionState
 import com.dosei.games.toybank.transaction.data.mapper.toDatabaseEntity
@@ -15,6 +14,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import kotlinx.coroutines.flow.flowOf
@@ -23,7 +23,10 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 class PerformTransactionTest {
 
     @RelaxedMockK
@@ -48,8 +51,8 @@ class PerformTransactionTest {
         )
         coEvery { playerRepository.deposit(any(), any()) } returns Player()
         coEvery { playerRepository.withdraw(any(), any()) } returns Player()
-        mockkStatic("com.dosei.games.toybank.core.toolbox.TimeUtilsKt")
-        every { now() } returns 0L
+        mockkObject(Clock.System)
+        every { Clock.System.now().toEpochMilliseconds() } returns 0L
     }
 
     @After
