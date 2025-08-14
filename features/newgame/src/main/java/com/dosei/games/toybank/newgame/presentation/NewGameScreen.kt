@@ -1,5 +1,7 @@
 package com.dosei.games.toybank.newgame.presentation
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -30,14 +33,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.commons.navigation.navigateTo
-import com.dosei.games.toybank.newgame.data.model.LeadPlayer
+import com.dosei.games.toybank.commons.widget.showErrorFrom
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.None
+import com.dosei.games.toybank.core.data.model.UiError
 import com.dosei.games.toybank.core.navigation.AppRoutes
+import com.dosei.games.toybank.newgame.R
+import com.dosei.games.toybank.newgame.data.model.LeadPlayer
 import com.dosei.games.toybank.newgame.data.usecase.PLAYERS_RANGE
 import com.dosei.games.toybank.newgame.widget.AddPlayerBottomSheet
 import com.dosei.games.toybank.newgame.widget.GameSettingsBottomSheet
@@ -47,13 +55,14 @@ import com.dosei.games.toybank.ui.widget.RemovalBox
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewGameScreen(
+internal fun NewGameScreen(
     controller: NavHostController,
     viewModel: NewGameViewModel,
 ) {
     var showAddPlayerBottomSheet by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
     val state by viewModel.state.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState(false)
     val actions = remember {
         NewGameActions(
             onBack = { controller.popBackStack() },
@@ -66,6 +75,7 @@ fun NewGameScreen(
 
     NewGameContent(
         players = state.players,
+        isLoading = isLoading,
         actions = actions
     )
 
@@ -109,17 +119,28 @@ private data class NewGameActions(
 private fun NewGameContent(
     players: List<LeadPlayer>,
     actions: NewGameActions,
+    isLoading: Boolean = false,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("New Game") },
-                navigationIcon = { BackButton(actions.onBack) },
+                title = { Text(stringResource(R.string.new_game_feature_title)) },
+                navigationIcon = {
+                    BackButton(
+                        enabled = !isLoading,
+                        onClick = actions.onBack
+                    )
+                },
                 actions = {
-                    IconButton(onClick = actions.onClickSettings) {
+                    IconButton(
+                        enabled = !isLoading,
+                        onClick = actions.onClickSettings
+                    ) {
                         Icon(
                             imageVector = Icons.Default.Settings,
-                            contentDescription = "Game Settings"
+                            contentDescription = stringResource(
+                                R.string.new_game_settings_description
+                            )
                         )
                     }
                 }
@@ -131,10 +152,10 @@ private fun NewGameContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-                    enabled = players.size in PLAYERS_RANGE,
+                    enabled = players.size in PLAYERS_RANGE && !isLoading,
                     onClick = actions.onStart
                 ) {
-                    Text("Start")
+                    Text(stringResource(R.string.new_game_action_start))
                 }
             }
         },
@@ -162,6 +183,10 @@ private fun NewGameContent(
                     }
                 }
             }
+
+            if (isLoading) {
+                item { LoadingIndicatorRow() }
+            }
         }
     }
 }
@@ -172,12 +197,27 @@ private fun EventHandler(
     controller: NavHostController
 ) {
     val event by viewModel.events.collectAsState(None)
+    val context = LocalContext.current
     LaunchedEffect(event) {
         when (event) {
             is NavigateTo -> controller.navigateTo(event) {
                 popUpTo(AppRoutes.Game.New) { inclusive = true }
             }
+
+            is UiError -> context.showErrorFrom(event)
         }
+    }
+}
+
+@Composable
+private fun LoadingIndicatorRow() {
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 16.dp),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        CircularProgressIndicator()
     }
 }
 
@@ -187,7 +227,7 @@ private fun EmptyMessage() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        text = "Add players to start a new game.",
+        text = stringResource(R.string.new_game_empty_message),
         style = MaterialTheme.typography.bodyLarge
     )
 }
@@ -215,7 +255,8 @@ private fun Preview() {
                 LeadPlayer("Doe", 0xFFFF5722.toInt()),
                 LeadPlayer("Alice", 0xFF4CAF50.toInt())
             ),
-            actions = NewGameActions()
+            actions = NewGameActions(),
+            isLoading = true
         )
     }
 }

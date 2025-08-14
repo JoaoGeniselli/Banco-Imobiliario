@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class NewGameViewModel @Inject constructor(
+internal class NewGameViewModel @Inject constructor(
     private val startNewGame: StartNewGame
 ) : StatefulViewModel<NewGameState>(initialState = NewGameState()) {
 

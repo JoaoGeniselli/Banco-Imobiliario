@@ -22,7 +22,8 @@ fun CurrencyTextField(
     label: (@Composable () -> Unit)? = null,
     supportingText: (@Composable () -> Unit)? = null,
     isError: Boolean = false,
-    keyboardOptions: KeyboardOptions = KeyboardOptions()
+    keyboardOptions: KeyboardOptions = KeyboardOptions(),
+    enabled: Boolean = true,
 ) {
     val formattedValue by remember(value) {
         derivedStateOf { value.formatBlr() }
@@ -33,6 +34,7 @@ fun CurrencyTextField(
             text = formattedValue,
             selection = TextRange(formattedValue.length)
         ),
+        enabled = enabled,
         keyboardOptions = keyboardOptions.copy(keyboardType = KeyboardType.Number),
         placeholder = { Text("R\$ 0,00") },
         onValueChange = { newValue ->

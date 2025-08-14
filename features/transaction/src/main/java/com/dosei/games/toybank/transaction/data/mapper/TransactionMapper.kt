@@ -6,7 +6,7 @@ import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
-fun TransactionState.toDatabaseEntity() = TransactionEntity(
+internal fun TransactionState.toDatabaseEntity() = TransactionEntity(
     type = type.id,
     amountInCents = amountInCents,
     sourcePlayerId = playerId,

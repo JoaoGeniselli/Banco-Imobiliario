@@ -11,9 +11,14 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun BackButton(
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
 ) {
-    IconButton(modifier = modifier, onClick = onClick) {
+    IconButton(
+        modifier = modifier,
+        onClick = onClick,
+        enabled = enabled
+    ) {
         Icon(
             imageVector = Icons.AutoMirrored.Default.ArrowBack,
             contentDescription = "Back"

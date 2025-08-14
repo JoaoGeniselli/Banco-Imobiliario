@@ -3,7 +3,7 @@ package com.dosei.games.toybank.history.data.model
 import com.dosei.games.toybank.core.data.storage.player.Player
 import java.util.Date
 
-sealed interface HistoryEntry {
+internal sealed interface HistoryEntry {
 
     val amount: Int
     val date: Date

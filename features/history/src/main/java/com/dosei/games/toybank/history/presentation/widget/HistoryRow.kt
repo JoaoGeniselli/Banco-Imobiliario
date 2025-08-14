@@ -18,7 +18,7 @@ import com.dosei.games.toybank.ui.theme.DeepOrange
 import com.dosei.games.toybank.ui.theme.Green
 
 @Composable
-fun HistoryRow(entry: HistoryEntry) {
+internal fun HistoryRow(entry: HistoryEntry) {
     when (entry) {
         is HistoryEntry.Deposit -> DepositRow(entry)
         is HistoryEntry.Transfer -> TransferRow(entry)

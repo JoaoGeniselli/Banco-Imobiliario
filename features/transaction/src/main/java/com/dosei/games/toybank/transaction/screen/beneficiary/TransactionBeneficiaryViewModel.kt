@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
-class TransactionBeneficiaryViewModel @Inject constructor(
+internal class TransactionBeneficiaryViewModel @Inject constructor(
     private val repository: PlayerRepository
 )  : ViewModel() {
 

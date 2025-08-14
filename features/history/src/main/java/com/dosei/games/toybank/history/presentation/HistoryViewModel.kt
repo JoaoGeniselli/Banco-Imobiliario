@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class HistoryViewModel @Inject constructor(
+internal class HistoryViewModel @Inject constructor(
     private val loadHistory: LoadHistory
 ) : ViewModel() {
 

@@ -27,7 +27,7 @@ import com.dosei.games.toybank.ui.widget.BackButton
 import java.util.Date
 
 @Composable
-fun HistoryScreen(
+internal fun HistoryScreen(
     controller: NavHostController,
     viewModel: HistoryViewModel,
 ) {

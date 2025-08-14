@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun AddPlayerBottomSheet(
+internal fun AddPlayerBottomSheet(
     availableColors: List<Color>,
     onDismiss: () -> Unit,
     onConfirm: (name: String, color: Color) -> Unit,

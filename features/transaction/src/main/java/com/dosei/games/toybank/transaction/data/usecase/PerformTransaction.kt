@@ -9,7 +9,7 @@ import com.dosei.games.toybank.transaction.TransactionState
 import com.dosei.games.toybank.transaction.data.mapper.toDatabaseEntity
 import javax.inject.Inject
 
-class PerformTransaction @Inject constructor(
+internal class PerformTransaction @Inject constructor(
     private val playerRepository: PlayerRepository,
     private val transactionRepository: TransactionRepository
 ) {

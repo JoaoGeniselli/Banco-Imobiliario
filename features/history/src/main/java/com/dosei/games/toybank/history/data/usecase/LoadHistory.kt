@@ -6,7 +6,7 @@ import com.dosei.games.toybank.history.data.mapper.toHistoryEntry
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
-class LoadHistory @Inject constructor(
+internal class LoadHistory @Inject constructor(
     private val playerRepository: PlayerRepository,
     private val transactionRepository: TransactionRepository
 ) {

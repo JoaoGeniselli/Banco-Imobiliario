@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 val PLAYERS_RANGE = 2..6
 
-class StartNewGame @Inject constructor(
+internal class StartNewGame @Inject constructor(
     private val playerRepository: PlayerRepository,
     private val transactionRepository: TransactionRepository,
 ) {

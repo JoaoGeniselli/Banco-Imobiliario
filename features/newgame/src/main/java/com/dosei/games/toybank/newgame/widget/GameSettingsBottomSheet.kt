@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GameSettingsBottomSheet(
+internal fun GameSettingsBottomSheet(
     initialBalance: Int,
     onDismiss: () -> Unit,
     onConfirm: (Int) -> Unit,

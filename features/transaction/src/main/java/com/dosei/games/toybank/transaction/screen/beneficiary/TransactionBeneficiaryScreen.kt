@@ -34,7 +34,7 @@ import com.dosei.games.toybank.ui.widget.BackButton
 import kotlinx.coroutines.flow.map
 
 @Composable
-fun TransactionBeneficiaryScreen(
+internal fun TransactionBeneficiaryScreen(
     controller: NavHostController,
     parentViewModel: TransactionViewModel,
     viewModel: TransactionBeneficiaryViewModel,

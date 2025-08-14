@@ -6,7 +6,7 @@ import com.dosei.games.toybank.core.data.storage.transaction.TransactionEntity
 import com.dosei.games.toybank.history.data.model.HistoryEntry
 import java.util.Date
 
-fun TransactionEntity.toHistoryEntry(players: List<Player>): HistoryEntry? {
+internal fun TransactionEntity.toHistoryEntry(players: List<Player>): HistoryEntry? {
     val sourcePlayer = players.first { it.id == sourcePlayerId }
     val date = Date(timestamp)
     return when (type) {

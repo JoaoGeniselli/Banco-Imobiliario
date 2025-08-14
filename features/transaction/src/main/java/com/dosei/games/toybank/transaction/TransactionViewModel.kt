@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TransactionViewModel @Inject constructor(
+internal class TransactionViewModel @Inject constructor(
     private val performTransaction: PerformTransaction
 ) : StatefulViewModel<TransactionState>(
     initialState = TransactionState()
