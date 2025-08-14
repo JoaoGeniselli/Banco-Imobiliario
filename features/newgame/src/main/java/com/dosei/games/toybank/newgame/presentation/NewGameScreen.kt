@@ -131,19 +131,7 @@ private fun NewGameContent(
                         onClick = actions.onBack
                     )
                 },
-                actions = {
-                    IconButton(
-                        enabled = !isLoading,
-                        onClick = actions.onClickSettings
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Settings,
-                            contentDescription = stringResource(
-                                R.string.new_game_settings_description
-                            )
-                        )
-                    }
-                }
+                actions = { SettingsButton(isLoading, actions) }
             )
         },
         bottomBar = {
@@ -188,6 +176,24 @@ private fun NewGameContent(
                 item { LoadingIndicatorRow() }
             }
         }
+    }
+}
+
+@Composable
+private fun SettingsButton(
+    isLoading: Boolean,
+    actions: NewGameActions
+) {
+    IconButton(
+        enabled = !isLoading,
+        onClick = actions.onClickSettings
+    ) {
+        Icon(
+            imageVector = Icons.Default.Settings,
+            contentDescription = stringResource(
+                R.string.new_game_settings_description
+            )
+        )
     }
 }
 
