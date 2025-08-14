@@ -1,4 +1,4 @@
-package com.dosei.games.toybank.gameplay.presentation
+package com.dosei.games.toybank.gameplay.presentation.play
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,38 +16,57 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.core.toolbox.formatBlr
+import com.dosei.games.toybank.gameplay.R
+import com.dosei.games.toybank.gameplay.navigation.GameplayRoutes
 import com.dosei.games.toybank.ui.widget.ColorChip
+import com.dosei.games.toybank.core.R as CoreR
 
 @Composable
 internal fun GameplayScreen(
     controller: NavHostController,
     viewModel: GameplayViewModel,
 ) {
-    val players by remember { viewModel.fetchPlayers() }.collectAsState()
+    val players by remember { viewModel.fetchPlayers() }.collectAsState(emptyList())
+    val winner by remember { viewModel.observeWinner() }.collectAsState(null)
+
     val actions = remember {
         GameplayActions(
             onBack = { controller.popBackStack() },
+            onClickHistory = { controller.navigate(AppRoutes.Game.History) },
             onClickPlayer = { player ->
                 controller.navigate(AppRoutes.Transaction(player.id))
-            },
-            onClickHistory = { controller.navigate(AppRoutes.Game.History) }
+            }
         )
     }
+
     GameplayContent(
         players = players,
         actions = actions
     )
+
+    LaunchedEffect(winner) {
+        val snapshotWinner = winner
+        if (snapshotWinner != null) {
+            controller.navigate(
+                GameplayRoutes.Winner(snapshotWinner.name, snapshotWinner.colorARGB)
+            ) {
+                popUpTo(GameplayRoutes.Gameplay) { inclusive = true }
+            }
+        }
+    }
 }
 
 private data class GameplayActions(
@@ -65,12 +84,14 @@ private fun GameplayContent(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Toy Bank") },
+                title = { Text(stringResource(CoreR.string.app_name)) },
                 actions = {
                     IconButton(onClick = actions.onClickHistory) {
                         Icon(
                             imageVector = Icons.Default.History,
-                            contentDescription = "History"
+                            contentDescription = stringResource(
+                                R.string.gameplay_action_access_history
+                            )
                         )
                     }
                 }
