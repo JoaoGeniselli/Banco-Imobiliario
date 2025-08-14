@@ -9,7 +9,7 @@ import com.dosei.games.toybank.ui.theme.Green
 import com.dosei.games.toybank.ui.theme.Grey
 import com.dosei.games.toybank.ui.theme.Purple
 
-data class NewGameState(
+internal data class NewGameState(
     val players: List<LeadPlayer> = emptyList(),
     val initialBalanceInCents: Int = 5000_00,
     val availableColors: List<Color> = listOf(

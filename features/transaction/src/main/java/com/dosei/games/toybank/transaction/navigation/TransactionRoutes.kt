@@ -3,7 +3,7 @@ package com.dosei.games.toybank.transaction.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object TransactionRoutes {
+internal data object TransactionRoutes {
 
     @Serializable
     data class TypeSelection(val playerId: Int)

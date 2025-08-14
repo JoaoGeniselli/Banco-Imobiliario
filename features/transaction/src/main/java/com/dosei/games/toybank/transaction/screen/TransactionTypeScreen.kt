@@ -31,7 +31,7 @@ import com.dosei.games.toybank.transaction.TransactionViewModel
 import com.dosei.games.toybank.ui.widget.BackButton
 
 @Composable
-fun TransactionTypeScreen(
+internal fun TransactionTypeScreen(
     controller: NavHostController,
     viewModel: TransactionViewModel,
 ) {

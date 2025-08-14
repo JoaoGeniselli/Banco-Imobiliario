@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transaction_feature_title">Transaction</string>
+    <string name="transaction_action_confirm">Confirm</string>
+    <string name="transaction_amount_label">Enter the transaction amount:</string>
+</resources>
