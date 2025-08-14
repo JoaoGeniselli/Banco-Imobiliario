@@ -1,0 +1,42 @@
+name: Build Production APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - release/*
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup-env
+
+      - name: Prepare Keystore
+        env:
+          SIGNING_KEYSTORE: ${{ secrets.SIGNING_KEYSTORE }}
+        run: echo "$SIGNING_KEYSTORE" | base64 --decode > app/release.jks
+
+      - name: Release Build
+        env:
+          SIGNING_KEYSTORE_PASSWORD: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+        run: ./gradlew bundleRelease
+
+      - name: Export Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          retention-days: 2
+          name: release-artifacts
+          path: |
+            app/build/outputs/bundle/release/app-release.aab
+            app/build/outputs/mapping/release/*.**
