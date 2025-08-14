@@ -5,7 +5,9 @@ import com.dosei.games.toybank.core.data.model.error.ErrorCode
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.core.data.storage.player.PlayerDao
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class PlayerRepository @Inject constructor(
     private val playerDao: PlayerDao,
 ) {

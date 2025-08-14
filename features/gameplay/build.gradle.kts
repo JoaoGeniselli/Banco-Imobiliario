@@ -19,6 +19,8 @@ android {
         }
     }
 
+    resourcePrefix = "gameplay_"
+
     buildFeatures {
         compose = true
     }

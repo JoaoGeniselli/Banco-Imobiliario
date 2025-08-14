@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gameplay_action_access_history">Access history</string>
+    <string name="gameplay_action_back_to_home">Back to home</string>
+    <string name="gameplay_winner_label">Winner:</string>
+    <string name="gameplay_winner_badge_description">winner badge</string>
+    <string name="gameplay_game_over">Game Over!</string>
+</resources>
