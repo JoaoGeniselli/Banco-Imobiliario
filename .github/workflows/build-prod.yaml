@@ -30,13 +30,13 @@ jobs:
           SIGNING_KEYSTORE_PASSWORD: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-        run: ./gradlew assembleRelease
+        run: ./gradlew bundleRelease
 
       - name: Export Artifacts
         uses: actions/upload-artifact@v4
         with:
           retention-days: 2
-          name: apk-release
+          name: release-artifacts
           path: |
-            app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/bundle/release/app-release.aab
             app/build/outputs/mapping/release/*.**
