@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -31,6 +32,8 @@ import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.core.toolbox.formatBlr
 import com.dosei.games.toybank.gameplay.R
 import com.dosei.games.toybank.gameplay.navigation.GameplayRoutes
+import com.dosei.games.toybank.ui.theme.DeepOrange
+import com.dosei.games.toybank.ui.theme.Green
 import com.dosei.games.toybank.ui.widget.ColorChip
 import com.dosei.games.toybank.core.R as CoreR
 
@@ -108,7 +111,17 @@ private fun GameplayContent(
                     modifier = Modifier.clickable { actions.onClickPlayer(player) },
                     leadingContent = { ColorChip(Color(player.colorARGB)) },
                     headlineContent = { Text(player.name) },
-                    trailingContent = { Text(player.balanceInCents.formatBlr()) }
+                    trailingContent = {
+                        Text(
+                            text = player.balanceInCents.formatBlr(),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = if (player.balanceInCents > 0) {
+                                Green
+                            } else {
+                                DeepOrange
+                            }
+                        )
+                    }
                 )
             }
         }
@@ -131,7 +144,7 @@ private fun Preview() {
                     id = 2,
                     name = "Bob",
                     colorARGB = Color.Green.toArgb(),
-                    balanceInCents = 1500_00
+                    balanceInCents = -1500_00
                 ),
                 Player(
                     id = 3,
