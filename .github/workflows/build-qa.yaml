@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   build:
-    name: Continuous Integration
+    name: Build QA
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
