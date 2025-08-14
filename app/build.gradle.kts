@@ -29,6 +29,12 @@ android {
         }
     }
 
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+
     kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
