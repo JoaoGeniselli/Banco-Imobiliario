@@ -5,7 +5,10 @@ on:
     types: [ opened, synchronize, reopened ]
     branches:
       - develop
-      - master
+      - main
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -28,6 +31,12 @@ jobs:
         run: ./gradlew detekt
 
       - name: Tests
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew koverXmlReport
+
+      - name: Sonar
+        if: github.event_name != 'pull_request' && github.event_name != 'pull_request_target'
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonar --info
 
 

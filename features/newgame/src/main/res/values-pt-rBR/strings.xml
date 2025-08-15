@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_game_feature_title">Novo Jogo</string>
+    <string name="new_game_settings_description">Configurações do Jogo</string>
+    <string name="new_game_action_start">Iniciar</string>
+    <string name="new_game_empty_message">Adicione os jogadores para iniciar o novo jogo.</string>
+    <string name="new_game_action_add_player">Adicionar jogador</string>
+    <string name="new_game_player_name_label">Nome do Jogador(a)</string>
+    <string name="new_game_duplicated_name_error">Esse nome já foi utilizado</string>
+    <string name="new_game_color_label">Selecione uma cor</string>
+    <string name="new_game_initial_balance_label">Saldo inicial dos jogadores</string>
+    <string name="new_game_balance_error">O saldo deve ser maior que zero.</string>
+    <string name="new_game_action_save">OK</string>
+</resources>

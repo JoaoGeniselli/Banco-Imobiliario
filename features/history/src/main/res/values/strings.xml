@@ -5,4 +5,5 @@
     <string name="history_transaction_deposit">Deposit</string>
     <string name="history_transaction_transfer">Transfer</string>
     <string name="history_transaction_withdraw">Withdraw</string>
+    <string name="history_template_from_to">%1$s to %2$s</string>
 </resources>

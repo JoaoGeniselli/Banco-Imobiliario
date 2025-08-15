@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -29,9 +30,11 @@ import com.dosei.games.toybank.commons.navigation.navigateTo
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.None
 import com.dosei.games.toybank.core.data.storage.player.Player
+import com.dosei.games.toybank.transaction.R
 import com.dosei.games.toybank.transaction.TransactionViewModel
 import com.dosei.games.toybank.ui.widget.BackButton
 import kotlinx.coroutines.flow.map
+import com.dosei.games.toybank.core.R as CoreR
 
 @Composable
 internal fun TransactionBeneficiaryScreen(
@@ -76,7 +79,7 @@ private fun TransactionBeneficiaryContent(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Toy Bank") },
+                title = { Text(stringResource(CoreR.string.app_name)) },
                 navigationIcon = { BackButton(onClick = actions.onBack) },
             )
         }
@@ -87,7 +90,10 @@ private fun TransactionBeneficiaryContent(
                 .padding(vertical = 24.dp)
         ) {
             item {
-                Text(modifier = Modifier.padding(16.dp), text = "Select the destination player:")
+                Text(
+                    modifier = Modifier.padding(16.dp),
+                    text = stringResource(R.string.transaction_select_player_label)
+                )
             }
             items(players) { player ->
                 ListItem(
@@ -96,7 +102,9 @@ private fun TransactionBeneficiaryContent(
                     trailingContent = {
                         Icon(
                             imageVector = Icons.AutoMirrored.Default.KeyboardArrowRight,
-                            contentDescription = "Navigate to Deposit"
+                            contentDescription = stringResource(
+                                R.string.transaction_select_player_description
+                            )
                         )
                     }
                 )

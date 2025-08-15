@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Banco Imobiliário</string>
+    <string name="message_invalid_amount">O valor deve ser maior que zero.</string>
+    <string name="message_invalid_initial_balance">O saldo inicial deve ser maior que zero.</string>
+    <string name="message_invalid_player_amount">Quantidade de jogadores inválida!</string>
+    <string name="message_invalid_player">Jogador não encontrado!</string>
+    <string name="message_invalid_destination_player">Beneficiário não encontrado!</string>
+    <string name="generic_error_message">Ops, ocorreu um erro interno! Tente novamente mais tarde.</string>
+</resources>

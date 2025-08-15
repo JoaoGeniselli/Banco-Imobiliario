@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_action_new_game">Novo Jogo</string>
+    <string name="home_action_continue">Continuar</string>
+</resources>

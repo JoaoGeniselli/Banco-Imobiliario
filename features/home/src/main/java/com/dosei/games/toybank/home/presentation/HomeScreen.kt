@@ -20,10 +20,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.core.navigation.AppRoutes
+import com.dosei.games.toybank.home.R
+import com.dosei.games.toybank.core.R as CoreR
 
 @Composable
 internal fun HomeScreen(
@@ -67,7 +70,7 @@ private fun HomeContent(
 
             Text(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                text = "Toy Bank",
+                text = stringResource(CoreR.string.app_name),
                 style = MaterialTheme.typography.headlineLarge,
             )
             Spacer(Modifier.weight(1f))
@@ -76,7 +79,7 @@ private fun HomeContent(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = actions.onClickNewGame
             ) {
-                Text("New Game")
+                Text(stringResource(R.string.home_action_new_game))
             }
 
             OutlinedButton(
@@ -86,7 +89,7 @@ private fun HomeContent(
                 enabled = isContinueEnabled,
                 onClick = actions.onClickContinue
             ) {
-                Text("Continue")
+                Text(stringResource(R.string.home_action_continue))
             }
             Spacer(Modifier.height(24.dp))
         }
