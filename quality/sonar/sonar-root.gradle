@@ -1,0 +1,8 @@
+apply plugin: "org.sonarqube"
+
+sonar {
+    properties {
+        property("sonar.projectKey", "JoaoGeniselli_Banco-Imobiliario")
+        property("sonar.organization", "joaogeniselli")
+    }
+}

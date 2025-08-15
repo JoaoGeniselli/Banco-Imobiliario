@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.kover) apply true
+    alias(libs.plugins.sonar) apply true
 }
 
 apply { from("$rootDir/quality/kover/kover.gradle") }
