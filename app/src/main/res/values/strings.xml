@@ -1,22 +1,3 @@
 <resources>
-    <string name="app_name">Banco Imobiliário</string>
-    <string name="continue_game">Continuar Jogo</string>
-    <string name="new_game">Novo Jogo</string>
-    <string name="error_while_fetching_players">Ocorreu um erro ao buscar os jogadores disponíveis</string>
-    <string name="create_game">Criar jogo</string>
-    <string name="player_name_mask">Jogador: %1$s</string>
-    <string name="transfer_value_to">Transferir valor para:</string>
-    <string name="debit">Débito</string>
-    <string name="credit">Crédito</string>
-    <string name="error_while_starting_game">Ocorreu um erro ao buscar as informações do jogo atual</string>
-    <string name="error">Erro</string>
-    <string name="transaction_history">Histórico de transações</string>
-    <string name="transaction">Transação</string>
-    <string name="error_minimum_players_required">É necessário selecionar ao menos dois jogadores</string>
-    <string name="must_fill_input">É necessário preencher o valor da transação</string>
-    <string name="reset_game">Reiniciar Partida</string>
-    <string name="message_reset_game_confirmation">Os dados atuais de saldo serão perdidos. Tem certeza que deseja
-        reiniciar a partida?
-    </string>
-
+    <string name="app_name">Toy Bank</string>
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Toy Bank</string>
+    <string name="message_invalid_amount">Amount must be greater than zero.</string>
+    <string name="message_invalid_initial_balance">Initial balance must be greater than zero.</string>
+    <string name="message_invalid_player_amount">Invalid player amount!</string>
+    <string name="message_invalid_player">Invalid player!</string>
+    <string name="message_invalid_destination_player">Invalid beneficiary!</string>
+    <string name="generic_error_message">Ooops, error! Try again later.</string>
+</resources>

@@ -1,0 +1,20 @@
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+detekt {
+    source = files(
+        "src/main/kotlin",
+        "src/main/java"
+    )
+    parallel = true
+    config.setFrom("$rootDir/quality/detekt/detekt.yml")
+    baseline = file("$projectDir/detekt_baseline.xml")
+    ignoredBuildTypes = ["release"]
+    basePath = projectDir
+}
+
+tasks.named("detekt").configure {
+    reports {
+        xml.required.set(true)
+        xml.outputLocation.set(layout.buildDirectory.file("reports/detekt.xml"))
+    }
+}

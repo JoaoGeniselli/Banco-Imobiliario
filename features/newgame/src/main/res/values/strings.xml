@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_game_feature_title">New Game</string>
+    <string name="new_game_settings_description">Game Settings</string>
+    <string name="new_game_action_start">Start</string>
+    <string name="new_game_empty_message">Add players to start a new game.</string>
+</resources>
