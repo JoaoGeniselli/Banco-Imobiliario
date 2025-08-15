@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.dosei.games.toybank.core.data.model.Close
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.TransactionType
+import com.dosei.games.toybank.test.MainDispatcherRule
 import com.dosei.games.toybank.transaction.data.usecase.PerformTransaction
 import com.dosei.games.toybank.transaction.navigation.TransactionRoutes
 import io.mockk.coVerify
@@ -13,6 +14,7 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -20,6 +22,9 @@ class TransactionViewModelTest {
 
     private lateinit var performTransaction: PerformTransaction
     private lateinit var viewModel: TransactionViewModel
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Before
     fun setup() {

@@ -6,6 +6,7 @@ import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.newgame.data.model.LeadPlayer
 import com.dosei.games.toybank.newgame.data.usecase.StartNewGame
+import com.dosei.games.toybank.test.MainDispatcherRule
 import com.dosei.games.toybank.ui.theme.Amber
 import com.dosei.games.toybank.ui.theme.Blue500
 import com.dosei.games.toybank.ui.theme.DeepOrange
@@ -17,12 +18,16 @@ import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class NewGameViewModelTest {
 
     private lateinit var startNewGame: StartNewGame
     private lateinit var viewModel: NewGameViewModel
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Before
     fun setup() {
