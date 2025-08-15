@@ -3,18 +3,23 @@ package com.dosei.games.toybank.transaction.screen.beneficiary
 import app.cash.turbine.test
 import com.dosei.games.toybank.core.data.repository.PlayerRepository
 import com.dosei.games.toybank.core.data.storage.player.Player
+import com.dosei.games.toybank.test.MainDispatcherRule
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class TransactionBeneficiaryViewModelTest {
 
     private lateinit var repository: PlayerRepository
     private lateinit var viewModel: TransactionBeneficiaryViewModel
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Before
     fun before() {

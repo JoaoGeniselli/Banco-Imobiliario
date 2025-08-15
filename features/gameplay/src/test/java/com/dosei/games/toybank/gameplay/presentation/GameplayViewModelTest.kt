@@ -6,6 +6,7 @@ import com.dosei.games.toybank.core.data.repository.PlayerRepository
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.core.data.usecase.CheckGameState
 import com.dosei.games.toybank.gameplay.presentation.play.GameplayViewModel
+import com.dosei.games.toybank.test.MainDispatcherRule
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,12 +15,16 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class GameplayViewModelTest {
 
     private lateinit var checkGameState: CheckGameState
     private lateinit var viewModel: GameplayViewModel
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Before
     fun setup() {
