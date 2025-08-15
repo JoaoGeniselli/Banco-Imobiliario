@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transaction_feature_title">Transação</string>
+    <string name="transaction_action_confirm">Confirmar</string>
+    <string name="transaction_amount_label">Insira o valor da transação:</string>
+    <string name="transaction_select_player_label">Selecionar o jogador(a) de destino:</string>
+    <string name="transaction_select_player_description">selecione o jogador(a)</string>
+    <string name="transaction_select_type_label">Selecione o tipo de transação:</string>
+    <string name="transaction_type_deposit">Depósito</string>
+    <string name="transaction_type_withdraw">Saque</string>
+    <string name="transaction_type_transfer">Transferência</string>
+    <string name="transaction_navigate_to">Navegar para %1$s</string>
+</resources>

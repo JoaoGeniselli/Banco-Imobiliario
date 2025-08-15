@@ -57,7 +57,15 @@ private fun TransferRow(
                 tint = Blue500
             )
         },
-        name = { Text("${entry.sourcePlayer.name} to ${entry.destinationPlayer.name}") },
+        name = {
+            Text(
+                stringResource(
+                    R.string.history_template_from_to,
+                    entry.sourcePlayer.name,
+                    entry.destinationPlayer.name
+                )
+            )
+        },
         operation = { Text(stringResource(R.string.history_transaction_transfer)) }
     )
 }

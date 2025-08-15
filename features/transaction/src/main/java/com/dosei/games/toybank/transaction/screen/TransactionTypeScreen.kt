@@ -20,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -27,8 +28,10 @@ import com.dosei.games.toybank.commons.navigation.navigateTo
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.None
 import com.dosei.games.toybank.core.data.model.TransactionType
+import com.dosei.games.toybank.transaction.R
 import com.dosei.games.toybank.transaction.TransactionViewModel
 import com.dosei.games.toybank.ui.widget.BackButton
+import com.dosei.games.toybank.core.R as CoreR
 
 @Composable
 internal fun TransactionTypeScreen(
@@ -63,31 +66,29 @@ private fun TransactionTypeContent(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Toy Bank") },
-                navigationIcon = {
-                    BackButton(onClick = actions.onBack)
-                },
+                title = { Text(stringResource(CoreR.string.app_name)) },
+                navigationIcon = { BackButton(onClick = actions.onBack) },
             )
         }
     ) { innerPadding ->
         Column(Modifier.padding(innerPadding)) {
             Text(
                 modifier = Modifier.padding(16.dp),
-                text = "Select the transaction type:"
+                text = stringResource(R.string.transaction_select_type_label)
             )
             Option(
                 onClick =  { actions.onSelectType(TransactionType.DEPOSIT) },
-                title = "Deposit"
+                title = stringResource(R.string.transaction_type_deposit)
             )
             HorizontalDivider()
             Option(
                 onClick = { actions.onSelectType(TransactionType.WITHDRAW) },
-                title = "Withdraw"
+                title = stringResource(R.string.transaction_type_withdraw)
             )
             HorizontalDivider()
             Option(
                 onClick = { actions.onSelectType(TransactionType.TRANSFER) },
-                title = "Transfer",
+                title = stringResource(R.string.transaction_type_transfer),
             )
             HorizontalDivider()
         }
@@ -102,7 +103,7 @@ private fun Option(onClick: () -> Unit, title: String) {
         trailingContent = {
             Icon(
                 imageVector = Icons.AutoMirrored.Default.KeyboardArrowRight,
-                contentDescription = "Navigate to $title"
+                contentDescription = stringResource(R.string.transaction_navigate_to, title)
             )
         }
     )

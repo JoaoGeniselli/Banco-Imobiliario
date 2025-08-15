@@ -154,7 +154,7 @@ private fun NewGameContent(
                     content = {
                         Icon(
                             imageVector = Icons.Default.Add,
-                            contentDescription = "Add Player"
+                            contentDescription = stringResource(R.string.new_game_action_add_player)
                         )
                     }
                 )

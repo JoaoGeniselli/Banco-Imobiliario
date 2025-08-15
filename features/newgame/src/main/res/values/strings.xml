@@ -4,4 +4,11 @@
     <string name="new_game_settings_description">Game Settings</string>
     <string name="new_game_action_start">Start</string>
     <string name="new_game_empty_message">Add players to start a new game.</string>
+    <string name="new_game_action_add_player">Add Player</string>
+    <string name="new_game_player_name_label">Player Name</string>
+    <string name="new_game_duplicated_name_error">Name already exists</string>
+    <string name="new_game_color_label">Select the color</string>
+    <string name="new_game_initial_balance_label">Player\'s initial balance</string>
+    <string name="new_game_balance_error">Balance must be greater than zero.</string>
+    <string name="new_game_action_save">Save</string>
 </resources>

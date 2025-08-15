@@ -26,10 +26,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.dosei.games.toybank.newgame.R
 import com.dosei.games.toybank.ui.widget.ColorChip
 import kotlinx.coroutines.launch
 
@@ -65,20 +67,20 @@ internal fun AddPlayerBottomSheet(
                 .fillMaxWidth(),
             value = name,
             onValueChange = { name = it },
-            placeholder = { Text(text = "Player Name") },
+            label = { Text(text = stringResource(R.string.new_game_player_name_label)) },
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,
                 capitalization = KeyboardCapitalization.Words
             ),
             isError = nameError,
             supportingText = if (nameError) {
-                { Text(text = "Name already exists") }
+                { Text(text = stringResource(R.string.new_game_duplicated_name_error)) }
             } else null
         )
 
         Text(
             modifier = Modifier.padding(top = 32.dp, start = 16.dp, end = 16.dp),
-            text = "Select the color"
+            text = stringResource(R.string.new_game_color_label)
         )
 
         ColorPicker(
@@ -97,7 +99,7 @@ internal fun AddPlayerBottomSheet(
                 .padding(start = 16.dp, end = 16.dp, top = 32.dp, bottom = 24.dp),
             enabled = name.isNotEmpty()
         ) {
-            Text(text = "Add Player")
+            Text(text = stringResource(R.string.new_game_action_add_player))
         }
     }
 

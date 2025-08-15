@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gameplay_action_access_history">Acessar histórico</string>
+    <string name="gameplay_action_back_to_home">Voltar para a Home</string>
+    <string name="gameplay_winner_label">Vencedor:</string>
+    <string name="gameplay_winner_badge_description">medalha do vencedor</string>
+    <string name="gameplay_game_over">Fim de Jogo!</string>
+</resources>
