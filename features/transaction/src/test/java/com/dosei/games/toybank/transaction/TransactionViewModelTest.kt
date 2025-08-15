@@ -97,15 +97,13 @@ class TransactionViewModelTest {
         viewModel.run {
             start(1)
             onSelectType(TransactionType.DEPOSIT)
+            events.test { assertEquals(NavigateTo(TransactionRoutes.AmountInput), awaitItem()) }
             onConfirmAmount(500)
+            events.test { assertEquals(Close, awaitItem()) }
         }
 
         viewModel.state.test {
             assertEquals(500, awaitItem().amountInCents)
-        }
-        viewModel.events.test {
-            assertEquals(NavigateTo(TransactionRoutes.AmountInput), awaitItem())
-            assertEquals(Close, awaitItem())
         }
 
         coVerify {
