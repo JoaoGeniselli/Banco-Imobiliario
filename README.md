@@ -22,18 +22,18 @@ O projeto possui dois idiomas implementatos:
 | [JetPack Compose](https://developer.android.com/compose)                                                  | Framework para criação de telas                        |
 | [Material Design 3](https://m3.material.io/)                                                              | Design System (Light & Dark modes)                     |
 | [Kotlin](https://kotlinlang.org/)                                                                         | Linguagem de programação principal                     |
-| [JUnit 4](https://junit.org/junit4/)                                                                      | Execução de testes unitários                           |
-| [Detekt](https://detekt.dev/)                                                                             | Análise estática (Kotlin)                              |
-| [Android Lint](https://developer.android.com/studio/write/lint)                                           | Análise estática (Android)                             |
-| [Sonarqube](https://www.sonarsource.com/products/sonarqube/)                                              | Análise de qualidade de código, segurança e relatórios |
-| [KotlinX Kover](https://github.com/Kotlin/kotlinx-kover)                                                  | Cobertura de testes unitários                          |
-| [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)                          | Injeção de dependências                                |
 | [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)                                 | Paralelismo e reatividade                              |
 | [Jetpack Navigation](https://developer.android.com/develop/ui/compose/navigation)                         | Navegação entre telas                                  |
+| [Room Database](https://developer.android.com/training/data-storage/room)                                 | Armazenamento local SQLite                             |
+| [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)                          | Injeção de dependências                                |
+| [Android Lint](https://developer.android.com/studio/write/lint)                                           | Análise estática (Android)                             |
+| [Detekt](https://detekt.dev/)                                                                             | Análise estática (Kotlin)                              |
+| [Sonarqube](https://www.sonarsource.com/products/sonarqube/)                                              | Análise de qualidade de código, segurança e relatórios |
+| [KotlinX Kover](https://github.com/Kotlin/kotlinx-kover)                                                  | Cobertura de testes unitários                          |
 | [KotlinX Serialization](https://kotlinlang.org/docs/serialization.html)                                   | Conversão de objetos JSON                              |
+| [JUnit 4](https://junit.org/junit4/)                                                                      | Execução de testes unitários                           |
 | [MockK](https://mockk.io/)                                                                                | Gerenciamento de mocks para testes unitários           | 
 | [Turbine](https://github.com/cashapp/turbine)                                                             | Teste de corrotinas e kotlin flows                     |
-| [Room Database](https://developer.android.com/training/data-storage/room)                                 | Armazenamento local SQLite                             |
 | [R8 (proguard)](https://developer.android.com/topic/performance/app-optimization/enable-app-optimization) | Ofuscação de código                                    |
 | [Version Catalogs](https://docs.gradle.org/current/userguide/version_catalogs.html)                       | Organização de versões e dependências                  |
 | [Github Actions](https://github.com/features/actions?locale=pt-BR)                                        | Workflows de validação e compilação do projeto         |
