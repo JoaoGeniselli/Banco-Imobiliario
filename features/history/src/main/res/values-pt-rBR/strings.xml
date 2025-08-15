@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="history_feature_title">Histórico</string>
+    <string name="history_empty_message">Ainda não foram realizadas transações.</string>
+    <string name="history_transaction_deposit">Depósito</string>
+    <string name="history_transaction_transfer">Transferência</string>
+    <string name="history_transaction_withdraw">Saque</string>
+    <string name="history_template_from_to">%1$s para %2$s</string>
+</resources>

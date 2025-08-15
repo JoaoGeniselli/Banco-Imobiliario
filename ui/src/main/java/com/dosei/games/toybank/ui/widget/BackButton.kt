@@ -6,7 +6,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.dosei.games.toybank.ui.R
 
 @Composable
 fun BackButton(
@@ -21,7 +23,7 @@ fun BackButton(
     ) {
         Icon(
             imageVector = Icons.AutoMirrored.Default.ArrowBack,
-            contentDescription = "Back"
+            contentDescription = stringResource(R.string.ui_action_back)
         )
     }
 }
