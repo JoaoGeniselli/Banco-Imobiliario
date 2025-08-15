@@ -31,7 +31,7 @@ jobs:
         run: ./gradlew detekt
 
       - name: Tests
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew koverXmlReport
 
       - name: Sonar
         if: github.event_name != 'pull_request' && github.event_name != 'pull_request_target'

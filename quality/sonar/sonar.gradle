@@ -8,7 +8,7 @@ sonarqube {
         property("sonar.sourceEncoding", "UTF-8")
 
         property("sonar.kotlin.detekt.reportPaths", "$buildDir/reports/detekt.xml")
-
+        property("sonar.androidLint.reportPaths", "$buildDir/reports/lint-results-debug.xml")
         property("sonar.java.coveragePlugin", "jacoco")
         property("sonar.java.jacoco.xmlReportPaths", "$buildDir/reports/kover/report.xml") // JaCoCo Compatible
 
