@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.history.data.model.HistoryEntry
 import com.dosei.games.toybank.history.data.usecase.LoadHistory
+import com.dosei.games.toybank.test.MainDispatcherRule
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -12,6 +13,7 @@ import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import java.util.Date
 import kotlin.time.Duration.Companion.seconds
@@ -21,6 +23,9 @@ class HistoryViewModelTest {
 
     private lateinit var loadHistory: LoadHistory
     private lateinit var viewModel: HistoryViewModel
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Before
     fun setup() {

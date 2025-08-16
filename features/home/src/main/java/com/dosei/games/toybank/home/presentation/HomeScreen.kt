@@ -14,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -24,8 +25,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.dosei.games.toybank.commons.widget.rememberAnalytics
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.home.R
+import com.dosei.games.toybank.home.analytics.HomeAnalytics
 import com.dosei.games.toybank.core.R as CoreR
 
 @Composable
@@ -33,18 +36,29 @@ internal fun HomeScreen(
     controller: NavHostController,
     viewModel: HomeViewModel,
 ) {
+    val analytics = rememberAnalytics()
     val isContinueEnabled by remember { viewModel.isContinueEnabled() }.collectAsState(false)
     val actions = remember {
         HomeActions(
             onBack = { controller.popBackStack() },
-            onClickNewGame = { controller.navigate(AppRoutes.Game.New) },
-            onClickContinue = { controller.navigate(AppRoutes.Game.Play) }
+            onClickNewGame = {
+                analytics.log(HomeAnalytics.clickNewGame)
+                controller.navigate(AppRoutes.Game.New)
+            },
+            onClickContinue = {
+                analytics.log(HomeAnalytics.clickContinue)
+                controller.navigate(AppRoutes.Game.Play)
+            }
         )
     }
     HomeContent(
         isContinueEnabled = isContinueEnabled,
         actions = actions
     )
+
+    LaunchedEffect(Unit) {
+        analytics.log(HomeAnalytics.display)
+    }
 }
 
 private data class HomeActions(

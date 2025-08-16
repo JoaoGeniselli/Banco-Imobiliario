@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.commons.navigation.navigateTo
 import com.dosei.games.toybank.commons.widget.CurrencyTextField
+import com.dosei.games.toybank.commons.widget.rememberAnalytics
 import com.dosei.games.toybank.commons.widget.showErrorFrom
 import com.dosei.games.toybank.core.data.model.Close
 import com.dosei.games.toybank.core.data.model.NavigateTo
@@ -40,6 +41,7 @@ import com.dosei.games.toybank.core.data.model.UiError
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.transaction.R
 import com.dosei.games.toybank.transaction.TransactionViewModel
+import com.dosei.games.toybank.transaction.analytics.TransactionAnalytics
 import com.dosei.games.toybank.ui.widget.BackButton
 
 @Composable
@@ -47,12 +49,16 @@ internal fun TransactionAmountScreen(
     controller: NavHostController,
     viewModel: TransactionViewModel,
 ) {
+    val analytics = rememberAnalytics()
     var amount by rememberSaveable { mutableIntStateOf(0) }
     val isLoading by viewModel.isLoading.collectAsState(false)
     val actions = remember {
         TransactionAmountActions(
             onUpdateAmount = { amount = it },
-            onConfirm = { viewModel.onConfirmAmount(amount) },
+            onConfirm = {
+                analytics.log(TransactionAnalytics.Amount.confirm)
+                viewModel.onConfirmAmount(amount)
+            },
             onBack = { controller.popBackStack() }
         )
     }
@@ -72,6 +78,8 @@ internal fun TransactionAmountScreen(
             is UiError -> context.showErrorFrom(event)
         }
     }
+
+    LaunchedEffect(Unit) { analytics.log(TransactionAnalytics.Amount.display) }
 }
 
 private data class TransactionAmountActions(

@@ -16,6 +16,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,8 +25,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.dosei.games.toybank.commons.widget.rememberAnalytics
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.gameplay.R
+import com.dosei.games.toybank.gameplay.analytics.GameplayAnalytics
 import com.dosei.games.toybank.ui.theme.DeepOrange
 import com.dosei.games.toybank.core.R as CoreR
 
@@ -35,13 +38,21 @@ internal fun WinnerScreen(
     winnerName: String,
     winnerColor: Int,
 ) {
+    val analytics = rememberAnalytics()
     WinnerContent(
         winnerName = winnerName,
         winnerColor = winnerColor,
         actions = WinnerActions(
-            onBack = { controller.popBackStack(AppRoutes.Home, false) },
+            onBack = {
+                analytics.log(GameplayAnalytics.Winner.back)
+                controller.popBackStack(AppRoutes.Home, false)
+            },
         )
     )
+
+    LaunchedEffect(Unit) {
+        analytics.log(GameplayAnalytics.Winner.display)
+    }
 }
 
 private data class WinnerActions(

@@ -16,8 +16,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dosei.games.toybank"
-        versionCode = 3
-        versionName = "2.1.0"
+        versionCode = 4
+        versionName = "2.2.0"
     }
 
     signingConfigs {
@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.kotlin.serialization.json)
     implementation(libs.androidx.room.runtime)
     implementation(libs.hilt.android)
+    implementation(libs.timber)
 
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)

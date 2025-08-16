@@ -27,11 +27,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.commons.navigation.navigateTo
+import com.dosei.games.toybank.commons.widget.rememberAnalytics
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.None
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.transaction.R
 import com.dosei.games.toybank.transaction.TransactionViewModel
+import com.dosei.games.toybank.transaction.analytics.TransactionAnalytics
 import com.dosei.games.toybank.ui.widget.BackButton
 import kotlinx.coroutines.flow.map
 import com.dosei.games.toybank.core.R as CoreR
@@ -42,6 +44,7 @@ internal fun TransactionBeneficiaryScreen(
     parentViewModel: TransactionViewModel,
     viewModel: TransactionBeneficiaryViewModel,
 ) {
+    val analytics = rememberAnalytics()
     val playerId by remember { parentViewModel.state.map { it.playerId } }.collectAsState(0)
     val players by remember(playerId) {
         viewModel.loadPlayers(playerId)
@@ -52,6 +55,7 @@ internal fun TransactionBeneficiaryScreen(
         actions = TransactionBeneficiaryActions(
             onBack = { controller.popBackStack() },
             onSelectPlayer = { beneficiary ->
+                analytics.log(TransactionAnalytics.Beneficiary.select)
                 parentViewModel.onBeneficiarySelected(beneficiary.id)
             }
         )
@@ -63,6 +67,7 @@ internal fun TransactionBeneficiaryScreen(
             is NavigateTo -> controller.navigateTo(event)
         }
     }
+    LaunchedEffect(Unit) { analytics.log(TransactionAnalytics.Beneficiary.display) }
 }
 
 private data class TransactionBeneficiaryActions(
