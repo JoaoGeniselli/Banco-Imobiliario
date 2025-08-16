@@ -39,12 +39,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.commons.navigation.navigateTo
+import com.dosei.games.toybank.commons.widget.rememberAnalytics
 import com.dosei.games.toybank.commons.widget.showErrorFrom
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.None
 import com.dosei.games.toybank.core.data.model.UiError
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.newgame.R
+import com.dosei.games.toybank.newgame.analytics.NewGameAnalytics
 import com.dosei.games.toybank.newgame.data.model.LeadPlayer
 import com.dosei.games.toybank.newgame.data.usecase.PLAYERS_RANGE
 import com.dosei.games.toybank.newgame.widget.AddPlayerBottomSheet
@@ -59,6 +61,7 @@ internal fun NewGameScreen(
     controller: NavHostController,
     viewModel: NewGameViewModel,
 ) {
+    val analytics = rememberAnalytics()
     var showAddPlayerBottomSheet by remember { mutableStateOf(false) }
     var showSettings by remember { mutableStateOf(false) }
     val state by viewModel.state.collectAsState()
@@ -66,10 +69,22 @@ internal fun NewGameScreen(
     val actions = remember {
         NewGameActions(
             onBack = { controller.popBackStack() },
-            onAddPlayer = { showAddPlayerBottomSheet = true },
-            onStart = { viewModel.onNewGameClick() },
-            onRemove = { viewModel.removePlayer(it) },
-            onClickSettings = { showSettings = true }
+            onAddPlayer = {
+                analytics.log(NewGameAnalytics.addPlayer)
+                showAddPlayerBottomSheet = true
+            },
+            onStart = {
+                analytics.log(NewGameAnalytics.clickStart)
+                viewModel.onNewGameClick()
+            },
+            onRemove = {
+                analytics.log(NewGameAnalytics.removePlayer)
+                viewModel.removePlayer(it)
+            },
+            onClickSettings = {
+                analytics.log(NewGameAnalytics.clickSettings)
+                showSettings = true
+            }
         )
     }
 
@@ -104,6 +119,7 @@ internal fun NewGameScreen(
         }
     }
     EventHandler(viewModel, controller)
+    LaunchedEffect(Unit) { analytics.log(NewGameAnalytics.display) }
 }
 
 private data class NewGameActions(

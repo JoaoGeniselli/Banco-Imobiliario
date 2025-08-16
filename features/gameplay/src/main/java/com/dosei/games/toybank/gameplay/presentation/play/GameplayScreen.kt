@@ -27,10 +27,12 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import com.dosei.games.toybank.commons.widget.rememberAnalytics
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.core.navigation.AppRoutes
 import com.dosei.games.toybank.core.toolbox.formatBlr
 import com.dosei.games.toybank.gameplay.R
+import com.dosei.games.toybank.gameplay.analytics.GameplayAnalytics
 import com.dosei.games.toybank.gameplay.navigation.GameplayRoutes
 import com.dosei.games.toybank.ui.theme.DeepOrange
 import com.dosei.games.toybank.ui.theme.Green
@@ -42,14 +44,22 @@ internal fun GameplayScreen(
     controller: NavHostController,
     viewModel: GameplayViewModel,
 ) {
+    val analytics = rememberAnalytics()
     val players by remember { viewModel.fetchPlayers() }.collectAsState(emptyList())
     val winner by remember { viewModel.observeWinner() }.collectAsState(null)
 
     val actions = remember {
         GameplayActions(
             onBack = { controller.popBackStack() },
-            onClickHistory = { controller.navigate(AppRoutes.Game.History) },
+            onClickHistory = {
+                analytics.log(GameplayAnalytics.clickHistory)
+                controller.navigate(AppRoutes.Game.History)
+            },
             onClickPlayer = { player ->
+                analytics.log(
+                    event = GameplayAnalytics.clickPlayer,
+                    properties = mapOf("id" to player.id.toString())
+                )
                 controller.navigate(AppRoutes.Transaction(player.id))
             }
         )
@@ -69,6 +79,10 @@ internal fun GameplayScreen(
                 popUpTo(GameplayRoutes.Gameplay) { inclusive = true }
             }
         }
+    }
+
+    LaunchedEffect(Unit) {
+        analytics.log(GameplayAnalytics.display)
     }
 }
 

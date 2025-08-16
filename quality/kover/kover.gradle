@@ -18,6 +18,7 @@ kover {
                         "*.*State*",                    // Ui State (data classes)
                         "*.widget.*",                   // Composable widgets
                         "*.model.*",                    // Model data classes
+                        "*.*Analytics",                 // Analytics objects
                         "*.theme.*",                    // Compose theming
                         "*.navigation.*",               // Compose navigation graphs
                         "*.ComposableSingletons",       // Compose generated code

@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -19,8 +20,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.dosei.games.toybank.commons.widget.rememberAnalytics
 import com.dosei.games.toybank.core.data.storage.player.Player
 import com.dosei.games.toybank.history.R
+import com.dosei.games.toybank.history.analytics.HistoryAnalytics
 import com.dosei.games.toybank.history.data.model.HistoryEntry
 import com.dosei.games.toybank.history.presentation.widget.HistoryRow
 import com.dosei.games.toybank.ui.widget.BackButton
@@ -31,6 +34,7 @@ internal fun HistoryScreen(
     controller: NavHostController,
     viewModel: HistoryViewModel,
 ) {
+    val analytics = rememberAnalytics()
     val history by remember { viewModel.fetchHistory() }.collectAsState()
 
     HistoryContent(
@@ -39,6 +43,10 @@ internal fun HistoryScreen(
             onBack = { controller.popBackStack() }
         )
     )
+
+    LaunchedEffect(Unit) {
+        analytics.log(HistoryAnalytics.display)
+    }
 }
 
 private data class HistoryActions(
