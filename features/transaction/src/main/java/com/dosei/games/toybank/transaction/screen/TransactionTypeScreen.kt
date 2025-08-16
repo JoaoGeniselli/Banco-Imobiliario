@@ -25,11 +25,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.dosei.games.toybank.commons.navigation.navigateTo
+import com.dosei.games.toybank.commons.widget.rememberAnalytics
 import com.dosei.games.toybank.core.data.model.NavigateTo
 import com.dosei.games.toybank.core.data.model.None
 import com.dosei.games.toybank.core.data.model.TransactionType
 import com.dosei.games.toybank.transaction.R
 import com.dosei.games.toybank.transaction.TransactionViewModel
+import com.dosei.games.toybank.transaction.analytics.TransactionAnalytics
 import com.dosei.games.toybank.ui.widget.BackButton
 import com.dosei.games.toybank.core.R as CoreR
 
@@ -38,10 +40,14 @@ internal fun TransactionTypeScreen(
     controller: NavHostController,
     viewModel: TransactionViewModel,
 ) {
+    val analytics = rememberAnalytics()
     TransactionTypeContent(
         actions = TransactionTypeActions(
             onBack = { controller.popBackStack() },
-            onSelectType = { type -> viewModel.onSelectType(type) }
+            onSelectType = { type ->
+                analytics.log(TransactionAnalytics.Type.selectType(type.id))
+                viewModel.onSelectType(type)
+            }
         )
     )
 
@@ -51,6 +57,8 @@ internal fun TransactionTypeScreen(
             is NavigateTo -> controller.navigateTo(event)
         }
     }
+
+    LaunchedEffect(Unit) { analytics.log(TransactionAnalytics.Type.display) }
 }
 
 private data class TransactionTypeActions(
