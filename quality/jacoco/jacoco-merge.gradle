@@ -1,0 +1,35 @@
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.8.13"
+    reportsDirectory = layout.buildDirectory.dir("jacoco")
+}
+
+tasks.register("jacocoFullReport", JacocoReport) {
+    group = "Reports"
+    description = "Computes unit test coverage"
+
+    def projects = subprojects.findAll {
+        it.getTasksByName("jacocoTestReport", false)
+    }
+    dependsOn(projects.jacocoTestReport)
+
+    final sources = files(projects.jacocoTestReport.sourceDirectories)
+
+    additionalSourceDirs.setFrom(sources)
+    sourceDirectories.setFrom(sources)
+    classDirectories.setFrom(files(projects.jacocoTestReport.classDirectories))
+    executionData.setFrom(files(projects.jacocoTestReport.executionData))
+
+    reports {
+        xml.required = true
+        xml.outputLocation = layout.buildDirectory.file("reports/jacoco.xml")
+
+        html.required = true
+        html.outputLocation = layout.buildDirectory.dir("reports/jacocoHtml")
+    }
+
+    doLast {
+        println("HTML report generated at: file://" + reports.html.entryPoint)
+    }
+}

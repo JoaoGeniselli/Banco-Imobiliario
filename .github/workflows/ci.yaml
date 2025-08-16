@@ -30,13 +30,11 @@ jobs:
       - name: Detekt
         run: ./gradlew detekt
 
-      - name: Tests
-        run: ./gradlew koverXmlReportDebug
+      - name: Tests + Coverage
+        run: ./gradlew jacocoTestReport
 
       - name: Sonar
         if: github.event_name != 'pull_request' && github.event_name != 'pull_request_target'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew sonar --info
-
-

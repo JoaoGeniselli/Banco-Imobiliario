@@ -1,4 +1,5 @@
 apply plugin: "org.sonarqube"
+apply from: "$rootDir/quality/jacoco/jacoco-filter.gradle"
 
 sonarqube {
     properties {
@@ -9,8 +10,10 @@ sonarqube {
 
         property("sonar.kotlin.detekt.reportPaths", "$buildDir/reports/detekt.xml")
         property("sonar.androidLint.reportPaths", "$buildDir/reports/lint-results-debug.xml")
+
         property("sonar.java.coveragePlugin", "jacoco")
-        property("sonar.java.jacoco.xmlReportPaths", "$buildDir/reports/kover/report.xml") // JaCoCo Compatible
+        property("sonar.java.jacoco.xmlReportPaths", "$buildDir/reports/jacoco.xml")
+        property("sonar.coverage.exclusions", coverageExclusions)
 
         property("sonar.qualitygate.wait", true)
     }

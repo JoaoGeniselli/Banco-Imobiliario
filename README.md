@@ -29,7 +29,7 @@ O projeto possui os idiomas implementados:
 | [Android Lint](https://developer.android.com/studio/write/lint)                                           | Análise estática (Android)                             |
 | [Detekt](https://detekt.dev/)                                                                             | Análise estática (Kotlin)                              |
 | [Sonarqube](https://www.sonarsource.com/products/sonarqube/)                                              | Análise de qualidade de código, segurança e relatórios |
-| [KotlinX Kover](https://github.com/Kotlin/kotlinx-kover)                                                  | Cobertura de testes unitários                          |
+| [JaCoCo](https://www.eclemma.org/jacoco/)                                                                 | Cobertura de testes unitários                          |
 | [KotlinX Serialization](https://kotlinlang.org/docs/serialization.html)                                   | Conversão de objetos JSON                              |
 | [JUnit 4](https://junit.org/junit4/)                                                                      | Execução de testes unitários                           |
 | [MockK](https://mockk.io/)                                                                                | Gerenciamento de mocks para testes unitários           | 
@@ -38,6 +38,7 @@ O projeto possui os idiomas implementados:
 | [Google KSP](https://github.com/google/ksp)                                                               | Processamento de anotações                             |
 | [Version Catalogs](https://docs.gradle.org/current/userguide/version_catalogs.html)                       | Organização de versões e dependências                  |
 | [Github Actions](https://github.com/features/actions?locale=pt-BR)                                        | Workflows de validação e compilação do projeto         |
+| [Timber](https://github.com/JakeWharton/timber)                                                           | Prevenção de logs em modo `release`                    |
 
 ## Configuração do Projeto
 1. Baixe o repositório localmente em sua máquina;
