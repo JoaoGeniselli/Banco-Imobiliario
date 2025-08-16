@@ -38,6 +38,7 @@ O projeto possui os idiomas implementados:
 | [Google KSP](https://github.com/google/ksp)                                                               | Processamento de anotações                             |
 | [Version Catalogs](https://docs.gradle.org/current/userguide/version_catalogs.html)                       | Organização de versões e dependências                  |
 | [Github Actions](https://github.com/features/actions?locale=pt-BR)                                        | Workflows de validação e compilação do projeto         |
+| [Timber](https://github.com/JakeWharton/timber)                                                           | Prevenção de logs em modo `release`                    |
 
 ## Configuração do Projeto
 1. Baixe o repositório localmente em sua máquina;
