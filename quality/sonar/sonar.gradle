@@ -12,7 +12,7 @@ sonarqube {
         property("sonar.androidLint.reportPaths", "$buildDir/reports/lint-results-debug.xml")
 
         property("sonar.java.coveragePlugin", "jacoco")
-        property("sonar.java.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/jacoco.xml")
+        property("sonar.java.jacoco.xmlReportPaths", "$buildDir/reports/jacoco.xml")
         property("sonar.coverage.exclusions", coverageExclusions)
 
         property("sonar.qualitygate.wait", true)
