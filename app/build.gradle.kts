@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "com.dosei.games.toybank"
-        versionCode = 3
+        versionCode = 4
         versionName = "2.2.0"
     }
 
