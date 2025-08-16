@@ -13,6 +13,7 @@ plugins {
 }
 
 apply { from("$rootDir/quality/kover/kover.gradle") }
+apply { from("$rootDir/quality/sonar/sonar-root.gradle") }
 
 dependencies {
     kover(project(":app"))
