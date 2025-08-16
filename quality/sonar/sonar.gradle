@@ -15,6 +15,10 @@ sonarqube {
         property("sonar.java.jacoco.xmlReportPaths", "$buildDir/reports/jacoco.xml")
         property("sonar.coverage.exclusions", coverageExclusions)
 
+        property("sonar.issue.ignore.multicriteria", "e1")
+        property("sonar.issue.ignore.multicriteria.e1.ruleKey", "kotlin:S107")
+        property("sonar.issue.ignore.multicriteria.e1.resourceKey", "**/widget/*.*")
+
         property("sonar.qualitygate.wait", true)
     }
 }
