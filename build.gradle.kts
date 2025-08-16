@@ -8,25 +8,12 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.detekt) apply false
-    alias(libs.plugins.kover) apply true
     alias(libs.plugins.sonar) apply true
 }
 
 apply {
     from("$rootDir/quality/sonar/sonar-root.gradle")
     from("$rootDir/quality/jacoco/jacoco-merge.gradle")
-}
-
-dependencies {
-    kover(project(":app"))
-    kover(project(":features:newgame"))
-    kover(project(":features:history"))
-    kover(project(":features:transaction"))
-    kover(project(":features:gameplay"))
-    kover(project(":features:home"))
-    kover(project(":core"))
-    kover(project(":commons"))
-    kover(project(":ui"))
 }
 
 subprojects {
