@@ -16,8 +16,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dosei.games.toybank"
-        versionCode = 4
-        versionName = "2.2.0"
+        versionCode = 5
+        versionName = "2.2.1"
     }
 
     signingConfigs {
@@ -31,6 +31,8 @@ android {
 
     buildTypes {
         getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
         }
     }
