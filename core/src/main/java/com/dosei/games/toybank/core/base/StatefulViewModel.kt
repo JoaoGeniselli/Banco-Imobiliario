@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+@SuppressWarnings("kotlin:S6313")
 open class StatefulViewModel<T : Any>(initialState: T) : ViewModel() {
 
     private val _state = MutableStateFlow(initialState)

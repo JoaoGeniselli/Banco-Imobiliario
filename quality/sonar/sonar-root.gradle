@@ -4,5 +4,9 @@ sonar {
     properties {
         property("sonar.projectKey", "JoaoGeniselli_Banco-Imobiliario")
         property("sonar.organization", "joaogeniselli")
+
+        property("sonar.issue.ignore.multicriteria", "e1")
+        property("sonar.issue.ignore.multicriteria.e1.ruleKey", "kotlin:S107")
+        property("sonar.issue.ignore.multicriteria.e1.resourceKey", "**/widget/*.*")
     }
 }
