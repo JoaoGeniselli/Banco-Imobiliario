@@ -29,7 +29,7 @@ O projeto possui os idiomas implementados:
 | [Android Lint](https://developer.android.com/studio/write/lint)                                           | Análise estática (Android)                             |
 | [Detekt](https://detekt.dev/)                                                                             | Análise estática (Kotlin)                              |
 | [Sonarqube](https://www.sonarsource.com/products/sonarqube/)                                              | Análise de qualidade de código, segurança e relatórios |
-| [KotlinX Kover](https://github.com/Kotlin/kotlinx-kover)                                                  | Cobertura de testes unitários                          |
+| [JaCoCo](https://www.eclemma.org/jacoco/)                                                                 | Cobertura de testes unitários                          |
 | [KotlinX Serialization](https://kotlinlang.org/docs/serialization.html)                                   | Conversão de objetos JSON                              |
 | [JUnit 4](https://junit.org/junit4/)                                                                      | Execução de testes unitários                           |
 | [MockK](https://mockk.io/)                                                                                | Gerenciamento de mocks para testes unitários           | 

@@ -12,8 +12,10 @@ plugins {
     alias(libs.plugins.sonar) apply true
 }
 
-apply { from("$rootDir/quality/kover/kover.gradle") }
-apply { from("$rootDir/quality/sonar/sonar-root.gradle") }
+apply {
+    from("$rootDir/quality/sonar/sonar-root.gradle")
+    from("$rootDir/quality/jacoco/jacoco-merge.gradle")
+}
 
 dependencies {
     kover(project(":app"))

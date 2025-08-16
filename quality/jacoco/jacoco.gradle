@@ -1,0 +1,63 @@
+apply plugin: "jacoco"
+apply from: "$rootDir/quality/jacoco/jacoco-filter.gradle"
+
+android {
+    buildTypes {
+        debug {
+            enableAndroidTestCoverage = false
+            enableUnitTestCoverage = true
+        }
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.13"
+    reportsDirectory = layout.buildDirectory.dir("jacoco")
+}
+
+tasks.register("jacocoTestReport", JacocoReport) {
+    dependsOn "testDebugUnitTest"
+
+    group = "Reports"
+    description = "Computes unit test coverage"
+
+    reports {
+        xml.required = true
+        xml.outputLocation = layout.buildDirectory.file("reports/jacoco.xml")
+
+        html.required = System.getenv("JACOCO_HTML") == "true"
+        html.outputLocation = layout.buildDirectory.dir("reports/jacocoHtml")
+    }
+
+    sourceDirectories.setFrom(layout.projectDirectory.dir("src/main/java"))
+    classDirectories.setFrom(files(
+            fileTree(layout.buildDirectory.dir("intermediates/javac/")) {
+                exclude(coverageExclusions)
+            },
+            fileTree(layout.buildDirectory.dir("tmp/kotlin-classes/")) {
+                exclude(coverageExclusions)
+            },
+    ))
+    executionData.setFrom(files(
+            fileTree(layout.buildDirectory) { include(["**/*.exec", "**/*.ec"]) }
+    ))
+
+    doLast {
+        if (System.getenv("JACOCO_HTML") == "true") {
+            println("HTML report generated at: file://" + reports.html.entryPoint)
+        }
+    }
+}
+
+afterEvaluate {
+    if (plugins.hasPlugin("com.android.library")) {
+        tasks.named("jacocoTestReport") {
+            dependsOn "compileDebugLibraryResources", "processDebugManifest"
+        }
+    }
+}
+
+tasks.withType(Test).configureEach {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ["jdk.internal.*"]
+}
