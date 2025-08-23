@@ -1,5 +1,3 @@
-import com.android.build.gradle.BaseExtension
-
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
@@ -14,40 +12,4 @@ plugins {
 apply {
     from("$rootDir/quality/sonar/sonar-root.gradle")
     from("$rootDir/quality/jacoco/jacoco-merge.gradle")
-}
-
-subprojects {
-    afterEvaluate {
-        val isAndroidApplication = plugins.hasPlugin("com.android.application")
-        val isAndroidLibrary = plugins.hasPlugin("com.android.library")
-
-        if (isAndroidApplication || isAndroidLibrary) {
-            configure<BaseExtension> {
-                compileSdkVersion(36)
-
-                defaultConfig {
-                    minSdk = 30
-                    targetSdk = 36
-                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-                }
-
-                buildTypes {
-                    named("release") {
-                        isMinifyEnabled = isAndroidApplication
-                        isShrinkResources = isAndroidApplication
-                        proguardFiles(
-                            getDefaultProguardFile("proguard-android-optimize.txt"),
-                            "$rootDir/quality/r8/default-obfuscation.pro",
-                            "proguard-rules.pro"
-                        )
-                    }
-                }
-
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_11
-                    targetCompatibility = JavaVersion.VERSION_11
-                }
-            }
-        }
-    }
 }

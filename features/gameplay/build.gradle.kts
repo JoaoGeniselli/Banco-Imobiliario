@@ -13,6 +13,26 @@ apply { from("$rootDir/quality/quality.gradle") }
 
 android {
     namespace = "com.dosei.games.toybank.gameplay"
+
+    defaultConfig {
+        minSdk = Sdk.MIN
+        compileSdk = Sdk.COMPILE
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        named("release") {
+            isMinifyEnabled = false
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "$rootDir/quality/r8/default-obfuscation.pro",
+                "proguard-rules.pro"
+            )
+        }
+    }
+
     kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
