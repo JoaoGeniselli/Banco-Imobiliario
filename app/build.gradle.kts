@@ -16,8 +16,14 @@ android {
 
     defaultConfig {
         applicationId = "com.dosei.games.toybank"
-        versionCode = 5
-        versionName = "2.2.1"
+        compileSdk = Sdk.COMPILE
+        targetSdk = Sdk.TARGET
+        minSdk = Sdk.MIN
+
+        versionCode = AppVersion.CODE
+        versionName = AppVersion.NAME
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -30,11 +36,21 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        named("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "$rootDir/quality/r8/default-obfuscation.pro",
+                "proguard-rules.pro"
+            )
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlin {
