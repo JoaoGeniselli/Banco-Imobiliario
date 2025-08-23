@@ -1,5 +1,3 @@
-import com.android.build.gradle.BaseExtension
-
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
@@ -16,38 +14,23 @@ apply {
     from("$rootDir/quality/jacoco/jacoco-merge.gradle")
 }
 
-subprojects {
-    afterEvaluate {
-        val isAndroidApplication = plugins.hasPlugin("com.android.application")
-        val isAndroidLibrary = plugins.hasPlugin("com.android.library")
+tasks.register<Exec>("setupReleasePatch") {
+    group = "versioning"
+    description = "Increments the patch version for a new release."
 
-        if (isAndroidApplication || isAndroidLibrary) {
-            configure<BaseExtension> {
-                compileSdkVersion(36)
+    commandLine("bash", "-c", "./scripts/setup_release.sh patch")
+}
 
-                defaultConfig {
-                    minSdk = 30
-                    targetSdk = 36
-                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-                }
+tasks.register<Exec>("setupReleaseMinor") {
+    group = "versioning"
+    description = "Increments the minor version and sets the patch version to 0 for a new release."
 
-                buildTypes {
-                    named("release") {
-                        isMinifyEnabled = isAndroidApplication
-                        isShrinkResources = isAndroidApplication
-                        proguardFiles(
-                            getDefaultProguardFile("proguard-android-optimize.txt"),
-                            "$rootDir/quality/r8/default-obfuscation.pro",
-                            "proguard-rules.pro"
-                        )
-                    }
-                }
+    commandLine("bash", "-c", "./scripts/setup_release.sh minor")
+}
 
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_11
-                    targetCompatibility = JavaVersion.VERSION_11
-                }
-            }
-        }
-    }
+tasks.register<Exec>("setupReleaseMajor") {
+    group = "versioning"
+    description = "Increments the major version and sets the minor and patch versions to 0 for a new release."
+
+    commandLine("bash", "-c", "./scripts/setup_release.sh major")
 }
